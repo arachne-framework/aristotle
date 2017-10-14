@@ -38,29 +38,6 @@
 
 (declare map->rdf)
 
-(defn- add-reifications
-  "Given a map (from the input data's metadatda) and a list of statements,
-   create reifications of those statements and return an expanded list of statements including meta-statements."
-  [meta statements model]
-  (if (or (::reified-subjects meta) (::reified-objects meta))
-    (let [reified-statements (map #(.createReifiedStatement model %) statements)
-          statements (concat statements
-                       (mapcat (fn [reified-statement]
-                                 (map->rdf (assoc (::reified-subjects meta)
-                                             :rdf/about
-                                             reified-statement)
-                                   model))
-                         reified-statements)
-                       (mapcat (fn [reified-statement]
-
-                                 (map->rdf (assoc (::reified-objects meta)
-                                             :rdf/about
-                                             reified-statement)
-                                   model))
-                         reified-statements))]
-      statements)
-    statements))
-
 (defn- map->rdf
   "Convert a map to a series of RDF statements. Returns a sequence of Jena
    Statement objects.
@@ -94,8 +71,7 @@
 
                                 :else
                                 [(tuple->statement [subject k v] model)]))
-                      (dissoc m :rdf/about))
-         statements (add-reifications (meta m) statements model)]
+                      (dissoc m :rdf/about))]
      (with-meta statements {::subject subject}))))
 
 (extend-protocol AsStatements
