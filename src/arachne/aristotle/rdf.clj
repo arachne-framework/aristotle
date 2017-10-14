@@ -36,6 +36,31 @@
   [[s p o] model]
   (.createStatement model (resource s model) (property p model) (node o model)))
 
+(declare map->rdf)
+
+(defn- add-reifications
+  "Given a map (from the input data's metadatda) and a list of statements,
+   create reifications of those statements and return an expanded list of statements including meta-statements."
+  [meta statements model]
+  (if (or (::reified-subjects meta) (::reified-objects meta))
+    (let [reified-statements (map #(.createReifiedStatement model %) statements)
+          statements (concat statements
+                       (mapcat (fn [reified-statement]
+                                 (map->rdf (assoc (::reified-subjects meta)
+                                             :rdf/about
+                                             reified-statement)
+                                   model))
+                         reified-statements)
+                       (mapcat (fn [reified-statement]
+
+                                 (map->rdf (assoc (::reified-objects meta)
+                                             :rdf/about
+                                             reified-statement)
+                                   model))
+                         reified-statements))]
+      statements)
+    statements))
+
 (defn- map->rdf
   "Convert a map to a series of RDF statements. Returns a sequence of Jena
    Statement objects.
@@ -53,24 +78,25 @@
                                   child-subj (::subject (meta statements))]
                               (cons
                                 (tuple->statement [subject property child-subj] model)
-                                statements)))]
-     (with-meta (mapcat (fn [[k v]]
-                          (cond
+                                statements)))
+         statements (mapcat (fn [[k v]]
+                              (cond
 
-                            (instance? java.util.Map v)
-                            (child-statements k v)
+                                (instance? java.util.Map v)
+                                (child-statements k v)
 
-                            (instance? java.util.Collection v)
-                            (mapcat (fn [child]
-                                      (if (map? child)
-                                        (child-statements k child)
-                                        [(tuple->statement [subject k child] model)]))
-                              v)
+                                (instance? java.util.Collection v)
+                                (mapcat (fn [child]
+                                          (if (map? child)
+                                            (child-statements k child)
+                                            [(tuple->statement [subject k child] model)]))
+                                  v)
 
-                            :else
-                            [(tuple->statement [subject k v] model)]))
-                  (dissoc m :rdf/about))
-       {::subject subject}))))
+                                :else
+                                [(tuple->statement [subject k v] model)]))
+                      (dissoc m :rdf/about))
+         statements (add-reifications (meta m) statements model)]
+     (with-meta statements {::subject subject}))))
 
 (extend-protocol AsStatements
 
