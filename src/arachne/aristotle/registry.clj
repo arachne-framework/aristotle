@@ -2,8 +2,8 @@
   "Tools for mapping between IRIs and keywords"
   (:refer-clojure :exclude [find alias]))
 
-(def ^:dynamic *registry* (atom {:prefixes {}
-                                 :mappings {}}))
+(defonce ^:dynamic *registry* (atom {:prefixes {}
+                                     :mappings {}}))
 
 (defn prefix
   "Register a namespace as an RDF prefix."
@@ -24,3 +24,5 @@
       (throw (ex-info (format "Could not determine IRI for %s, no matching prefix or keyword is registered."
                         kw)
                {:keyword kw}))))
+
+(prefix :rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
