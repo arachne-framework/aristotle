@@ -1,6 +1,7 @@
 (ns arachne.aristotle.graph
   "Tools for converting Clojure data to an Jena Graph representation"
-  (:require [arachne.aristotle.registry :as reg])
+  (:require [arachne.aristotle.registry :as reg]
+            [clojure.spec.alpha :as s])
   (:import [clojure.lang Keyword Symbol]
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
@@ -8,6 +9,36 @@
            [org.apache.jena.datatypes.xsd XSDDatatype]
            [javax.xml.bind DatatypeConverter])
   (:refer-clojure :exclude [reify]))
+
+(defn variable?
+  [s]
+  (and (symbol? s) (.startsWith (name s) "?")))
+
+(defn uri-str?
+  [o]
+  (and (string? o) (re-matches #"^<.*>$" o)))
+
+(defn literal?
+  [obj]
+  (and (not (coll? obj))
+    (not (instance? java.util.Collection obj))))
+
+(s/def ::variable variable?)
+
+(s/def ::iri (s/or :keyword keyword?
+               :uri uri-str?))
+
+(s/def ::literal literal?)
+
+(s/def ::node (s/or :variable ::variable
+                    :iri     ::iri
+                    :literal ::literal))
+
+(s/def ::triple (s/tuple ::node ::node ::node))
+
+(s/def ::triples (s/or :map map?
+                       :triples (s/coll-of ::triple :min-count 1)
+                       :single-triple ::triple))
 
 (defprotocol AsTriples
   "An object that can be converted to a collection of Jena Triples."
@@ -25,7 +56,10 @@
   URL
   (node [url] (NodeFactory/createURI (.toString url)))
   Symbol
-  (node [sym] (NodeFactory/createBlankNode (str sym)))
+  (node [sym]
+    (if (.startsWith (name sym) "?")
+      (NodeFactory/createVariable (subs (name sym) 1))
+      (NodeFactory/createBlankNode (str sym))))
   String
   (node [obj]
     (if-let [uri (second (re-find #"^<(.*)>$" obj))]
@@ -61,10 +95,10 @@
        (= 3 (count obj))
        (not-any? coll? obj)))
 
-(defn- triple
+(defn triple
   "Build a Triple object"
-  [s p o]
-  (Triple/create (node s) (node p) (node o)))
+  ([[s p o]] (triple s p o))
+  ([s p o] (Triple/create (node s) (node p) (node o))))
 
 (extend-protocol AsTriples
 
