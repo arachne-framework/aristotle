@@ -11,12 +11,14 @@
 (s/def ::expr (s/or :fn-expr ::fn-expr
                     :node-expr ::graph/node))
 
-(s/def ::filter (s/coll-of ::expr :min-count 1))
-(s/def ::project (s/coll-of ::graph/variable :min-count 1))
-(s/def ::pattern ::graph/triples)
+(s/def ::where (s/coll-of (s/or :triples ::graph/triples
+                                :filter ::expr)))
 
-(s/def ::query (s/keys :req-un [::project ::pattern]
-                       :opt-un [::filter]))
+(s/def ::select (s/coll-of ::graph/variable :min-count 1))
+(s/def ::select-distinct ::select)
+
+(s/def ::query (s/keys :req-un [::where]
+                       :opt-un [::select ::select-distinct]))
 
 (defn- compile-query
   "Convert the given query from a conformed Clojure data structure to an ARQ
@@ -30,13 +32,15 @@
   :args (s/cat :query ::query))
 
 (defn query
-  "Build an ARQ Query object from a Clojure data structure"
+  "Build an ARQ query (an Operation object) from a Clojure data structure"
   [query]
   (s/assert* ::query query)
   (compile-query (s/conform ::query query)
-    [qc/replace-nodes
+    [qc/split-where
+     qc/replace-nodes
      qc/replace-exprs
-     qc/pattern
+     qc/replace-triples
+     qc/bgp
      qc/add-filter
      qc/project]))
 
@@ -47,39 +51,24 @@
   (reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
   (reg/prefix :cfg "http://arachne-framework.org/config/")
 
-  (def q2 '{:project [?luke]
-            :pattern {:rdf/about ?luke
-                      :foaf/name "Luke"
-                      :foaf/friend {:foaf/name "Joe"}}
-            :filter [(< 1 ?age)
-                     (= ?luke :foaf/dob)]
-            :values {?names #{"Joe" "Jimmy"}}
-
-            })
-
-  (def q '{:project [?person]
-           :pattern [[?person :foaf/name "Luke"]
-                     [?person :foaf/age 32]]
-           :filter [(< 1 ?age)
-                    (not= ?luke :foaf/dob)]
-           ;:values {?names #{"Joe" "Jimmy"}}
-
-
-           })
+  (def q '{:select-distinct [?name]
+           :where [[youngling :foaf/age ?age]
+                   (<= 21 ?age)
+                   {:rdf/about youngling
+                    :foaf/knows {:foaf/name ?name}}]})
 
   (s/conform ::query q)
 
   (query q)
 
-  (s/explain ::triple '[?person :foaf/name ?name])
-
-  (s/conform ::node :foaf/name)
-
   )
+
+
+
 
 (comment
 
-  (def querystr "SELECT ?x ?y
+  (def querystr "SELECT DISTINCT ?x ?y
                  WHERE { ?x <http://xmlns.com/foaf/0.1/name> ?y }")
   (def querystr " SELECT ?s { ?s <http://example.com/val> ?val .
                   FILTER ( ?val < 20 ) }")
@@ -102,10 +91,10 @@
   (def querystr "PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX  foaf:   <http://xmlns.com/foaf/0.1/> \n\nSELECT ?person\nWHERE \n{\n    ?person rdf:type  foaf:Person .\n    FILTER NOT EXISTS { ?person foaf:name ?name }\n}  ")
 
 
-  (def query (QueryFactory/create querystr))
+  (def qq (QueryFactory/create querystr))
 
   (-> (AlgebraGenerator.)
-    (.compile query)
+    (.compile qq)
     ;(.getSubOp)
     ;(.getExprs)
     ;(.getList)

@@ -7,7 +7,8 @@
   (:import [org.apache.jena.graph NodeFactory Triple Node_Variable]
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList]
            [org.apache.jena.sparql.core BasicPattern Var]
-           [org.apache.jena.sparql.algebra.op OpBGP OpProject OpFilter]))
+           [org.apache.jena.sparql.algebra.op OpBGP OpProject OpFilter OpDistinct]
+           [org.apache.commons.lang3.reflect ConstructorUtils]))
 
 
 (defmacro defreplace
@@ -27,6 +28,12 @@
   [:literal l] (graph/node l)
   [:iri [_ iri]] (graph/node iri))
 
+(defreplace replace-triples
+  "Replace triple-able objects with Triples"
+  [:triples [:map m]] (graph/triples m)
+  [:triples [:single-triple t]] [(graph/triple t)]
+  [:triples [:triples ts]] (map graph/triple ts))
+
 (def op-classes
   {'= org.apache.jena.sparql.expr.E_Equals
    '> org.apache.jena.sparql.expr.E_GreaterThan
@@ -45,12 +52,7 @@
    according to the mapping defined in op-classes."
   [op args]
   (if-let [clazz (op-classes op)]
-    (let [ctors (.getConstructors clazz)
-          ctor (first (filter #(= (count args) (.getParameterCount %)) ctors))]
-      (when-not ctor
-        (throw (ex-info (format "No %s argument constructor found for %s, for operation '%s'"
-                          (count args) clazz op) {:op op :args args :class clazz})))
-      (.newInstance ctor (into-array Expr args)))
+    (ConstructorUtils/invokeConstructor clazz (into-array Object args))
     (throw (ex-info (format "Expression operator %s is not implemented" op)
              {:op op :args args}))))
 
@@ -59,28 +61,42 @@
   [:node-expr node] (if (instance? Node_Variable node)
                       (ExprVar. node)
                       (NodeValue/makeNode node))
-  [:fn-expr {:operator op
-             :args args}] (construct-expr op args))
+  [:filter [:fn-expr {:operator op
+                      :args args}]] (construct-expr op args))
 
-(defn pattern
+(defn bgp
   "Compiles the pattern to an OpBGP object and sets it as the primary operation"
   [q]
-  (assoc q :op (->> (-> q :pattern second)
-                 (graph/triples)
+  (assoc q :op (->> q
+                 :triples
+                 (apply concat)
                  (BasicPattern/wrap)
                  (OpBGP.))))
 
 (defn project
   "Wraps the primary operation in a OpProject operation"
   [q]
-  (let [vars (->> q :project (map graph/node) (map #(Var/alloc %)))]
+  (let [vars (or (:select-distinct q) (:select q))
+        vars (->> vars (map graph/node) (map #(Var/alloc %)))]
     (update q :op (fn [op]
-                    (OpProject. op vars)))))
+                    (let [op (OpProject. op vars)]
+                      (if (:select-distinct q)
+                        (OpDistinct. op)
+                        op))))))
+
+(defn split-where
+  "Takes the top level :where key and splits it into two top-level keys, :triples and :filter"
+  [q]
+  (-> q
+    (dissoc :where)
+    (merge (group-by first (-> q :where)))))
 
 (defn add-filter
-  "Takes the top level :op and wraps it in a Filter, if present"
+  "Wraps the top-level op in an OpFilter"
   [q]
-  (if-let [filter-exprs (:filter q)]
-    (update q :op (fn [op]
-                    (OpFilter/filterBy (ExprList. filter-exprs) op)))
-    q))
+  (let [filter-exprs (:filter q)]
+    (if (empty? filter-exprs)
+      q
+      (update q :op (fn [op]
+                      (OpFilter/filterBy (ExprList. filter-exprs) op))))))
+
