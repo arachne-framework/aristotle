@@ -4,7 +4,8 @@
             [arachne.aristotle.graph :as graph]
             [clojure.spec.alpha :as s])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
-           [org.apache.jena.sparql.algebra AlgebraGenerator]))
+           [org.apache.jena.sparql.algebra AlgebraGenerator Algebra]
+           [org.apache.jena.sparql.algebra.op OpProject Op1]))
 
 (s/def ::fn-expr (s/cat :operator symbol? :args (s/* ::expr)))
 
@@ -28,11 +29,16 @@
             (pass data))
     data passes))
 
-(s/fdef query
+(s/fdef build
   :args (s/cat :query ::query))
 
-(defn query
-  "Build an ARQ query (an Operation object) from a Clojure data structure"
+(defn build
+  "Build an optimized query from a Clojure data structure. Returns a map
+   containing:
+
+   :op - an instance of org.apache.jena.sparql.algebra.Op
+   :vars - a sequence of org.apache.jena.sparql.core.Var objects which should
+           be bound in the query results.  "
   [query]
   (s/assert* ::query query)
   (compile-query (s/conform ::query query)
@@ -42,7 +48,35 @@
      qc/replace-triples
      qc/bgp
      qc/add-filter
-     qc/project]))
+     qc/project
+     qc/optimize
+     :op]))
+
+(defn- find-vars
+  "Unwrap the given operation until we find an OpProject, then return the list of vars."
+  [op]
+  (cond
+    (instance? OpProject op) (.getVars op)
+    (instance? Op1 op) (recur (.getSubOp op))
+    :else (throw (ex-info (format "Could not extract vars from operation of type %s"
+                            (.getClass op)) {:op op}))))
+
+(defn run
+  "Given an input dataset (which may be a Graph or a Model) and an Operation,
+   evaluate the query and return the results as a realized Clojure data structure."
+  [data op]
+  (let [vars (find-vars op)]
+    (->> (Algebra/exec op data)
+      (iterator-seq)
+      (map (fn [binding]
+               (mapv #(graph/data (.get binding %)) vars)))
+      (doall))))
+
+(defn query
+  "Build and execute a query on the given dataset."
+  [query dataset]
+  (let [q (build query)]
+    (run dataset q)))
 
 (comment
 
@@ -51,7 +85,7 @@
   (reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
   (reg/prefix :cfg "http://arachne-framework.org/config/")
 
-  (def q '{:select-distinct [?name]
+  (def q '{:select [?name]
            :where [[youngling :foaf/age ?age]
                    (<= 21 ?age)
                    {:rdf/about youngling
@@ -59,11 +93,9 @@
 
   (s/conform ::query q)
 
-  (query q)
+  (build q)
 
   )
-
-
 
 
 (comment
@@ -91,7 +123,13 @@
   (def querystr "PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX  foaf:   <http://xmlns.com/foaf/0.1/> \n\nSELECT ?person\nWHERE \n{\n    ?person rdf:type  foaf:Person .\n    FILTER NOT EXISTS { ?person foaf:name ?name }\n}  ")
 
 
+  (def querystr "SELECT DISTINCT ?x ?y
+                 WHERE { ?x <http://xmlns.com/foaf/0.1/name> ?y
+                         FILTER NOT EXISTS {?x <http://xmlns.com/foaf/0.1/age> ?age}
+                         }")
+
   (def qq (QueryFactory/create querystr))
+
 
   (-> (AlgebraGenerator.)
     (.compile qq)

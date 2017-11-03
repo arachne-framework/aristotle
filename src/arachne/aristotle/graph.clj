@@ -5,7 +5,7 @@
   (:import [clojure.lang Keyword Symbol]
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
-           [org.apache.jena.graph Node NodeFactory Triple GraphUtil]
+           [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory]
            [org.apache.jena.datatypes.xsd XSDDatatype]
            [javax.xml.bind DatatypeConverter])
   (:refer-clojure :exclude [reify]))
@@ -48,6 +48,10 @@
   "An object that can be interpreted as a node in an RDF graph."
   (node [obj] "Convert this object to a Jena RDFNode."))
 
+(defprotocol AsClojureData
+  "A Node that can be converted back to Clojure data"
+  (data [node] "Convert this node to Clojure data"))
+
 (extend-protocol AsNode
   Keyword
   (node [kw] (NodeFactory/createURI (reg/iri kw)))
@@ -57,9 +61,10 @@
   (node [url] (NodeFactory/createURI (.toString url)))
   Symbol
   (node [sym]
-    (if (.startsWith (name sym) "?")
-      (NodeFactory/createVariable (subs (name sym) 1))
-      (NodeFactory/createBlankNode (str sym))))
+    (cond
+      (= '_ sym) (NodeFactory/createBlankNode)
+      (.startsWith (name sym) "?") (NodeFactory/createVariable (subs (name sym) 1))
+      :else (NodeFactory/createBlankNode (str sym))))
   String
   (node [obj]
     (if-let [uri (second (re-find #"^<(.*)>$" obj))]
@@ -87,6 +92,18 @@
       XSDDatatype/XSDdateTime))
   Node
   (node [node] node))
+
+(extend-protocol AsClojureData
+  Node_URI
+  (data [n] (let [uri (.getURI n)]
+                 (or (reg/kw uri)
+                     (str "<" uri ">"))))
+  Node_Literal
+  (data [n] (if (= XSDDatatype/XSDdateTime (.getLiteralDatatype n))
+                 (.getTime (.asCalendar (.getLiteralValue n)))
+                 (.getLiteralValue n)))
+  Node_Variable
+  (data [n] (symbol (str "?" (.getName n)))))
 
 (defn- triple?
   "Does an object look like a triple?"
@@ -153,6 +170,12 @@
                  :rdf/object (.getObject t)})))
     triples))
 
+(defn graph
+  "Convert the given set of triples to a Jena Graph object, or add them to an existing graph"
+  ([triples] (graph (Factory/createDefaultGraph) triples))
+  ([graph triples]
+   (GraphUtil/add graph triples)
+   graph))
 
 (comment
 

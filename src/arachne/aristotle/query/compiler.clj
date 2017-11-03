@@ -8,7 +8,8 @@
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList]
            [org.apache.jena.sparql.core BasicPattern Var]
            [org.apache.jena.sparql.algebra.op OpBGP OpProject OpFilter OpDistinct]
-           [org.apache.commons.lang3.reflect ConstructorUtils]))
+           [org.apache.commons.lang3.reflect ConstructorUtils]
+           [org.apache.jena.sparql.algebra OpAsQuery Algebra]))
 
 
 (defmacro defreplace
@@ -24,7 +25,7 @@
 
 (defreplace replace-nodes
   "Replace Nodes with node values"
-  [:variable s] (graph/node s)
+  [:variable s] (Var/alloc (graph/node s))
   [:literal l] (graph/node l)
   [:iri [_ iri]] (graph/node iri))
 
@@ -100,3 +101,7 @@
       (update q :op (fn [op]
                       (OpFilter/filterBy (ExprList. filter-exprs) op))))))
 
+(defn optimize
+  "Automatically optimize the query using Jena's built-in optimizer"
+  [q]
+  (update q :op #(Algebra/optimize %)))
