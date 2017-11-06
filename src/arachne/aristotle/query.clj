@@ -1,56 +1,12 @@
 (ns arachne.aristotle.query
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query.compiler :as qc]
+            [arachne.aristotle.query.spec :as qs]
             [arachne.aristotle.graph :as graph]
             [clojure.spec.alpha :as s])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
            [org.apache.jena.sparql.algebra AlgebraGenerator Algebra]
            [org.apache.jena.sparql.algebra.op OpProject Op1]))
-
-(s/def ::fn-expr (s/cat :operator symbol? :args (s/* ::expr)))
-
-(s/def ::expr (s/or :fn-expr ::fn-expr
-                    :node-expr ::graph/node))
-
-(s/def ::where (s/coll-of (s/or :triples ::graph/triples
-                                :filter ::expr)))
-
-(s/def ::select (s/coll-of ::graph/variable :min-count 1))
-(s/def ::select-distinct ::select)
-
-(s/def ::query (s/keys :req-un [::where]
-                       :opt-un [::select ::select-distinct]))
-
-(defn- compile-query
-  "Convert the given query from a conformed Clojure data structure to an ARQ
-   Query object, using the specified sequence of compiler passes."
-  [data passes]
-  (reduce (fn [data pass]
-            (pass data))
-    data passes))
-
-(s/fdef build
-  :args (s/cat :query ::query))
-
-(defn build
-  "Build an optimized query from a Clojure data structure. Returns a map
-   containing:
-
-   :op - an instance of org.apache.jena.sparql.algebra.Op
-   :vars - a sequence of org.apache.jena.sparql.core.Var objects which should
-           be bound in the query results.  "
-  [query]
-  (s/assert* ::query query)
-  (compile-query (s/conform ::query query)
-    [qc/split-where
-     qc/replace-nodes
-     qc/replace-exprs
-     qc/replace-triples
-     qc/bgp
-     qc/add-filter
-     qc/project
-     qc/optimize
-     :op]))
 
 (defn- find-vars
   "Unwrap the given operation until we find an OpProject, then return the list of vars."
@@ -72,11 +28,19 @@
                (mapv #(graph/data (.get binding %)) vars)))
       (doall))))
 
+(defn build
+  "Build a Jena Operation object from the given query, represented as a
+   Clojure data structure"
+  [query]
+  (s/assert* ::qs/op query)
+  (let [op (qc/compile-op (s/conform ::qs/op query))
+        op (Algebra/optimize op)]
+    op))
+
 (defn query
   "Build and execute a query on the given dataset."
   [query dataset]
-  (let [q (build query)]
-    (run dataset q)))
+  (run dataset (build query)))
 
 (comment
 
@@ -85,18 +49,32 @@
   (reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
   (reg/prefix :cfg "http://arachne-framework.org/config/")
 
-  (def q '{:select [?name]
-           :where [[youngling :foaf/age ?age]
-                   (<= 21 ?age)
-                   {:rdf/about youngling
-                    :foaf/knows {:foaf/name ?name}}]})
+  (def q '[:distinct
+           [:project [?name ?age]
+            [:filter (<= 21 ?age)
+             [:bgp [youngling :foaf/age ?age]
+              {:rdf/about youngling
+               :foaf/knows {:foaf/name ?name}}]]]])
 
-  (s/conform ::query q)
+  (def q '[:filter (<= ?a ?b)
+           [:filter (< ?a 42)
+
+            [:bgp [[?a :foaf/name ?b]]
+
+             ]]
+           ])
+
+  (def q '[:bgp [[?a :foaf/name ?b]]
+                [?a :foaf/test ?b]
+                {:rdf/about ?a
+                 :foaf/knows "<http://example.com/person/joe>"
+                 :foaf/age 32}])
+
+  (s/conform ::qs/op q)
 
   (build q)
 
   )
-
 
 (comment
 

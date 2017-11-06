@@ -1,107 +1,127 @@
 (ns arachne.aristotle.query.compiler
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
+            [arachne.aristotle.query.spec :as qs]
             [clojure.spec.alpha :as s]
             [clojure.core.match :as m]
             [clojure.walk :as w])
   (:import [org.apache.jena.graph NodeFactory Triple Node_Variable]
-           [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList]
+           [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList E_GreaterThan]
            [org.apache.jena.sparql.core BasicPattern Var]
            [org.apache.jena.sparql.algebra.op OpBGP OpProject OpFilter OpDistinct]
            [org.apache.commons.lang3.reflect ConstructorUtils]
            [org.apache.jena.sparql.algebra OpAsQuery Algebra]))
 
+(defn- replace-node
+  "If the given data structure is a node, replace it with a Jena Node object,
+   otherwise return it unchanged."
+  [n]
+  (m/match n
+    [:variable s] (Var/alloc (graph/node s))
+    [:literal l] (graph/node l)
+    [:iri [_ iri]] (graph/node iri)
+    :else n))
 
-(defmacro defreplace
-  "Define a function that walks its input and replaces nodes matching the
-   given core.match patterns"
-  [name docstr & patterns]
-  `(defn ~name ~docstr [data#]
-     (w/postwalk (fn [node#]
-                  (m/match node#
-                    ~@patterns
-                    :else node#))
-       data#)))
+(defmulti compile-op
+  "Compile an operation from a Clojure data structure to a Jena Op instance"
+  :op)
 
-(defreplace replace-nodes
-  "Replace Nodes with node values"
-  [:variable s] (Var/alloc (graph/node s))
-  [:literal l] (graph/node l)
-  [:iri [_ iri]] (graph/node iri))
+(defmulti compile-fn-expr
+  "Compile a function expression from a Clojure data structure to a Jena Expr instance"
+  :operator
+  :default ::default)
 
-(defreplace replace-triples
-  "Replace triple-able objects with Triples"
-  [:triples [:map m]] (graph/triples m)
-  [:triples [:single-triple t]] [(graph/triple t)]
-  [:triples [:triples ts]] (map graph/triple ts))
+(defn compile-expr
+  "Compile a Clojure data structure to a Jena Expr instance"
+  [[type val]]
+  (case type
+    :node-expr (let [node (replace-node val)]
+                 (if (instance? Node_Variable node)
+                   (ExprVar. node)
+                   (NodeValue/makeNode node)))
+    :fn-expr (compile-fn-expr val)))
 
-(def op-classes
-  {'= org.apache.jena.sparql.expr.E_Equals
-   '> org.apache.jena.sparql.expr.E_GreaterThan
-   '< org.apache.jena.sparql.expr.E_LessThan
-   '>= org.apache.jena.sparql.expr.E_GreaterThanOrEqual
-   '<= org.apache.jena.sparql.expr.E_LessThanOrEqual
-   'not org.apache.jena.sparql.expr.E_LogicalNot
-   'or org.apache.jena.sparql.expr.E_LogicalOr
-   'and org.apache.jena.sparql.expr.E_LogicalAnd
-   'not= org.apache.jena.sparql.expr.E_NotEquals
+(defmethod compile-fn-expr ::default
+  [{operator :operator args :args}]
+  (let [args (map compile-expr args)
+        clazz (qs/exprs operator)]
+    (if clazz
+      (ConstructorUtils/invokeConstructor clazz (into-array Object args))
+      (throw (ex-info "bad" {}))
+      )))
 
-   })
+(defmethod compile-op :bgp
+  [{triples :triples}]
+  (->> triples
+    (w/postwalk replace-node)
+    (mapcat (fn [[type data]]
+              (case type
+                :map (graph/triples data)
+                :single-triple [(graph/triple data)]
+                :triples (map graph/triple data))))
+    (BasicPattern/wrap)
+    (OpBGP.)))
 
-(defn- construct-expr
-  "Construct an Expression by reflectively constructing a class instance,
-   according to the mapping defined in op-classes."
-  [op args]
-  (if-let [clazz (op-classes op)]
-    (ConstructorUtils/invokeConstructor clazz (into-array Object args))
-    (throw (ex-info (format "Expression operator %s is not implemented" op)
-             {:op op :args args}))))
+(defmethod compile-op :filter
+  [{exprs :exprs child :child}]
+  (OpFilter/filterBy
+    (ExprList. (map compile-expr exprs))
+    (compile-op child)))
 
-(defreplace replace-exprs
-  "Replace expressions with Expr objects"
-  [:node-expr node] (if (instance? Node_Variable node)
-                      (ExprVar. node)
-                      (NodeValue/makeNode node))
-  [:filter [:fn-expr {:operator op
-                      :args args}]] (construct-expr op args))
+(defmethod compile-op :project
+  [{bindings :bindings child :child}]
+  (OpProject. (compile-op child)
+    (map #(Var/alloc (graph/node %)) bindings)))
 
-(defn bgp
-  "Compiles the pattern to an OpBGP object and sets it as the primary operation"
-  [q]
-  (assoc q :op (->> q
-                 :triples
-                 (apply concat)
-                 (BasicPattern/wrap)
-                 (OpBGP.))))
+(defmethod compile-op :distinct
+  [{child :child}]
+  (OpDistinct. (compile-op child)))
 
-(defn project
-  "Wraps the primary operation in a OpProject operation"
-  [q]
-  (let [vars (or (:select-distinct q) (:select q))
-        vars (->> vars (map graph/node) (map #(Var/alloc %)))]
-    (update q :op (fn [op]
-                    (let [op (OpProject. op vars)]
-                      (if (:select-distinct q)
-                        (OpDistinct. op)
-                        op))))))
+;;; Operations to implement
+;OpConditional
+;OpDatasetNames
+;OpDiff
+;OpDisjunction
+;OpDistinctReduced
+;OpExt
+;OpExtend
+;OpExtendAssign
+;OpFilter
+;OpGraph
+;OpGroup
+;OpJoin
+;OpLabel
+;OpLeftJoin
+;OpList
+;OpMinus
+;OpModified
+;OpNull
+;OpOrder
+;OpPath
+;OpProcedure
+;OpPropFunc
+;OpQuad
+;OpQuadBlock
+;OpQuadPattern
+;OpReduced
+;OpSequence
+;OpService
+;OpSplice
+;OpTable
+;OpTopN
+;OpTriple
+;OpUnion
 
-(defn split-where
-  "Takes the top level :where key and splits it into two top-level keys, :triples and :filter"
-  [q]
-  (-> q
-    (dissoc :where)
-    (merge (group-by first (-> q :where)))))
-
-(defn add-filter
-  "Wraps the top-level op in an OpFilter"
-  [q]
-  (let [filter-exprs (:filter q)]
-    (if (empty? filter-exprs)
-      q
-      (update q :op (fn [op]
-                      (OpFilter/filterBy (ExprList. filter-exprs) op))))))
-
-(defn optimize
-  "Automatically optimize the query using Jena's built-in optimizer"
-  [q]
-  (update q :op #(Algebra/optimize %)))
+;; Exprs to implement
+E_Add,
+E_BNode,
+E_Bound,
+E_Call,
+E_Cast,
+E_Coalesce,
+E_Conditional,
+E_Datatype,
+E_DateTimeDay,
+E_DateTimeHours,
+E_DateTimeMinutes,
+E_DateTimeMonth, E_DateTimeSeconds, E_DateTimeTimezone, E_DateTimeTZ, E_DateTimeYear, E_Divide, E_Equals, E_Exists, E_Function, E_FunctionDynamic, E_GreaterThan, E_GreaterThanOrEqual, E_IRI, E_IsBlank, E_IsIRI, E_IsLiteral, E_IsNumeric, E_IsURI, E_Lang, E_LangMatches, E_LessThan, E_LessThanOrEqual, E_LogicalAnd, E_LogicalNot, E_LogicalOr, E_MD5, E_Multiply, E_NotEquals, E_NotExists, E_NotOneOf, E_Now, E_NumAbs, E_NumCeiling, E_NumFloor, E_NumRound, E_OneOf, E_OneOfBase, E_Random, E_Regex, E_SameTerm, E_SHA1, E_SHA224, E_SHA256, E_SHA384, E_SHA512, E_Str, E_StrAfter, E_StrBefore, E_StrConcat, E_StrContains, E_StrDatatype, E_StrEncodeForURI, E_StrEndsWith, E_StrLang, E_StrLength, E_StrLowerCase, E_StrReplace, E_StrStartsWith, E_StrSubstring, E_StrUpperCase, E_StrUUID, E_Subtract, E_UnaryMinus, E_UnaryPlus, E_URI, E_UUID, E_Version, ExprAggregator, ExprDigest, ExprFunction, ExprFunction0, ExprFunction1, ExprFunction2, ExprFunction3, ExprFunctionN, ExprFunctionOp, ExprNode, ExprNone, ExprSystem, ExprVar, NodeValue, NodeValueBoolean, NodeValueDecimal, NodeValueDouble, NodeValueDT, NodeValueDuration, NodeValueFloat, NodeValueInteger, NodeValueLang, NodeValueNode, NodeValueSortKey, NodeValueString
