@@ -75,9 +75,25 @@
                :foaf/knows "<http://example.com/person/joe>"
                :foaf/age 32}]])
 
+  (def q '[:project [?a]
+           [:quad-block
+            [?x ?a :foaf/name ?name]
+            [?x ?a :foaf/age ?age]
+            ]])
+
+  (def q '[:project [?name-count]
+           [:bgp {:rdf/about ?p
+                  :rdf/name ?name}]])
+
   ;(s/conform ::qs/op q)
 
   (sparql (build q))
+
+  (.getVars (build q))
+
+  (def x (build q))
+
+  (def v (.getVars x))
 
   )
 

@@ -7,7 +7,7 @@
             [arachne.aristotle.graph :as g])
   (:import [org.apache.jena.graph NodeFactory Triple Node_Variable]
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList E_GreaterThan E_Equals E_LessThan E_GreaterThanOrEqual E_LogicalNot E_LogicalAnd E_LogicalOr E_NotEquals E_LessThanOrEqual E_BNode E_Bound E_Conditional E_Datatype E_DateTimeDay E_DateTimeHours E_DateTimeMinutes E_DateTimeMonth E_DateTimeSeconds E_DateTimeTimezone E_DateTimeYear E_Divide E_Exists E_IRI E_IsIRI E_IsBlank E_IsLiteral E_IsNumeric E_IsURI E_Add E_Lang E_LangMatches E_MD5 E_Multiply E_Subtract E_Now E_NumAbs E_NumCeiling E_NumFloor E_NumRound E_Random E_Regex E_SameTerm E_Str E_SHA1 E_SHA224 E_SHA256 E_SHA384 E_SHA512 E_StrAfter E_StrBefore E_StrConcat E_StrContains E_StrDatatype E_StrLength E_StrEndsWith E_StrStartsWith E_StrLang E_StrSubstring E_StrUpperCase E_StrUUID E_StrLowerCase E_UnaryPlus E_UnaryMinus E_URI E_Version E_UUID E_StrEncodeForURI E_StrReplace E_Coalesce E_OneOf E_NotOneOf E_Function E_NotExists ExprAggregator]
-           [org.apache.jena.sparql.core BasicPattern Var VarExprList QuadPattern]
+           [org.apache.jena.sparql.core BasicPattern Var VarExprList QuadPattern Quad]
            [org.apache.commons.lang3.reflect ConstructorUtils]
            [org.apache.jena.sparql.algebra OpAsQuery Algebra]
            [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion]
@@ -39,7 +39,7 @@
 (defn- var-seq
   "Convert a seq of variable names to a list of Var nodes"
   [s]
-  (map #(Var/alloc (graph/node %)) s))
+  (mapv #(Var/alloc (graph/node %)) s))
 
 (declare op)
 (declare expr)
@@ -72,7 +72,9 @@
   [quads]
   (let [qp (QuadPattern.)]
     (doseq [[g s p o] quads]
-      (.add qp (g/node g) (g/triple s p o)))))
+      (let [quad (Quad. (g/node g) (g/triple s p o))]
+        (.add qp quad)))
+    qp))
 
 (defn aggregator
   "Convert a Clojure data structure representing an aggregation expression to
