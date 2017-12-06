@@ -1,11 +1,10 @@
 (ns arachne.aristotle.query
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query.compiler :as qc]
-            [arachne.aristotle.query.spec :as qs]
             [arachne.aristotle.graph :as graph]
             [clojure.spec.alpha :as s])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
-           [org.apache.jena.sparql.algebra AlgebraGenerator Algebra]
+           [org.apache.jena.sparql.algebra AlgebraGenerator Algebra OpAsQuery]
            [org.apache.jena.sparql.algebra.op OpProject Op1]))
 
 (defn- find-vars
@@ -32,10 +31,15 @@
   "Build a Jena Operation object from the given query, represented as a
    Clojure data structure"
   [query]
-  (s/assert* ::qs/op query)
-  (let [op (qc/compile-op (s/conform ::qs/op query))
+  (let [op (qc/op query)
         op (Algebra/optimize op)]
     op))
+
+(defn sparql
+  "Return a SPARQL query string for the given Jena Operation (as returned from `build`).
+  Useful mostly for debugging."
+  [op]
+  (OpAsQuery/asQuery op))
 
 (defn query
   "Build and execute a query on the given dataset."
@@ -64,15 +68,16 @@
              ]]
            ])
 
-  (def q '[:bgp [[?a :foaf/name ?b]]
-                [?a :foaf/test ?b]
-                {:rdf/about ?a
-                 :foaf/knows "<http://example.com/person/joe>"
-                 :foaf/age 32}])
+  (def q '[:project [?a]
+           [:bgp [[?a :foaf/name ?b]]
+              [?a :foaf/test ?b]
+              {:rdf/about ?a
+               :foaf/knows "<http://example.com/person/joe>"
+               :foaf/age 32}]])
 
-  (s/conform ::qs/op q)
+  ;(s/conform ::qs/op q)
 
-  (build q)
+  (sparql (build q))
 
   )
 
@@ -106,16 +111,50 @@
                          FILTER NOT EXISTS {?x <http://xmlns.com/foaf/0.1/age> ?age}
                          }")
 
+  (def querystr "SELECT ?x (<java:foo.inc>(?y) AS ?iy)
+                 WHERE {
+                   ?x <http://xmlns.com/foaf/0.1/name> ?y .
+                }
+
+  ")
+
+  (def querystr "SELECT ?x (str(?y) AS ?iy)
+                 WHERE {
+                   ?x <http://xmlns.com/foaf/0.1/name> ?y .
+                }
+
+
+  ")
+
+
+  (def querystr "SELECT ?group1 ?group2
+                 (COUNT(?var1) AS ?var2)
+                  (GROUP_CONCAT (DISTINCT ?var3; SEPARATOR=\", \") AS ?var4)
+                     WHERE
+                     {
+                       ?var3 <http://xmlns.com/foaf/0.1/name> ?y .
+                     }
+                  GROUP BY ?group1 ?group2")
+
+  (def querystr "SELECT ?group1 ?group2 (COUNT(?var1) AS ?var2)
+                 WHERE {
+                     ?var1 <http://xmlns.com/foaf/0.1/name> ?var4 .
+                 }
+                 GROUP BY ?group1 ?group2
+                 ")
+
   (def qq (QueryFactory/create querystr))
 
 
-  (-> (AlgebraGenerator.)
-    (.compile qq)
-    ;(.getSubOp)
-    ;(.getExprs)
-    ;(.getList)
-    ;first
-    ;(.getArgs)
+  (def op
+    (-> (AlgebraGenerator.)
+      (.compile qq)
+      ;(.getSubOp)
+      ;(.getExprs)
+      ;(.getList)
+      ;first
+      ;(.getArgs)
+      )
     )
 
 
