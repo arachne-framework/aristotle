@@ -2,10 +2,9 @@
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
             [clojure.spec.alpha :as s]
-            [clojure.core.match :as m]
             [clojure.walk :as w]
             [arachne.aristotle.graph :as g])
-  (:import [org.apache.jena.graph NodeFactory Triple Node_Variable]
+  (:import [org.apache.jena.graph NodeFactory Triple Node_Variable Node_Blank]
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList E_GreaterThan E_Equals E_LessThan E_GreaterThanOrEqual E_LogicalNot E_LogicalAnd E_LogicalOr E_NotEquals E_LessThanOrEqual E_BNode E_Bound E_Conditional E_Datatype E_DateTimeDay E_DateTimeHours E_DateTimeMinutes E_DateTimeMonth E_DateTimeSeconds E_DateTimeTimezone E_DateTimeYear E_Divide E_Exists E_IRI E_IsIRI E_IsBlank E_IsLiteral E_IsNumeric E_IsURI E_Add E_Lang E_LangMatches E_MD5 E_Multiply E_Subtract E_Now E_NumAbs E_NumCeiling E_NumFloor E_NumRound E_Random E_Regex E_SameTerm E_Str E_SHA1 E_SHA224 E_SHA256 E_SHA384 E_SHA512 E_StrAfter E_StrBefore E_StrConcat E_StrContains E_StrDatatype E_StrLength E_StrEndsWith E_StrStartsWith E_StrLang E_StrSubstring E_StrUpperCase E_StrUUID E_StrLowerCase E_UnaryPlus E_UnaryMinus E_URI E_Version E_UUID E_StrEncodeForURI E_StrReplace E_Coalesce E_OneOf E_NotOneOf E_Function E_NotExists ExprAggregator]
            [org.apache.jena.sparql.core BasicPattern Var VarExprList QuadPattern Quad]
            [org.apache.commons.lang3.reflect ConstructorUtils]
@@ -14,27 +13,34 @@
            [org.apache.jena.sparql.expr.aggregate AggCount$AccCount AggSum AggAvg AggMin AggMax AggGroupConcat$AccGroupConcat AggSample$AccSample AggGroupConcat AggCount AggSample]
            [org.apache.jena.query SortCondition]))
 
-(defn- replace-node
-  "If the given conformed data structure is a node, replace it with a Jena
-   Node object, otherwise return it unchanged."
-  [n]
-  (m/match n
-    [:variable s] (Var/alloc (graph/node s))
-    [:literal l] (graph/node l)
-    [:iri [_ iri]] (graph/node iri)
-    :else n))
+(defn- replace-vars
+  "Given a collection of Triples, mutate the triples to replace Node_variable
+   objects with Var objects."
+  [triples]
+  (let [bnodes (atom {})
+        update-bnodes (fn [bnodes id]
+                        (if (bnodes id)
+                          bnodes
+                          (assoc bnodes id (Var/alloc (str "?" (count bnodes))))))
+        replace (fn [node]
+                  (cond
+                    (instance? Node_Variable node) (Var/alloc node)
+                    (instance? Node_Blank node)
+                    (let [id (str (.getBlankNodeId node))
+                          bnodes (swap! bnodes update-bnodes id)]
+                      (bnodes id))
+                    :else node))]
+    (for [^Triple triple triples]
+      (Triple.
+        (replace (.getSubject triple))
+        (replace (.getPredicate triple))
+        (replace (.getObject triple))))))
 
 (defn- triples
   "Convert the given Clojure data structure to a set of Jena triples"
   [data]
   (s/assert* ::graph/triples data)
-  (let [conformed (s/conform ::graph/triples data)
-        with-nodes (w/postwalk replace-node conformed)
-        [type triples] with-nodes]
-    (case type
-      :map (graph/triples data)
-      :single-triple [(graph/triple data)]
-      :triples (map graph/triple data))))
+  (replace-vars (graph/triples data)))
 
 (defn- var-seq
   "Convert a seq of variable names to a list of Var nodes"
@@ -51,14 +57,15 @@
   (let [vel (VarExprList.)]
     (doseq [[v e] (partition 2 bindings)]
       (.add vel (Var/alloc (graph/node v))
-        (expr e)))))
+        (expr e)))
+    vel))
 
 (defn- var-aggr-list
   "Given a vector of var/aggregate bindings return a Jena VarExprList with
    vars and aggregates"
   [bindings]
   (for [[v e] (partition 2 bindings)]
-    (ExprAggregator. v (aggregator e))))
+    (ExprAggregator. (Var/alloc (graph/node v)) (aggregator e))))
 
 (defn- sort-conditions
   "Given a seq of expressions and the keyword :asc or :desc, return a list of
@@ -81,13 +88,13 @@
    a Jena Aggregator object"
   [[op & [a1 a2 & _ :as args]]]
   (case op
-    :count (AggCount.)
-    :sum (AggSum. (expr a1))
-    :avg (AggAvg. (expr a1))
-    :min (AggMin. (expr a1))
-    :max (AggMax. (expr a1))
-    :group-concat (AggGroupConcat. (expr a1) a2)
-    :sample (AggSample. a1)))
+    count (AggCount.)
+    sum (AggSum. (expr a1))
+    avg (AggAvg. (expr a1))
+    min (AggMin. (expr a1))
+    max (AggMax. (expr a1))
+    group-concat (AggGroupConcat. (expr a1) a2)
+    sample (AggSample. a1)))
 
 (defn op
   "Convert a Clojure data structure to an Arq Op"
@@ -219,8 +226,7 @@
         (= f 'in) (E_OneOf. (first args) (ExprList. (rest args)))
         (= f 'not-in) (E_NotOneOf. (first args) (ExprList. (rest args)))
 
-        (s/valid? ::graph/iri f) (E_Function. (graph/node f) (ExprList. args))
-
+        (s/valid? ::graph/iri f) (E_Function. (.getURI (graph/node f)) (ExprList. args))
 
         :else (throw (ex-info (str "Unknown expression type " f) {:expr f
                                                                   :args args}))))))

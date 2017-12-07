@@ -7,8 +7,9 @@
            [java.util GregorianCalendar Calendar Date Map Collection List]
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory]
            [org.apache.jena.datatypes.xsd XSDDatatype]
-           [javax.xml.bind DatatypeConverter])
-  (:refer-clojure :exclude [reify]))
+           [javax.xml.bind DatatypeConverter]
+           [org.apache.jena.riot RDFDataMgr])
+  (:refer-clojure :exclude [reify load]))
 
 (defn variable?
   [s]
@@ -177,38 +178,17 @@
    (GraphUtil/add graph triples)
    graph))
 
-(comment
+(defn load
+  "Load a file containing RDF data into a Jena Graph object. Attempts to infer the RDF language.
 
-  (import [org.apache.jena.graph Factory GraphUtil])
-
-  (reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
-  (reg/prefix :cfg "http://arachne-framework.org/config/")
-
-  (def ts (triples [["<http://example.com/#luke>" :foaf/name "Luke"]
-                    ["<http://example.com/#luke>" :foaf/age 32]]))
-
-  (def rs (reify ts))
-
-  (def ms (->> rs
-            (map #(.getSubject %))
-            (set)
-            (map (fn [stmt]
-                   (triple "<http://example.com/#my-tx" :cfg/tx-stmts stmt)))))
-
-  (def g (Factory/createDefaultGraph))
-
-  (GraphUtil/add g ts)
-  (GraphUtil/add g rs)
-  (GraphUtil/add g ms)
-
-  (import [org.apache.jena.rdf.model ModelFactory])
-
-
-  (def m (ModelFactory/createModelForGraph g))
-
-  (iterator-seq (.listReifiedStatements m))
-
-  (.write m *out* "TURTLE")
-
-  )
-
+  Argument may be a string URI, or a URI, URL, or File object."
+  [uri]
+  (cond
+    (string? uri) (RDFDataMgr/loadGraph uri)
+    (uri? uri) (load (str uri))
+    (instance? java.net.URL uri) (RDFDataMgr/loadGraph (str (.toURI uri)))
+    (instance? java.io.File uri) (RDFDataMgr/loadGraph
+                                   (-> uri
+                                     (.getAbsoluteFile)
+                                     (.toURI)
+                                     (str)))))

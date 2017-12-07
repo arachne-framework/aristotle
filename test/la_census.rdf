@@ -1,0 +1,3191 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:socrata="http://www.socrata.com/rdf/terms#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:ods="http://open-data-standards.github.com/2012/01/open-data-standards#" xmlns:dcterm="http://purl.org/dc/terms/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dsbase="http://data.lacity.org/resource/" xmlns:ds="https://data.lacity.org/resource/zzzz-zzzz/">
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/228">
+    <socrata:rowID>228</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91371</ds:zip_code>
+    <ds:total_population>1</ds:total_population>
+    <ds:median_age>73.5</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>1</ds:total_females>
+    <ds:total_households>1</ds:total_households>
+    <ds:average_household_size>1.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/1">
+    <socrata:rowID>1</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90001</ds:zip_code>
+    <ds:total_population>57110</ds:total_population>
+    <ds:median_age>26.6</ds:median_age>
+    <ds:total_males>28468</ds:total_males>
+    <ds:total_females>28642</ds:total_females>
+    <ds:total_households>12971</ds:total_households>
+    <ds:average_household_size>4.40</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/2">
+    <socrata:rowID>2</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90002</ds:zip_code>
+    <ds:total_population>51223</ds:total_population>
+    <ds:median_age>25.5</ds:median_age>
+    <ds:total_males>24876</ds:total_males>
+    <ds:total_females>26347</ds:total_females>
+    <ds:total_households>11731</ds:total_households>
+    <ds:average_household_size>4.36</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/3">
+    <socrata:rowID>3</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90003</ds:zip_code>
+    <ds:total_population>66266</ds:total_population>
+    <ds:median_age>26.3</ds:median_age>
+    <ds:total_males>32631</ds:total_males>
+    <ds:total_females>33635</ds:total_females>
+    <ds:total_households>15642</ds:total_households>
+    <ds:average_household_size>4.22</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/4">
+    <socrata:rowID>4</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90004</ds:zip_code>
+    <ds:total_population>62180</ds:total_population>
+    <ds:median_age>34.8</ds:median_age>
+    <ds:total_males>31302</ds:total_males>
+    <ds:total_females>30878</ds:total_females>
+    <ds:total_households>22547</ds:total_households>
+    <ds:average_household_size>2.73</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/5">
+    <socrata:rowID>5</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90005</ds:zip_code>
+    <ds:total_population>37681</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>19299</ds:total_males>
+    <ds:total_females>18382</ds:total_females>
+    <ds:total_households>15044</ds:total_households>
+    <ds:average_household_size>2.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/6">
+    <socrata:rowID>6</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90006</ds:zip_code>
+    <ds:total_population>59185</ds:total_population>
+    <ds:median_age>32.4</ds:median_age>
+    <ds:total_males>30254</ds:total_males>
+    <ds:total_females>28931</ds:total_females>
+    <ds:total_households>18617</ds:total_households>
+    <ds:average_household_size>3.13</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/7">
+    <socrata:rowID>7</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90007</ds:zip_code>
+    <ds:total_population>40920</ds:total_population>
+    <ds:median_age>24.0</ds:median_age>
+    <ds:total_males>20915</ds:total_males>
+    <ds:total_females>20005</ds:total_females>
+    <ds:total_households>11944</ds:total_households>
+    <ds:average_household_size>3.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/8">
+    <socrata:rowID>8</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90008</ds:zip_code>
+    <ds:total_population>32327</ds:total_population>
+    <ds:median_age>39.7</ds:median_age>
+    <ds:total_males>14477</ds:total_males>
+    <ds:total_females>17850</ds:total_females>
+    <ds:total_households>13841</ds:total_households>
+    <ds:average_household_size>2.33</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/9">
+    <socrata:rowID>9</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90010</ds:zip_code>
+    <ds:total_population>3800</ds:total_population>
+    <ds:median_age>37.8</ds:median_age>
+    <ds:total_males>1874</ds:total_males>
+    <ds:total_females>1926</ds:total_females>
+    <ds:total_households>2014</ds:total_households>
+    <ds:average_household_size>1.87</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/10">
+    <socrata:rowID>10</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90011</ds:zip_code>
+    <ds:total_population>103892</ds:total_population>
+    <ds:median_age>26.2</ds:median_age>
+    <ds:total_males>52794</ds:total_males>
+    <ds:total_females>51098</ds:total_females>
+    <ds:total_households>22168</ds:total_households>
+    <ds:average_household_size>4.67</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/11">
+    <socrata:rowID>11</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90012</ds:zip_code>
+    <ds:total_population>31103</ds:total_population>
+    <ds:median_age>36.3</ds:median_age>
+    <ds:total_males>19493</ds:total_males>
+    <ds:total_females>11610</ds:total_females>
+    <ds:total_households>10327</ds:total_households>
+    <ds:average_household_size>2.12</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/12">
+    <socrata:rowID>12</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90013</ds:zip_code>
+    <ds:total_population>11772</ds:total_population>
+    <ds:median_age>44.6</ds:median_age>
+    <ds:total_males>7629</ds:total_males>
+    <ds:total_females>4143</ds:total_females>
+    <ds:total_households>6416</ds:total_households>
+    <ds:average_household_size>1.26</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/13">
+    <socrata:rowID>13</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90014</ds:zip_code>
+    <ds:total_population>7005</ds:total_population>
+    <ds:median_age>44.8</ds:median_age>
+    <ds:total_males>4471</ds:total_males>
+    <ds:total_females>2534</ds:total_females>
+    <ds:total_households>4109</ds:total_households>
+    <ds:average_household_size>1.34</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/14">
+    <socrata:rowID>14</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90015</ds:zip_code>
+    <ds:total_population>18986</ds:total_population>
+    <ds:median_age>31.3</ds:median_age>
+    <ds:total_males>9833</ds:total_males>
+    <ds:total_females>9153</ds:total_females>
+    <ds:total_households>7420</ds:total_households>
+    <ds:average_household_size>2.45</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/15">
+    <socrata:rowID>15</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90016</ds:zip_code>
+    <ds:total_population>47596</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>22778</ds:total_males>
+    <ds:total_females>24818</ds:total_females>
+    <ds:total_households>16145</ds:total_households>
+    <ds:average_household_size>2.93</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/16">
+    <socrata:rowID>16</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90017</ds:zip_code>
+    <ds:total_population>23768</ds:total_population>
+    <ds:median_age>29.4</ds:median_age>
+    <ds:total_males>12818</ds:total_males>
+    <ds:total_females>10950</ds:total_females>
+    <ds:total_households>9338</ds:total_households>
+    <ds:average_household_size>2.53</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/17">
+    <socrata:rowID>17</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90018</ds:zip_code>
+    <ds:total_population>49310</ds:total_population>
+    <ds:median_age>33.2</ds:median_age>
+    <ds:total_males>23770</ds:total_males>
+    <ds:total_females>25540</ds:total_females>
+    <ds:total_households>15493</ds:total_households>
+    <ds:average_household_size>3.12</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/18">
+    <socrata:rowID>18</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90019</ds:zip_code>
+    <ds:total_population>64458</ds:total_population>
+    <ds:median_age>35.8</ds:median_age>
+    <ds:total_males>31442</ds:total_males>
+    <ds:total_females>33016</ds:total_females>
+    <ds:total_households>23344</ds:total_households>
+    <ds:average_household_size>2.70</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/19">
+    <socrata:rowID>19</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90020</ds:zip_code>
+    <ds:total_population>38967</ds:total_population>
+    <ds:median_age>34.6</ds:median_age>
+    <ds:total_males>19381</ds:total_males>
+    <ds:total_females>19586</ds:total_females>
+    <ds:total_households>16514</ds:total_households>
+    <ds:average_household_size>2.35</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/20">
+    <socrata:rowID>20</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90021</ds:zip_code>
+    <ds:total_population>3951</ds:total_population>
+    <ds:median_age>44.3</ds:median_age>
+    <ds:total_males>2790</ds:total_males>
+    <ds:total_females>1161</ds:total_females>
+    <ds:total_households>1561</ds:total_households>
+    <ds:average_household_size>1.57</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/21">
+    <socrata:rowID>21</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90022</ds:zip_code>
+    <ds:total_population>67179</ds:total_population>
+    <ds:median_age>29.8</ds:median_age>
+    <ds:total_males>33216</ds:total_males>
+    <ds:total_females>33963</ds:total_females>
+    <ds:total_households>17023</ds:total_households>
+    <ds:average_household_size>3.94</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/22">
+    <socrata:rowID>22</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90023</ds:zip_code>
+    <ds:total_population>45903</ds:total_population>
+    <ds:median_age>28.4</ds:median_age>
+    <ds:total_males>23037</ds:total_males>
+    <ds:total_females>22866</ds:total_females>
+    <ds:total_households>10727</ds:total_households>
+    <ds:average_household_size>4.26</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/23">
+    <socrata:rowID>23</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90024</ds:zip_code>
+    <ds:total_population>47452</ds:total_population>
+    <ds:median_age>23.6</ds:median_age>
+    <ds:total_males>22248</ds:total_males>
+    <ds:total_females>25204</ds:total_females>
+    <ds:total_households>17903</ds:total_households>
+    <ds:average_household_size>2.03</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/24">
+    <socrata:rowID>24</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90025</ds:zip_code>
+    <ds:total_population>42147</ds:total_population>
+    <ds:median_age>34.7</ds:median_age>
+    <ds:total_males>20859</ds:total_males>
+    <ds:total_females>21288</ds:total_females>
+    <ds:total_households>21228</ds:total_households>
+    <ds:average_household_size>1.97</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/25">
+    <socrata:rowID>25</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90026</ds:zip_code>
+    <ds:total_population>67869</ds:total_population>
+    <ds:median_age>34.0</ds:median_age>
+    <ds:total_males>34515</ds:total_males>
+    <ds:total_females>33354</ds:total_females>
+    <ds:total_households>24956</ds:total_households>
+    <ds:average_household_size>2.68</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/26">
+    <socrata:rowID>26</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90027</ds:zip_code>
+    <ds:total_population>45151</ds:total_population>
+    <ds:median_age>38.3</ds:median_age>
+    <ds:total_males>22362</ds:total_males>
+    <ds:total_females>22789</ds:total_females>
+    <ds:total_households>21929</ds:total_households>
+    <ds:average_household_size>1.99</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/27">
+    <socrata:rowID>27</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90028</ds:zip_code>
+    <ds:total_population>28714</ds:total_population>
+    <ds:median_age>34.0</ds:median_age>
+    <ds:total_males>16056</ds:total_males>
+    <ds:total_females>12658</ds:total_females>
+    <ds:total_households>14964</ds:total_households>
+    <ds:average_household_size>1.78</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/28">
+    <socrata:rowID>28</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90029</ds:zip_code>
+    <ds:total_population>38617</ds:total_population>
+    <ds:median_age>34.6</ds:median_age>
+    <ds:total_males>19575</ds:total_males>
+    <ds:total_females>19042</ds:total_females>
+    <ds:total_households>13883</ds:total_households>
+    <ds:average_household_size>2.70</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/29">
+    <socrata:rowID>29</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90031</ds:zip_code>
+    <ds:total_population>39316</ds:total_population>
+    <ds:median_age>33.5</ds:median_age>
+    <ds:total_males>19546</ds:total_males>
+    <ds:total_females>19770</ds:total_females>
+    <ds:total_households>11156</ds:total_households>
+    <ds:average_household_size>3.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/30">
+    <socrata:rowID>30</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90032</ds:zip_code>
+    <ds:total_population>45786</ds:total_population>
+    <ds:median_age>32.4</ds:median_age>
+    <ds:total_males>22564</ds:total_males>
+    <ds:total_females>23222</ds:total_females>
+    <ds:total_households>12765</ds:total_households>
+    <ds:average_household_size>3.52</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/31">
+    <socrata:rowID>31</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90033</ds:zip_code>
+    <ds:total_population>48852</ds:total_population>
+    <ds:median_age>29.2</ds:median_age>
+    <ds:total_males>24425</ds:total_males>
+    <ds:total_females>24427</ds:total_females>
+    <ds:total_households>12924</ds:total_households>
+    <ds:average_household_size>3.66</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/32">
+    <socrata:rowID>32</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90034</ds:zip_code>
+    <ds:total_population>57964</ds:total_population>
+    <ds:median_age>32.8</ds:median_age>
+    <ds:total_males>28828</ds:total_males>
+    <ds:total_females>29136</ds:total_females>
+    <ds:total_households>25592</ds:total_households>
+    <ds:average_household_size>2.23</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/33">
+    <socrata:rowID>33</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90035</ds:zip_code>
+    <ds:total_population>28418</ds:total_population>
+    <ds:median_age>37.5</ds:median_age>
+    <ds:total_males>13326</ds:total_males>
+    <ds:total_females>15092</ds:total_females>
+    <ds:total_households>12814</ds:total_households>
+    <ds:average_household_size>2.19</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/34">
+    <socrata:rowID>34</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90036</ds:zip_code>
+    <ds:total_population>36865</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>17914</ds:total_males>
+    <ds:total_females>18951</ds:total_females>
+    <ds:total_households>18646</ds:total_households>
+    <ds:average_household_size>1.96</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/35">
+    <socrata:rowID>35</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90037</ds:zip_code>
+    <ds:total_population>62276</ds:total_population>
+    <ds:median_age>28.8</ds:median_age>
+    <ds:total_males>31187</ds:total_males>
+    <ds:total_females>31089</ds:total_females>
+    <ds:total_households>15869</ds:total_households>
+    <ds:average_household_size>3.85</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/36">
+    <socrata:rowID>36</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90038</ds:zip_code>
+    <ds:total_population>28917</ds:total_population>
+    <ds:median_age>33.1</ds:median_age>
+    <ds:total_males>15383</ds:total_males>
+    <ds:total_females>13534</ds:total_females>
+    <ds:total_households>11928</ds:total_households>
+    <ds:average_household_size>2.41</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/37">
+    <socrata:rowID>37</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90039</ds:zip_code>
+    <ds:total_population>28514</ds:total_population>
+    <ds:median_age>38.8</ds:median_age>
+    <ds:total_males>14383</ds:total_males>
+    <ds:total_females>14131</ds:total_females>
+    <ds:total_households>11436</ds:total_households>
+    <ds:average_household_size>2.47</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/38">
+    <socrata:rowID>38</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90040</ds:zip_code>
+    <ds:total_population>12520</ds:total_population>
+    <ds:median_age>31.2</ds:median_age>
+    <ds:total_males>6129</ds:total_males>
+    <ds:total_females>6391</ds:total_females>
+    <ds:total_households>3317</ds:total_households>
+    <ds:average_household_size>3.75</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/39">
+    <socrata:rowID>39</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90041</ds:zip_code>
+    <ds:total_population>27425</ds:total_population>
+    <ds:median_age>39.0</ds:median_age>
+    <ds:total_males>13212</ds:total_males>
+    <ds:total_females>14213</ds:total_females>
+    <ds:total_households>9513</ds:total_households>
+    <ds:average_household_size>2.71</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/40">
+    <socrata:rowID>40</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90042</ds:zip_code>
+    <ds:total_population>62430</ds:total_population>
+    <ds:median_age>33.6</ds:median_age>
+    <ds:total_males>30836</ds:total_males>
+    <ds:total_females>31594</ds:total_females>
+    <ds:total_households>19892</ds:total_households>
+    <ds:average_household_size>3.11</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/41">
+    <socrata:rowID>41</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90043</ds:zip_code>
+    <ds:total_population>44789</ds:total_population>
+    <ds:median_age>38.7</ds:median_age>
+    <ds:total_males>20561</ds:total_males>
+    <ds:total_females>24228</ds:total_females>
+    <ds:total_households>16075</ds:total_households>
+    <ds:average_household_size>2.76</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/42">
+    <socrata:rowID>42</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90044</ds:zip_code>
+    <ds:total_population>89779</ds:total_population>
+    <ds:median_age>28.6</ds:median_age>
+    <ds:total_males>43128</ds:total_males>
+    <ds:total_females>46651</ds:total_females>
+    <ds:total_households>25144</ds:total_households>
+    <ds:average_household_size>3.55</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/43">
+    <socrata:rowID>43</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90045</ds:zip_code>
+    <ds:total_population>39480</ds:total_population>
+    <ds:median_age>35.6</ds:median_age>
+    <ds:total_males>18958</ds:total_males>
+    <ds:total_females>20522</ds:total_females>
+    <ds:total_households>15224</ds:total_households>
+    <ds:average_household_size>2.37</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/44">
+    <socrata:rowID>44</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90046</ds:zip_code>
+    <ds:total_population>48581</ds:total_population>
+    <ds:median_age>38.5</ds:median_age>
+    <ds:total_males>25854</ds:total_males>
+    <ds:total_females>22727</ds:total_females>
+    <ds:total_households>28534</ds:total_households>
+    <ds:average_household_size>1.69</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/45">
+    <socrata:rowID>45</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90047</ds:zip_code>
+    <ds:total_population>48606</ds:total_population>
+    <ds:median_age>36.2</ds:median_age>
+    <ds:total_males>22129</ds:total_males>
+    <ds:total_females>26477</ds:total_females>
+    <ds:total_households>16168</ds:total_households>
+    <ds:average_household_size>2.99</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/46">
+    <socrata:rowID>46</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90048</ds:zip_code>
+    <ds:total_population>21397</ds:total_population>
+    <ds:median_age>39.2</ds:median_age>
+    <ds:total_males>10132</ds:total_males>
+    <ds:total_females>11265</ds:total_females>
+    <ds:total_households>11821</ds:total_households>
+    <ds:average_household_size>1.77</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/47">
+    <socrata:rowID>47</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90049</ds:zip_code>
+    <ds:total_population>35482</ds:total_population>
+    <ds:median_age>41.3</ds:median_age>
+    <ds:total_males>16359</ds:total_males>
+    <ds:total_females>19123</ds:total_females>
+    <ds:total_households>16657</ds:total_households>
+    <ds:average_household_size>2.09</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/48">
+    <socrata:rowID>48</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90056</ds:zip_code>
+    <ds:total_population>7827</ds:total_population>
+    <ds:median_age>48.4</ds:median_age>
+    <ds:total_males>3436</ds:total_males>
+    <ds:total_females>4391</ds:total_females>
+    <ds:total_households>3371</ds:total_households>
+    <ds:average_household_size>2.32</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/49">
+    <socrata:rowID>49</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90057</ds:zip_code>
+    <ds:total_population>44998</ds:total_population>
+    <ds:median_age>31.2</ds:median_age>
+    <ds:total_males>24300</ds:total_males>
+    <ds:total_females>20698</ds:total_females>
+    <ds:total_households>15658</ds:total_households>
+    <ds:average_household_size>2.81</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/50">
+    <socrata:rowID>50</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90058</ds:zip_code>
+    <ds:total_population>3223</ds:total_population>
+    <ds:median_age>26.0</ds:median_age>
+    <ds:total_males>1555</ds:total_males>
+    <ds:total_females>1668</ds:total_females>
+    <ds:total_households>892</ds:total_households>
+    <ds:average_household_size>3.60</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/51">
+    <socrata:rowID>51</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90059</ds:zip_code>
+    <ds:total_population>40952</ds:total_population>
+    <ds:median_age>25.7</ds:median_age>
+    <ds:total_males>19623</ds:total_males>
+    <ds:total_females>21329</ds:total_females>
+    <ds:total_households>9596</ds:total_households>
+    <ds:average_household_size>4.19</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/52">
+    <socrata:rowID>52</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90061</ds:zip_code>
+    <ds:total_population>26872</ds:total_population>
+    <ds:median_age>28.4</ds:median_age>
+    <ds:total_males>13049</ds:total_males>
+    <ds:total_females>13823</ds:total_females>
+    <ds:total_households>6892</ds:total_households>
+    <ds:average_household_size>3.85</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/53">
+    <socrata:rowID>53</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90062</ds:zip_code>
+    <ds:total_population>32821</ds:total_population>
+    <ds:median_age>31.8</ds:median_age>
+    <ds:total_males>15720</ds:total_males>
+    <ds:total_females>17101</ds:total_females>
+    <ds:total_households>9155</ds:total_households>
+    <ds:average_household_size>3.55</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/54">
+    <socrata:rowID>54</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90063</ds:zip_code>
+    <ds:total_population>55758</ds:total_population>
+    <ds:median_age>29.0</ds:median_age>
+    <ds:total_males>27843</ds:total_males>
+    <ds:total_females>27915</ds:total_females>
+    <ds:total_households>13260</ds:total_households>
+    <ds:average_household_size>4.19</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/55">
+    <socrata:rowID>55</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90064</ds:zip_code>
+    <ds:total_population>25403</ds:total_population>
+    <ds:median_age>40.0</ds:median_age>
+    <ds:total_males>12297</ds:total_males>
+    <ds:total_females>13106</ds:total_females>
+    <ds:total_households>10968</ds:total_households>
+    <ds:average_household_size>2.29</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/56">
+    <socrata:rowID>56</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90065</ds:zip_code>
+    <ds:total_population>45527</ds:total_population>
+    <ds:median_age>36.1</ds:median_age>
+    <ds:total_males>22873</ds:total_males>
+    <ds:total_females>22654</ds:total_females>
+    <ds:total_households>14476</ds:total_households>
+    <ds:average_household_size>3.12</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/57">
+    <socrata:rowID>57</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90066</ds:zip_code>
+    <ds:total_population>55277</ds:total_population>
+    <ds:median_age>37.3</ds:median_age>
+    <ds:total_males>27714</ds:total_males>
+    <ds:total_females>27563</ds:total_females>
+    <ds:total_households>23985</ds:total_households>
+    <ds:average_household_size>2.29</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/58">
+    <socrata:rowID>58</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90067</ds:zip_code>
+    <ds:total_population>2424</ds:total_population>
+    <ds:median_age>65.3</ds:median_age>
+    <ds:total_males>1074</ds:total_males>
+    <ds:total_females>1350</ds:total_females>
+    <ds:total_households>1510</ds:total_households>
+    <ds:average_household_size>1.61</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/59">
+    <socrata:rowID>59</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90068</ds:zip_code>
+    <ds:total_population>22286</ds:total_population>
+    <ds:median_age>39.4</ds:median_age>
+    <ds:total_males>12018</ds:total_males>
+    <ds:total_females>10268</ds:total_females>
+    <ds:total_households>12326</ds:total_households>
+    <ds:average_household_size>1.80</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/60">
+    <socrata:rowID>60</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90069</ds:zip_code>
+    <ds:total_population>20483</ds:total_population>
+    <ds:median_age>41.5</ds:median_age>
+    <ds:total_males>12153</ds:total_males>
+    <ds:total_females>8330</ds:total_females>
+    <ds:total_households>13364</ds:total_households>
+    <ds:average_household_size>1.53</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/61">
+    <socrata:rowID>61</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90071</ds:zip_code>
+    <ds:total_population>15</ds:total_population>
+    <ds:median_age>45.5</ds:median_age>
+    <ds:total_males>13</ds:total_males>
+    <ds:total_females>2</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/62">
+    <socrata:rowID>62</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90073</ds:zip_code>
+    <ds:total_population>539</ds:total_population>
+    <ds:median_age>56.9</ds:median_age>
+    <ds:total_males>506</ds:total_males>
+    <ds:total_females>33</ds:total_females>
+    <ds:total_households>4</ds:total_households>
+    <ds:average_household_size>1.25</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/63">
+    <socrata:rowID>63</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90077</ds:zip_code>
+    <ds:total_population>9377</ds:total_population>
+    <ds:median_age>47.9</ds:median_age>
+    <ds:total_males>4594</ds:total_males>
+    <ds:total_females>4783</ds:total_females>
+    <ds:total_households>3615</ds:total_households>
+    <ds:average_household_size>2.57</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/64">
+    <socrata:rowID>64</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90079</ds:zip_code>
+    <ds:total_population>0</ds:total_population>
+    <ds:median_age>0.0</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>0</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/65">
+    <socrata:rowID>65</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90089</ds:zip_code>
+    <ds:total_population>3217</ds:total_population>
+    <ds:median_age>19.3</ds:median_age>
+    <ds:total_males>1436</ds:total_males>
+    <ds:total_females>1781</ds:total_females>
+    <ds:total_households>31</ds:total_households>
+    <ds:average_household_size>1.94</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/66">
+    <socrata:rowID>66</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90090</ds:zip_code>
+    <ds:total_population>0</ds:total_population>
+    <ds:median_age>0.0</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>0</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/67">
+    <socrata:rowID>67</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90094</ds:zip_code>
+    <ds:total_population>5464</ds:total_population>
+    <ds:median_age>33.7</ds:median_age>
+    <ds:total_males>2559</ds:total_males>
+    <ds:total_females>2905</ds:total_females>
+    <ds:total_households>2949</ds:total_households>
+    <ds:average_household_size>1.85</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/68">
+    <socrata:rowID>68</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90095</ds:zip_code>
+    <ds:total_population>3</ds:total_population>
+    <ds:median_age>52.5</ds:median_age>
+    <ds:total_males>2</ds:total_males>
+    <ds:total_females>1</ds:total_females>
+    <ds:total_households>2</ds:total_households>
+    <ds:average_household_size>1.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/69">
+    <socrata:rowID>69</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90201</ds:zip_code>
+    <ds:total_population>101279</ds:total_population>
+    <ds:median_age>27.8</ds:median_age>
+    <ds:total_males>50658</ds:total_males>
+    <ds:total_females>50621</ds:total_females>
+    <ds:total_households>24104</ds:total_households>
+    <ds:average_household_size>4.16</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/70">
+    <socrata:rowID>70</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90210</ds:zip_code>
+    <ds:total_population>21741</ds:total_population>
+    <ds:median_age>47.5</ds:median_age>
+    <ds:total_males>10292</ds:total_males>
+    <ds:total_females>11449</ds:total_females>
+    <ds:total_households>8669</ds:total_households>
+    <ds:average_household_size>2.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/71">
+    <socrata:rowID>71</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90211</ds:zip_code>
+    <ds:total_population>8434</ds:total_population>
+    <ds:median_age>40.6</ds:median_age>
+    <ds:total_males>3849</ds:total_males>
+    <ds:total_females>4585</ds:total_females>
+    <ds:total_households>3706</ds:total_households>
+    <ds:average_household_size>2.28</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/72">
+    <socrata:rowID>72</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90212</ds:zip_code>
+    <ds:total_population>11555</ds:total_population>
+    <ds:median_age>41.2</ds:median_age>
+    <ds:total_males>5211</ds:total_males>
+    <ds:total_females>6344</ds:total_females>
+    <ds:total_households>5567</ds:total_households>
+    <ds:average_household_size>2.08</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/73">
+    <socrata:rowID>73</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90220</ds:zip_code>
+    <ds:total_population>49328</ds:total_population>
+    <ds:median_age>29.8</ds:median_age>
+    <ds:total_males>23773</ds:total_males>
+    <ds:total_females>25555</ds:total_females>
+    <ds:total_households>12741</ds:total_households>
+    <ds:average_household_size>3.85</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/74">
+    <socrata:rowID>74</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90221</ds:zip_code>
+    <ds:total_population>53704</ds:total_population>
+    <ds:median_age>26.7</ds:median_age>
+    <ds:total_males>26346</ds:total_males>
+    <ds:total_females>27358</ds:total_females>
+    <ds:total_households>11630</ds:total_households>
+    <ds:average_household_size>4.57</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/75">
+    <socrata:rowID>75</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90222</ds:zip_code>
+    <ds:total_population>31869</ds:total_population>
+    <ds:median_age>27.3</ds:median_age>
+    <ds:total_males>15375</ds:total_males>
+    <ds:total_females>16494</ds:total_females>
+    <ds:total_households>7520</ds:total_households>
+    <ds:average_household_size>4.21</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/76">
+    <socrata:rowID>76</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90230</ds:zip_code>
+    <ds:total_population>31766</ds:total_population>
+    <ds:median_age>39.1</ds:median_age>
+    <ds:total_males>14932</ds:total_males>
+    <ds:total_females>16834</ds:total_females>
+    <ds:total_households>12883</ds:total_households>
+    <ds:average_household_size>2.45</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/77">
+    <socrata:rowID>77</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90232</ds:zip_code>
+    <ds:total_population>15149</ds:total_population>
+    <ds:median_age>38.6</ds:median_age>
+    <ds:total_males>7333</ds:total_males>
+    <ds:total_females>7816</ds:total_females>
+    <ds:total_households>6605</ds:total_households>
+    <ds:average_household_size>2.28</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/78">
+    <socrata:rowID>78</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90240</ds:zip_code>
+    <ds:total_population>25876</ds:total_population>
+    <ds:median_age>35.5</ds:median_age>
+    <ds:total_males>12501</ds:total_males>
+    <ds:total_females>13375</ds:total_females>
+    <ds:total_households>7632</ds:total_households>
+    <ds:average_household_size>3.36</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/79">
+    <socrata:rowID>79</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90241</ds:zip_code>
+    <ds:total_population>42399</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>20466</ds:total_males>
+    <ds:total_females>21933</ds:total_females>
+    <ds:total_households>13617</ds:total_households>
+    <ds:average_household_size>3.09</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/80">
+    <socrata:rowID>80</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90242</ds:zip_code>
+    <ds:total_population>43497</ds:total_population>
+    <ds:median_age>31.6</ds:median_age>
+    <ds:total_males>21207</ds:total_males>
+    <ds:total_females>22290</ds:total_females>
+    <ds:total_households>12687</ds:total_households>
+    <ds:average_household_size>3.41</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/81">
+    <socrata:rowID>81</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90245</ds:zip_code>
+    <ds:total_population>16654</ds:total_population>
+    <ds:median_age>39.2</ds:median_age>
+    <ds:total_males>8304</ds:total_males>
+    <ds:total_females>8350</ds:total_females>
+    <ds:total_households>7085</ds:total_households>
+    <ds:average_household_size>2.34</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/82">
+    <socrata:rowID>82</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90247</ds:zip_code>
+    <ds:total_population>47487</ds:total_population>
+    <ds:median_age>35.5</ds:median_age>
+    <ds:total_males>23217</ds:total_males>
+    <ds:total_females>24270</ds:total_females>
+    <ds:total_households>15830</ds:total_households>
+    <ds:average_household_size>2.96</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/83">
+    <socrata:rowID>83</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90248</ds:zip_code>
+    <ds:total_population>9947</ds:total_population>
+    <ds:median_age>41.2</ds:median_age>
+    <ds:total_males>4823</ds:total_males>
+    <ds:total_females>5124</ds:total_females>
+    <ds:total_households>3427</ds:total_households>
+    <ds:average_household_size>2.89</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/84">
+    <socrata:rowID>84</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90249</ds:zip_code>
+    <ds:total_population>26669</ds:total_population>
+    <ds:median_age>37.2</ds:median_age>
+    <ds:total_males>12897</ds:total_males>
+    <ds:total_females>13772</ds:total_females>
+    <ds:total_households>8880</ds:total_households>
+    <ds:average_household_size>2.98</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/85">
+    <socrata:rowID>85</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90250</ds:zip_code>
+    <ds:total_population>93193</ds:total_population>
+    <ds:median_age>31.9</ds:median_age>
+    <ds:total_males>45113</ds:total_males>
+    <ds:total_females>48080</ds:total_females>
+    <ds:total_households>31087</ds:total_households>
+    <ds:average_household_size>2.98</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/86">
+    <socrata:rowID>86</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90254</ds:zip_code>
+    <ds:total_population>19506</ds:total_population>
+    <ds:median_age>37.0</ds:median_age>
+    <ds:total_males>10273</ds:total_males>
+    <ds:total_females>9233</ds:total_females>
+    <ds:total_households>9550</ds:total_households>
+    <ds:average_household_size>2.04</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/87">
+    <socrata:rowID>87</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90255</ds:zip_code>
+    <ds:total_population>75066</ds:total_population>
+    <ds:median_age>29.1</ds:median_age>
+    <ds:total_males>37525</ds:total_males>
+    <ds:total_females>37541</ds:total_females>
+    <ds:total_households>18419</ds:total_households>
+    <ds:average_household_size>4.06</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/88">
+    <socrata:rowID>88</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90260</ds:zip_code>
+    <ds:total_population>34924</ds:total_population>
+    <ds:median_age>32.7</ds:median_age>
+    <ds:total_males>17509</ds:total_males>
+    <ds:total_females>17415</ds:total_females>
+    <ds:total_households>10429</ds:total_households>
+    <ds:average_household_size>3.33</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/89">
+    <socrata:rowID>89</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90262</ds:zip_code>
+    <ds:total_population>69745</ds:total_population>
+    <ds:median_age>27.8</ds:median_age>
+    <ds:total_males>33919</ds:total_males>
+    <ds:total_females>35826</ds:total_females>
+    <ds:total_households>14669</ds:total_households>
+    <ds:average_household_size>4.57</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/90">
+    <socrata:rowID>90</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90263</ds:zip_code>
+    <ds:total_population>1612</ds:total_population>
+    <ds:median_age>19.7</ds:median_age>
+    <ds:total_males>665</ds:total_males>
+    <ds:total_females>947</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/91">
+    <socrata:rowID>91</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90265</ds:zip_code>
+    <ds:total_population>18116</ds:total_population>
+    <ds:median_age>46.5</ds:median_age>
+    <ds:total_males>9159</ds:total_males>
+    <ds:total_females>8957</ds:total_females>
+    <ds:total_households>7174</ds:total_households>
+    <ds:average_household_size>2.39</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/92">
+    <socrata:rowID>92</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90266</ds:zip_code>
+    <ds:total_population>35135</ds:total_population>
+    <ds:median_age>40.9</ds:median_age>
+    <ds:total_males>17605</ds:total_males>
+    <ds:total_females>17530</ds:total_females>
+    <ds:total_households>14038</ds:total_households>
+    <ds:average_household_size>2.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/93">
+    <socrata:rowID>93</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90270</ds:zip_code>
+    <ds:total_population>27372</ds:total_population>
+    <ds:median_age>27.9</ds:median_age>
+    <ds:total_males>13992</ds:total_males>
+    <ds:total_females>13380</ds:total_females>
+    <ds:total_households>6554</ds:total_households>
+    <ds:average_household_size>4.16</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/94">
+    <socrata:rowID>94</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90272</ds:zip_code>
+    <ds:total_population>22986</ds:total_population>
+    <ds:median_age>47.3</ds:median_age>
+    <ds:total_males>10952</ds:total_males>
+    <ds:total_females>12034</ds:total_females>
+    <ds:total_households>9212</ds:total_households>
+    <ds:average_household_size>2.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/95">
+    <socrata:rowID>95</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90274</ds:zip_code>
+    <ds:total_population>25209</ds:total_population>
+    <ds:median_age>49.4</ds:median_age>
+    <ds:total_males>12199</ds:total_males>
+    <ds:total_females>13010</ds:total_females>
+    <ds:total_households>9479</ds:total_households>
+    <ds:average_household_size>2.66</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/96">
+    <socrata:rowID>96</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90275</ds:zip_code>
+    <ds:total_population>41804</ds:total_population>
+    <ds:median_age>47.8</ds:median_age>
+    <ds:total_males>20283</ds:total_males>
+    <ds:total_females>21521</ds:total_females>
+    <ds:total_households>15618</ds:total_households>
+    <ds:average_household_size>2.65</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/97">
+    <socrata:rowID>97</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90277</ds:zip_code>
+    <ds:total_population>35293</ds:total_population>
+    <ds:median_age>42.0</ds:median_age>
+    <ds:total_males>17521</ds:total_males>
+    <ds:total_females>17772</ds:total_females>
+    <ds:total_households>16910</ds:total_households>
+    <ds:average_household_size>2.07</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/98">
+    <socrata:rowID>98</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90278</ds:zip_code>
+    <ds:total_population>40071</ds:total_population>
+    <ds:median_age>38.2</ds:median_age>
+    <ds:total_males>19848</ds:total_males>
+    <ds:total_females>20223</ds:total_females>
+    <ds:total_households>16009</ds:total_households>
+    <ds:average_household_size>2.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/99">
+    <socrata:rowID>99</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90280</ds:zip_code>
+    <ds:total_population>94396</ds:total_population>
+    <ds:median_age>29.4</ds:median_age>
+    <ds:total_males>46321</ds:total_males>
+    <ds:total_females>48075</ds:total_females>
+    <ds:total_households>23278</ds:total_households>
+    <ds:average_household_size>4.05</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/100">
+    <socrata:rowID>100</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90290</ds:zip_code>
+    <ds:total_population>6368</ds:total_population>
+    <ds:median_age>45.0</ds:median_age>
+    <ds:total_males>3180</ds:total_males>
+    <ds:total_females>3188</ds:total_females>
+    <ds:total_households>2612</ds:total_households>
+    <ds:average_household_size>2.44</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/101">
+    <socrata:rowID>101</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90291</ds:zip_code>
+    <ds:total_population>28341</ds:total_population>
+    <ds:median_age>37.6</ds:median_age>
+    <ds:total_males>14757</ds:total_males>
+    <ds:total_females>13584</ds:total_females>
+    <ds:total_households>14261</ds:total_households>
+    <ds:average_household_size>1.95</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/102">
+    <socrata:rowID>102</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90292</ds:zip_code>
+    <ds:total_population>21576</ds:total_population>
+    <ds:median_age>41.2</ds:median_age>
+    <ds:total_males>10729</ds:total_males>
+    <ds:total_females>10847</ds:total_females>
+    <ds:total_households>12654</ds:total_households>
+    <ds:average_household_size>1.70</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/103">
+    <socrata:rowID>103</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90293</ds:zip_code>
+    <ds:total_population>12132</ds:total_population>
+    <ds:median_age>40.4</ds:median_age>
+    <ds:total_males>5890</ds:total_males>
+    <ds:total_females>6242</ds:total_females>
+    <ds:total_households>6575</ds:total_households>
+    <ds:average_household_size>1.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/104">
+    <socrata:rowID>104</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90301</ds:zip_code>
+    <ds:total_population>36568</ds:total_population>
+    <ds:median_age>32.6</ds:median_age>
+    <ds:total_males>17633</ds:total_males>
+    <ds:total_females>18935</ds:total_females>
+    <ds:total_households>11895</ds:total_households>
+    <ds:average_household_size>3.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/105">
+    <socrata:rowID>105</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90302</ds:zip_code>
+    <ds:total_population>29415</ds:total_population>
+    <ds:median_age>32.8</ds:median_age>
+    <ds:total_males>13803</ds:total_males>
+    <ds:total_females>15612</ds:total_females>
+    <ds:total_households>10684</ds:total_households>
+    <ds:average_household_size>2.74</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/106">
+    <socrata:rowID>106</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90303</ds:zip_code>
+    <ds:total_population>26176</ds:total_population>
+    <ds:median_age>30.4</ds:median_age>
+    <ds:total_males>12733</ds:total_males>
+    <ds:total_females>13443</ds:total_females>
+    <ds:total_households>7290</ds:total_households>
+    <ds:average_household_size>3.58</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/107">
+    <socrata:rowID>107</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90304</ds:zip_code>
+    <ds:total_population>28210</ds:total_population>
+    <ds:median_age>28.1</ds:median_age>
+    <ds:total_males>14503</ds:total_males>
+    <ds:total_females>13707</ds:total_females>
+    <ds:total_households>6634</ds:total_households>
+    <ds:average_household_size>4.22</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/108">
+    <socrata:rowID>108</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90305</ds:zip_code>
+    <ds:total_population>14853</ds:total_population>
+    <ds:median_age>43.3</ds:median_age>
+    <ds:total_males>6552</ds:total_males>
+    <ds:total_females>8301</ds:total_females>
+    <ds:total_households>5933</ds:total_households>
+    <ds:average_household_size>2.46</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/109">
+    <socrata:rowID>109</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90401</ds:zip_code>
+    <ds:total_population>6722</ds:total_population>
+    <ds:median_age>37.8</ds:median_age>
+    <ds:total_males>3524</ds:total_males>
+    <ds:total_females>3198</ds:total_females>
+    <ds:total_households>4188</ds:total_households>
+    <ds:average_household_size>1.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/110">
+    <socrata:rowID>110</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90402</ds:zip_code>
+    <ds:total_population>12250</ds:total_population>
+    <ds:median_age>47.0</ds:median_age>
+    <ds:total_males>5809</ds:total_males>
+    <ds:total_females>6441</ds:total_females>
+    <ds:total_households>5301</ds:total_households>
+    <ds:average_household_size>2.31</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/111">
+    <socrata:rowID>111</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90403</ds:zip_code>
+    <ds:total_population>24525</ds:total_population>
+    <ds:median_age>40.8</ds:median_age>
+    <ds:total_males>11426</ds:total_males>
+    <ds:total_females>13099</ds:total_females>
+    <ds:total_households>13970</ds:total_households>
+    <ds:average_household_size>1.74</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/112">
+    <socrata:rowID>112</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90404</ds:zip_code>
+    <ds:total_population>21360</ds:total_population>
+    <ds:median_age>37.4</ds:median_age>
+    <ds:total_males>10292</ds:total_males>
+    <ds:total_females>11068</ds:total_females>
+    <ds:total_households>10089</ds:total_households>
+    <ds:average_household_size>2.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/113">
+    <socrata:rowID>113</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90405</ds:zip_code>
+    <ds:total_population>27186</ds:total_population>
+    <ds:median_age>40.8</ds:median_age>
+    <ds:total_males>13364</ds:total_males>
+    <ds:total_females>13822</ds:total_females>
+    <ds:total_households>14376</ds:total_households>
+    <ds:average_household_size>1.87</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/114">
+    <socrata:rowID>114</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90501</ds:zip_code>
+    <ds:total_population>43180</ds:total_population>
+    <ds:median_age>35.0</ds:median_age>
+    <ds:total_males>21483</ds:total_males>
+    <ds:total_females>21697</ds:total_females>
+    <ds:total_households>14610</ds:total_households>
+    <ds:average_household_size>2.94</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/115">
+    <socrata:rowID>115</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90502</ds:zip_code>
+    <ds:total_population>18010</ds:total_population>
+    <ds:median_age>40.2</ds:median_age>
+    <ds:total_males>8811</ds:total_males>
+    <ds:total_females>9199</ds:total_females>
+    <ds:total_households>5717</ds:total_households>
+    <ds:average_household_size>2.94</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/116">
+    <socrata:rowID>116</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90503</ds:zip_code>
+    <ds:total_population>44383</ds:total_population>
+    <ds:median_age>40.8</ds:median_age>
+    <ds:total_males>21481</ds:total_males>
+    <ds:total_females>22902</ds:total_females>
+    <ds:total_households>17183</ds:total_households>
+    <ds:average_household_size>2.55</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/117">
+    <socrata:rowID>117</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90504</ds:zip_code>
+    <ds:total_population>32102</ds:total_population>
+    <ds:median_age>40.3</ds:median_age>
+    <ds:total_males>15886</ds:total_males>
+    <ds:total_females>16216</ds:total_females>
+    <ds:total_households>11580</ds:total_households>
+    <ds:average_household_size>2.76</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/118">
+    <socrata:rowID>118</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90505</ds:zip_code>
+    <ds:total_population>36678</ds:total_population>
+    <ds:median_age>43.0</ds:median_age>
+    <ds:total_males>17684</ds:total_males>
+    <ds:total_females>18994</ds:total_females>
+    <ds:total_households>14244</ds:total_households>
+    <ds:average_household_size>2.55</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/119">
+    <socrata:rowID>119</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90506</ds:zip_code>
+    <ds:total_population>0</ds:total_population>
+    <ds:median_age>0.0</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>0</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/120">
+    <socrata:rowID>120</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90601</ds:zip_code>
+    <ds:total_population>31974</ds:total_population>
+    <ds:median_age>36.6</ds:median_age>
+    <ds:total_males>15312</ds:total_males>
+    <ds:total_females>16662</ds:total_females>
+    <ds:total_households>11027</ds:total_households>
+    <ds:average_household_size>2.89</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/121">
+    <socrata:rowID>121</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90602</ds:zip_code>
+    <ds:total_population>25777</ds:total_population>
+    <ds:median_age>30.9</ds:median_age>
+    <ds:total_males>12720</ds:total_males>
+    <ds:total_females>13057</ds:total_females>
+    <ds:total_households>7980</ds:total_households>
+    <ds:average_household_size>3.09</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/122">
+    <socrata:rowID>122</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90603</ds:zip_code>
+    <ds:total_population>20063</ds:total_population>
+    <ds:median_age>39.4</ds:median_age>
+    <ds:total_males>9694</ds:total_males>
+    <ds:total_females>10369</ds:total_females>
+    <ds:total_households>6788</ds:total_households>
+    <ds:average_household_size>2.93</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/123">
+    <socrata:rowID>123</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90604</ds:zip_code>
+    <ds:total_population>39407</ds:total_population>
+    <ds:median_age>34.1</ds:median_age>
+    <ds:total_males>19270</ds:total_males>
+    <ds:total_females>20137</ds:total_females>
+    <ds:total_households>11932</ds:total_households>
+    <ds:average_household_size>3.29</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/124">
+    <socrata:rowID>124</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90605</ds:zip_code>
+    <ds:total_population>40331</ds:total_population>
+    <ds:median_age>32.6</ds:median_age>
+    <ds:total_males>20033</ds:total_males>
+    <ds:total_females>20298</ds:total_females>
+    <ds:total_households>10527</ds:total_households>
+    <ds:average_household_size>3.81</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/125">
+    <socrata:rowID>125</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90606</ds:zip_code>
+    <ds:total_population>32396</ds:total_population>
+    <ds:median_age>33.5</ds:median_age>
+    <ds:total_males>15936</ds:total_males>
+    <ds:total_females>16460</ds:total_females>
+    <ds:total_households>8633</ds:total_households>
+    <ds:average_household_size>3.72</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/126">
+    <socrata:rowID>126</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90621</ds:zip_code>
+    <ds:total_population>35153</ds:total_population>
+    <ds:median_age>32.1</ds:median_age>
+    <ds:total_males>17377</ds:total_males>
+    <ds:total_females>17776</ds:total_females>
+    <ds:total_households>10304</ds:total_households>
+    <ds:average_household_size>3.38</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/127">
+    <socrata:rowID>127</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90623</ds:zip_code>
+    <ds:total_population>15554</ds:total_population>
+    <ds:median_age>41.2</ds:median_age>
+    <ds:total_males>7516</ds:total_males>
+    <ds:total_females>8038</ds:total_females>
+    <ds:total_households>5072</ds:total_households>
+    <ds:average_household_size>3.06</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/128">
+    <socrata:rowID>128</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90630</ds:zip_code>
+    <ds:total_population>47993</ds:total_population>
+    <ds:median_age>40.0</ds:median_age>
+    <ds:total_males>23204</ds:total_males>
+    <ds:total_females>24789</ds:total_females>
+    <ds:total_households>15785</ds:total_households>
+    <ds:average_household_size>3.02</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/129">
+    <socrata:rowID>129</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90631</ds:zip_code>
+    <ds:total_population>67619</ds:total_population>
+    <ds:median_age>34.8</ds:median_age>
+    <ds:total_males>33320</ds:total_males>
+    <ds:total_females>34299</ds:total_females>
+    <ds:total_households>21452</ds:total_households>
+    <ds:average_household_size>3.13</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/130">
+    <socrata:rowID>130</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90638</ds:zip_code>
+    <ds:total_population>49012</ds:total_population>
+    <ds:median_age>37.9</ds:median_age>
+    <ds:total_males>23520</ds:total_males>
+    <ds:total_females>25492</ds:total_females>
+    <ds:total_households>14821</ds:total_households>
+    <ds:average_household_size>3.11</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/131">
+    <socrata:rowID>131</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90640</ds:zip_code>
+    <ds:total_population>62549</ds:total_population>
+    <ds:median_age>34.7</ds:median_age>
+    <ds:total_males>30189</ds:total_males>
+    <ds:total_females>32360</ds:total_females>
+    <ds:total_households>19027</ds:total_households>
+    <ds:average_household_size>3.27</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/132">
+    <socrata:rowID>132</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90650</ds:zip_code>
+    <ds:total_population>105549</ds:total_population>
+    <ds:median_age>32.5</ds:median_age>
+    <ds:total_males>52364</ds:total_males>
+    <ds:total_females>53185</ds:total_females>
+    <ds:total_households>27130</ds:total_households>
+    <ds:average_household_size>3.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/133">
+    <socrata:rowID>133</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90660</ds:zip_code>
+    <ds:total_population>62928</ds:total_population>
+    <ds:median_age>34.0</ds:median_age>
+    <ds:total_males>30738</ds:total_males>
+    <ds:total_females>32190</ds:total_females>
+    <ds:total_households>16564</ds:total_households>
+    <ds:average_household_size>3.77</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/134">
+    <socrata:rowID>134</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90670</ds:zip_code>
+    <ds:total_population>14866</ds:total_population>
+    <ds:median_age>36.2</ds:median_age>
+    <ds:total_males>7163</ds:total_males>
+    <ds:total_females>7703</ds:total_females>
+    <ds:total_households>4393</ds:total_households>
+    <ds:average_household_size>3.34</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/135">
+    <socrata:rowID>135</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90701</ds:zip_code>
+    <ds:total_population>16591</ds:total_population>
+    <ds:median_age>38.2</ds:median_age>
+    <ds:total_males>8227</ds:total_males>
+    <ds:total_females>8364</ds:total_females>
+    <ds:total_households>4553</ds:total_households>
+    <ds:average_household_size>3.51</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/136">
+    <socrata:rowID>136</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90703</ds:zip_code>
+    <ds:total_population>49399</ds:total_population>
+    <ds:median_age>43.9</ds:median_age>
+    <ds:total_males>23785</ds:total_males>
+    <ds:total_females>25614</ds:total_females>
+    <ds:total_households>15604</ds:total_households>
+    <ds:average_household_size>3.16</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/137">
+    <socrata:rowID>137</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90704</ds:zip_code>
+    <ds:total_population>4090</ds:total_population>
+    <ds:median_age>37.2</ds:median_age>
+    <ds:total_males>2101</ds:total_males>
+    <ds:total_females>1989</ds:total_females>
+    <ds:total_households>1629</ds:total_households>
+    <ds:average_household_size>2.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/138">
+    <socrata:rowID>138</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90706</ds:zip_code>
+    <ds:total_population>76615</ds:total_population>
+    <ds:median_age>31.9</ds:median_age>
+    <ds:total_males>37203</ds:total_males>
+    <ds:total_females>39412</ds:total_females>
+    <ds:total_households>23650</ds:total_households>
+    <ds:average_household_size>3.21</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/139">
+    <socrata:rowID>139</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90710</ds:zip_code>
+    <ds:total_population>25457</ds:total_population>
+    <ds:median_age>36.7</ds:median_age>
+    <ds:total_males>12291</ds:total_males>
+    <ds:total_females>13166</ds:total_females>
+    <ds:total_households>8717</ds:total_households>
+    <ds:average_household_size>2.91</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/140">
+    <socrata:rowID>140</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90712</ds:zip_code>
+    <ds:total_population>31499</ds:total_population>
+    <ds:median_age>38.4</ds:median_age>
+    <ds:total_males>15277</ds:total_males>
+    <ds:total_females>16222</ds:total_females>
+    <ds:total_households>10794</ds:total_households>
+    <ds:average_household_size>2.91</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/141">
+    <socrata:rowID>141</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90713</ds:zip_code>
+    <ds:total_population>27925</ds:total_population>
+    <ds:median_age>39.0</ds:median_age>
+    <ds:total_males>13574</ds:total_males>
+    <ds:total_females>14351</ds:total_females>
+    <ds:total_households>9447</ds:total_households>
+    <ds:average_household_size>2.95</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/142">
+    <socrata:rowID>142</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90715</ds:zip_code>
+    <ds:total_population>20388</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>9935</ds:total_males>
+    <ds:total_females>10453</ds:total_females>
+    <ds:total_households>6105</ds:total_households>
+    <ds:average_household_size>3.33</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/143">
+    <socrata:rowID>143</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90716</ds:zip_code>
+    <ds:total_population>14184</ds:total_population>
+    <ds:median_age>28.3</ds:median_age>
+    <ds:total_males>7078</ds:total_males>
+    <ds:total_females>7106</ds:total_females>
+    <ds:total_households>3515</ds:total_households>
+    <ds:average_household_size>4.03</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/144">
+    <socrata:rowID>144</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90717</ds:zip_code>
+    <ds:total_population>21318</ds:total_population>
+    <ds:median_age>39.5</ds:median_age>
+    <ds:total_males>10317</ds:total_males>
+    <ds:total_females>11001</ds:total_females>
+    <ds:total_households>8520</ds:total_households>
+    <ds:average_household_size>2.48</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/145">
+    <socrata:rowID>145</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90720</ds:zip_code>
+    <ds:total_population>21751</ds:total_population>
+    <ds:median_age>41.7</ds:median_age>
+    <ds:total_males>10423</ds:total_males>
+    <ds:total_females>11328</ds:total_females>
+    <ds:total_households>7789</ds:total_households>
+    <ds:average_household_size>2.74</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/146">
+    <socrata:rowID>146</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90723</ds:zip_code>
+    <ds:total_population>54099</ds:total_population>
+    <ds:median_age>28.6</ds:median_age>
+    <ds:total_males>26315</ds:total_males>
+    <ds:total_females>27784</ds:total_females>
+    <ds:total_households>13882</ds:total_households>
+    <ds:average_household_size>3.87</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/147">
+    <socrata:rowID>147</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90731</ds:zip_code>
+    <ds:total_population>59662</ds:total_population>
+    <ds:median_age>35.6</ds:median_age>
+    <ds:total_males>29951</ds:total_males>
+    <ds:total_females>29711</ds:total_females>
+    <ds:total_households>22044</ds:total_households>
+    <ds:average_household_size>2.62</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/148">
+    <socrata:rowID>148</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90732</ds:zip_code>
+    <ds:total_population>21115</ds:total_population>
+    <ds:median_age>45.0</ds:median_age>
+    <ds:total_males>9843</ds:total_males>
+    <ds:total_females>11272</ds:total_females>
+    <ds:total_households>8611</ds:total_households>
+    <ds:average_household_size>2.38</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/149">
+    <socrata:rowID>149</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90740</ds:zip_code>
+    <ds:total_population>23729</ds:total_population>
+    <ds:median_age>57.5</ds:median_age>
+    <ds:total_males>10423</ds:total_males>
+    <ds:total_females>13306</ds:total_females>
+    <ds:total_households>12830</ds:total_households>
+    <ds:average_household_size>1.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/150">
+    <socrata:rowID>150</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90744</ds:zip_code>
+    <ds:total_population>53815</ds:total_population>
+    <ds:median_age>28.7</ds:median_age>
+    <ds:total_males>27298</ds:total_males>
+    <ds:total_females>26517</ds:total_females>
+    <ds:total_households>13999</ds:total_households>
+    <ds:average_household_size>3.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/151">
+    <socrata:rowID>151</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90745</ds:zip_code>
+    <ds:total_population>57251</ds:total_population>
+    <ds:median_age>37.1</ds:median_age>
+    <ds:total_males>27754</ds:total_males>
+    <ds:total_females>29497</ds:total_females>
+    <ds:total_households>15210</ds:total_households>
+    <ds:average_household_size>3.73</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/152">
+    <socrata:rowID>152</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90746</ds:zip_code>
+    <ds:total_population>25990</ds:total_population>
+    <ds:median_age>40.7</ds:median_age>
+    <ds:total_males>11944</ds:total_males>
+    <ds:total_females>14046</ds:total_females>
+    <ds:total_households>8050</ds:total_households>
+    <ds:average_household_size>3.14</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/153">
+    <socrata:rowID>153</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90747</ds:zip_code>
+    <ds:total_population>0</ds:total_population>
+    <ds:median_age>0.0</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>0</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/154">
+    <socrata:rowID>154</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90755</ds:zip_code>
+    <ds:total_population>11074</ds:total_population>
+    <ds:median_age>36.1</ds:median_age>
+    <ds:total_males>5462</ds:total_males>
+    <ds:total_females>5612</ds:total_females>
+    <ds:total_households>4172</ds:total_households>
+    <ds:average_household_size>2.64</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/155">
+    <socrata:rowID>155</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90802</ds:zip_code>
+    <ds:total_population>39347</ds:total_population>
+    <ds:median_age>34.7</ds:median_age>
+    <ds:total_males>20387</ds:total_males>
+    <ds:total_females>18960</ds:total_females>
+    <ds:total_households>19853</ds:total_households>
+    <ds:average_household_size>1.93</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/156">
+    <socrata:rowID>156</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90803</ds:zip_code>
+    <ds:total_population>32031</ds:total_population>
+    <ds:median_age>42.7</ds:median_age>
+    <ds:total_males>15609</ds:total_males>
+    <ds:total_females>16422</ds:total_females>
+    <ds:total_households>17318</ds:total_households>
+    <ds:average_household_size>1.84</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/157">
+    <socrata:rowID>157</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90804</ds:zip_code>
+    <ds:total_population>40311</ds:total_population>
+    <ds:median_age>29.8</ds:median_age>
+    <ds:total_males>19686</ds:total_males>
+    <ds:total_females>20625</ds:total_females>
+    <ds:total_households>14556</ds:total_households>
+    <ds:average_household_size>2.70</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/158">
+    <socrata:rowID>158</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90805</ds:zip_code>
+    <ds:total_population>93524</ds:total_population>
+    <ds:median_age>29.0</ds:median_age>
+    <ds:total_males>45229</ds:total_males>
+    <ds:total_females>48295</ds:total_females>
+    <ds:total_households>26056</ds:total_households>
+    <ds:average_household_size>3.56</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/159">
+    <socrata:rowID>159</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90806</ds:zip_code>
+    <ds:total_population>42399</ds:total_population>
+    <ds:median_age>30.3</ds:median_age>
+    <ds:total_males>20717</ds:total_males>
+    <ds:total_females>21682</ds:total_females>
+    <ds:total_households>12184</ds:total_households>
+    <ds:average_household_size>3.44</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/160">
+    <socrata:rowID>160</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90807</ds:zip_code>
+    <ds:total_population>31481</ds:total_population>
+    <ds:median_age>39.7</ds:median_age>
+    <ds:total_males>15153</ds:total_males>
+    <ds:total_females>16328</ds:total_females>
+    <ds:total_households>12452</ds:total_households>
+    <ds:average_household_size>2.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/161">
+    <socrata:rowID>161</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90808</ds:zip_code>
+    <ds:total_population>38232</ds:total_population>
+    <ds:median_age>41.6</ds:median_age>
+    <ds:total_males>18408</ds:total_males>
+    <ds:total_females>19824</ds:total_females>
+    <ds:total_households>14167</ds:total_households>
+    <ds:average_household_size>2.69</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/162">
+    <socrata:rowID>162</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90810</ds:zip_code>
+    <ds:total_population>36735</ds:total_population>
+    <ds:median_age>31.8</ds:median_age>
+    <ds:total_males>18067</ds:total_males>
+    <ds:total_females>18668</ds:total_females>
+    <ds:total_households>9289</ds:total_households>
+    <ds:average_household_size>3.90</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/163">
+    <socrata:rowID>163</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90813</ds:zip_code>
+    <ds:total_population>58911</ds:total_population>
+    <ds:median_age>27.3</ds:median_age>
+    <ds:total_males>29425</ds:total_males>
+    <ds:total_females>29486</ds:total_females>
+    <ds:total_households>16425</ds:total_households>
+    <ds:average_household_size>3.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/164">
+    <socrata:rowID>164</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90814</ds:zip_code>
+    <ds:total_population>19131</ds:total_population>
+    <ds:median_age>37.2</ds:median_age>
+    <ds:total_males>9356</ds:total_males>
+    <ds:total_females>9775</ds:total_females>
+    <ds:total_households>9170</ds:total_households>
+    <ds:average_household_size>2.06</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/165">
+    <socrata:rowID>165</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90815</ds:zip_code>
+    <ds:total_population>39733</ds:total_population>
+    <ds:median_age>37.9</ds:median_age>
+    <ds:total_males>19124</ds:total_males>
+    <ds:total_females>20609</ds:total_females>
+    <ds:total_households>14836</ds:total_households>
+    <ds:average_household_size>2.53</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/166">
+    <socrata:rowID>166</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90822</ds:zip_code>
+    <ds:total_population>117</ds:total_population>
+    <ds:median_age>63.9</ds:median_age>
+    <ds:total_males>109</ds:total_males>
+    <ds:total_females>8</ds:total_females>
+    <ds:total_households>2</ds:total_households>
+    <ds:average_household_size>4.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/167">
+    <socrata:rowID>167</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>90831</ds:zip_code>
+    <ds:total_population>0</ds:total_population>
+    <ds:median_age>0.0</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>0</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/168">
+    <socrata:rowID>168</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91001</ds:zip_code>
+    <ds:total_population>36126</ds:total_population>
+    <ds:median_age>41.6</ds:median_age>
+    <ds:total_males>17421</ds:total_males>
+    <ds:total_females>18705</ds:total_females>
+    <ds:total_households>12663</ds:total_households>
+    <ds:average_household_size>2.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/169">
+    <socrata:rowID>169</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91006</ds:zip_code>
+    <ds:total_population>31715</ds:total_population>
+    <ds:median_age>42.7</ds:median_age>
+    <ds:total_males>15283</ds:total_males>
+    <ds:total_females>16432</ds:total_females>
+    <ds:total_households>10652</ds:total_households>
+    <ds:average_household_size>2.98</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/170">
+    <socrata:rowID>170</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91007</ds:zip_code>
+    <ds:total_population>34095</ds:total_population>
+    <ds:median_age>43.8</ds:median_age>
+    <ds:total_males>16039</ds:total_males>
+    <ds:total_females>18056</ds:total_females>
+    <ds:total_households>12033</ds:total_households>
+    <ds:average_household_size>2.73</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/171">
+    <socrata:rowID>171</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91008</ds:zip_code>
+    <ds:total_population>1391</ds:total_population>
+    <ds:median_age>54.6</ds:median_age>
+    <ds:total_males>614</ds:total_males>
+    <ds:total_females>777</ds:total_females>
+    <ds:total_households>562</ds:total_households>
+    <ds:average_household_size>2.39</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/172">
+    <socrata:rowID>172</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91010</ds:zip_code>
+    <ds:total_population>26074</ds:total_population>
+    <ds:median_age>38.1</ds:median_age>
+    <ds:total_males>12461</ds:total_males>
+    <ds:total_females>13613</ds:total_females>
+    <ds:total_households>7972</ds:total_households>
+    <ds:average_household_size>3.20</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/173">
+    <socrata:rowID>173</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91011</ds:zip_code>
+    <ds:total_population>20280</ds:total_population>
+    <ds:median_age>45.9</ds:median_age>
+    <ds:total_males>9863</ds:total_males>
+    <ds:total_females>10417</ds:total_females>
+    <ds:total_households>6859</ds:total_households>
+    <ds:average_household_size>2.95</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/174">
+    <socrata:rowID>174</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91016</ds:zip_code>
+    <ds:total_population>40598</ds:total_population>
+    <ds:median_age>37.9</ds:median_age>
+    <ds:total_males>19434</ds:total_males>
+    <ds:total_females>21164</ds:total_females>
+    <ds:total_households>15029</ds:total_households>
+    <ds:average_household_size>2.69</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/175">
+    <socrata:rowID>175</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91020</ds:zip_code>
+    <ds:total_population>8415</ds:total_population>
+    <ds:median_age>40.2</ds:median_age>
+    <ds:total_males>3966</ds:total_males>
+    <ds:total_females>4449</ds:total_females>
+    <ds:total_households>3385</ds:total_households>
+    <ds:average_household_size>2.43</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/176">
+    <socrata:rowID>176</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91024</ds:zip_code>
+    <ds:total_population>10917</ds:total_population>
+    <ds:median_age>46.6</ds:median_age>
+    <ds:total_males>5165</ds:total_males>
+    <ds:total_females>5752</ds:total_females>
+    <ds:total_households>4837</ds:total_households>
+    <ds:average_household_size>2.26</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/177">
+    <socrata:rowID>177</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91030</ds:zip_code>
+    <ds:total_population>25616</ds:total_population>
+    <ds:median_age>40.1</ds:median_age>
+    <ds:total_males>12160</ds:total_males>
+    <ds:total_females>13456</ds:total_females>
+    <ds:total_households>10466</ds:total_households>
+    <ds:average_household_size>2.43</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/178">
+    <socrata:rowID>178</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91040</ds:zip_code>
+    <ds:total_population>20372</ds:total_population>
+    <ds:median_age>43.3</ds:median_age>
+    <ds:total_males>10120</ds:total_males>
+    <ds:total_females>10252</ds:total_females>
+    <ds:total_households>7359</ds:total_households>
+    <ds:average_household_size>2.72</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/179">
+    <socrata:rowID>179</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91042</ds:zip_code>
+    <ds:total_population>27585</ds:total_population>
+    <ds:median_age>40.7</ds:median_age>
+    <ds:total_males>13734</ds:total_males>
+    <ds:total_females>13851</ds:total_females>
+    <ds:total_households>9987</ds:total_households>
+    <ds:average_household_size>2.74</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/180">
+    <socrata:rowID>180</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91046</ds:zip_code>
+    <ds:total_population>156</ds:total_population>
+    <ds:median_age>74.0</ds:median_age>
+    <ds:total_males>51</ds:total_males>
+    <ds:total_females>105</ds:total_females>
+    <ds:total_households>114</ds:total_households>
+    <ds:average_household_size>1.37</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/181">
+    <socrata:rowID>181</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91101</ds:zip_code>
+    <ds:total_population>20460</ds:total_population>
+    <ds:median_age>33.7</ds:median_age>
+    <ds:total_males>9926</ds:total_males>
+    <ds:total_females>10534</ds:total_females>
+    <ds:total_households>10869</ds:total_households>
+    <ds:average_household_size>1.86</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/182">
+    <socrata:rowID>182</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91103</ds:zip_code>
+    <ds:total_population>27480</ds:total_population>
+    <ds:median_age>35.0</ds:median_age>
+    <ds:total_males>13481</ds:total_males>
+    <ds:total_females>13999</ds:total_females>
+    <ds:total_households>8492</ds:total_households>
+    <ds:average_household_size>3.11</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/183">
+    <socrata:rowID>183</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91104</ds:zip_code>
+    <ds:total_population>36751</ds:total_population>
+    <ds:median_age>38.2</ds:median_age>
+    <ds:total_males>17874</ds:total_males>
+    <ds:total_females>18877</ds:total_females>
+    <ds:total_households>12922</ds:total_households>
+    <ds:average_household_size>2.80</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/184">
+    <socrata:rowID>184</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91105</ds:zip_code>
+    <ds:total_population>11254</ds:total_population>
+    <ds:median_age>49.0</ds:median_age>
+    <ds:total_males>5432</ds:total_males>
+    <ds:total_females>5822</ds:total_females>
+    <ds:total_households>5213</ds:total_households>
+    <ds:average_household_size>2.07</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/185">
+    <socrata:rowID>185</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91106</ds:zip_code>
+    <ds:total_population>24229</ds:total_population>
+    <ds:median_age>34.6</ds:median_age>
+    <ds:total_males>11993</ds:total_males>
+    <ds:total_females>12236</ds:total_females>
+    <ds:total_households>10723</ds:total_households>
+    <ds:average_household_size>2.17</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/186">
+    <socrata:rowID>186</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91107</ds:zip_code>
+    <ds:total_population>32940</ds:total_population>
+    <ds:median_age>41.2</ds:median_age>
+    <ds:total_males>15940</ds:total_males>
+    <ds:total_females>17000</ds:total_females>
+    <ds:total_households>13028</ds:total_households>
+    <ds:average_household_size>2.51</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/187">
+    <socrata:rowID>187</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91108</ds:zip_code>
+    <ds:total_population>13361</ds:total_population>
+    <ds:median_age>45.4</ds:median_age>
+    <ds:total_males>6410</ds:total_males>
+    <ds:total_females>6951</ds:total_females>
+    <ds:total_households>4415</ds:total_households>
+    <ds:average_household_size>3.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/188">
+    <socrata:rowID>188</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91201</ds:zip_code>
+    <ds:total_population>22781</ds:total_population>
+    <ds:median_age>40.4</ds:median_age>
+    <ds:total_males>11123</ds:total_males>
+    <ds:total_females>11658</ds:total_females>
+    <ds:total_households>8150</ds:total_households>
+    <ds:average_household_size>2.78</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/189">
+    <socrata:rowID>189</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91202</ds:zip_code>
+    <ds:total_population>22830</ds:total_population>
+    <ds:median_age>41.7</ds:median_age>
+    <ds:total_males>10805</ds:total_males>
+    <ds:total_females>12025</ds:total_females>
+    <ds:total_households>8879</ds:total_households>
+    <ds:average_household_size>2.56</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/190">
+    <socrata:rowID>190</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91203</ds:zip_code>
+    <ds:total_population>13220</ds:total_population>
+    <ds:median_age>38.9</ds:median_age>
+    <ds:total_males>6279</ds:total_males>
+    <ds:total_females>6941</ds:total_females>
+    <ds:total_households>5044</ds:total_households>
+    <ds:average_household_size>2.62</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/191">
+    <socrata:rowID>191</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91204</ds:zip_code>
+    <ds:total_population>16032</ds:total_population>
+    <ds:median_age>38.1</ds:median_age>
+    <ds:total_males>7699</ds:total_males>
+    <ds:total_females>8333</ds:total_females>
+    <ds:total_households>5639</ds:total_households>
+    <ds:average_household_size>2.76</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/192">
+    <socrata:rowID>192</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91205</ds:zip_code>
+    <ds:total_population>37810</ds:total_population>
+    <ds:median_age>39.1</ds:median_age>
+    <ds:total_males>18084</ds:total_males>
+    <ds:total_females>19726</ds:total_females>
+    <ds:total_households>14089</ds:total_households>
+    <ds:average_household_size>2.67</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/193">
+    <socrata:rowID>193</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91206</ds:zip_code>
+    <ds:total_population>33065</ds:total_population>
+    <ds:median_age>42.6</ds:median_age>
+    <ds:total_males>15544</ds:total_males>
+    <ds:total_females>17521</ds:total_females>
+    <ds:total_households>13261</ds:total_households>
+    <ds:average_household_size>2.48</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/194">
+    <socrata:rowID>194</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91207</ds:zip_code>
+    <ds:total_population>10506</ds:total_population>
+    <ds:median_age>45.5</ds:median_age>
+    <ds:total_males>4924</ds:total_males>
+    <ds:total_females>5582</ds:total_females>
+    <ds:total_households>4097</ds:total_households>
+    <ds:average_household_size>2.56</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/195">
+    <socrata:rowID>195</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91208</ds:zip_code>
+    <ds:total_population>16245</ds:total_population>
+    <ds:median_age>43.6</ds:median_age>
+    <ds:total_males>7756</ds:total_males>
+    <ds:total_females>8489</ds:total_females>
+    <ds:total_households>6106</ds:total_households>
+    <ds:average_household_size>2.66</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/196">
+    <socrata:rowID>196</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91210</ds:zip_code>
+    <ds:total_population>328</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>162</ds:total_males>
+    <ds:total_females>166</ds:total_females>
+    <ds:total_households>178</ds:total_households>
+    <ds:average_household_size>1.84</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/197">
+    <socrata:rowID>197</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91214</ds:zip_code>
+    <ds:total_population>30356</ds:total_population>
+    <ds:median_age>42.5</ds:median_age>
+    <ds:total_males>14642</ds:total_males>
+    <ds:total_females>15714</ds:total_females>
+    <ds:total_households>10551</ds:total_households>
+    <ds:average_household_size>2.87</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/198">
+    <socrata:rowID>198</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91301</ds:zip_code>
+    <ds:total_population>25488</ds:total_population>
+    <ds:median_age>42.7</ds:median_age>
+    <ds:total_males>12511</ds:total_males>
+    <ds:total_females>12977</ds:total_females>
+    <ds:total_households>9208</ds:total_households>
+    <ds:average_household_size>2.76</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/199">
+    <socrata:rowID>199</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91302</ds:zip_code>
+    <ds:total_population>25709</ds:total_population>
+    <ds:median_age>42.4</ds:median_age>
+    <ds:total_males>12487</ds:total_males>
+    <ds:total_females>13222</ds:total_females>
+    <ds:total_households>9303</ds:total_households>
+    <ds:average_household_size>2.76</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/200">
+    <socrata:rowID>200</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91303</ds:zip_code>
+    <ds:total_population>26855</ds:total_population>
+    <ds:median_age>31.1</ds:median_age>
+    <ds:total_males>13907</ds:total_males>
+    <ds:total_females>12948</ds:total_females>
+    <ds:total_households>8697</ds:total_households>
+    <ds:average_household_size>3.08</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/201">
+    <socrata:rowID>201</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91304</ds:zip_code>
+    <ds:total_population>50231</ds:total_population>
+    <ds:median_age>35.9</ds:median_age>
+    <ds:total_males>24827</ds:total_males>
+    <ds:total_females>25404</ds:total_females>
+    <ds:total_households>16532</ds:total_households>
+    <ds:average_household_size>3.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/202">
+    <socrata:rowID>202</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91306</ds:zip_code>
+    <ds:total_population>45061</ds:total_population>
+    <ds:median_age>35.4</ds:median_age>
+    <ds:total_males>22679</ds:total_males>
+    <ds:total_females>22382</ds:total_females>
+    <ds:total_households>13635</ds:total_households>
+    <ds:average_household_size>3.28</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/203">
+    <socrata:rowID>203</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91307</ds:zip_code>
+    <ds:total_population>24474</ds:total_population>
+    <ds:median_age>43.4</ds:median_age>
+    <ds:total_males>11939</ds:total_males>
+    <ds:total_females>12535</ds:total_females>
+    <ds:total_households>8315</ds:total_households>
+    <ds:average_household_size>2.91</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/204">
+    <socrata:rowID>204</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91311</ds:zip_code>
+    <ds:total_population>36557</ds:total_population>
+    <ds:median_age>42.7</ds:median_age>
+    <ds:total_males>17838</ds:total_males>
+    <ds:total_females>18719</ds:total_females>
+    <ds:total_households>13425</ds:total_households>
+    <ds:average_household_size>2.66</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/205">
+    <socrata:rowID>205</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91316</ds:zip_code>
+    <ds:total_population>26898</ds:total_population>
+    <ds:median_age>42.1</ds:median_age>
+    <ds:total_males>12717</ds:total_males>
+    <ds:total_females>14181</ds:total_females>
+    <ds:total_households>11911</ds:total_households>
+    <ds:average_household_size>2.26</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/206">
+    <socrata:rowID>206</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91321</ds:zip_code>
+    <ds:total_population>34882</ds:total_population>
+    <ds:median_age>33.3</ds:median_age>
+    <ds:total_males>17402</ds:total_males>
+    <ds:total_females>17480</ds:total_females>
+    <ds:total_households>11215</ds:total_households>
+    <ds:average_household_size>3.04</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/207">
+    <socrata:rowID>207</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91324</ds:zip_code>
+    <ds:total_population>27669</ds:total_population>
+    <ds:median_age>36.5</ds:median_age>
+    <ds:total_males>13545</ds:total_males>
+    <ds:total_females>14124</ds:total_females>
+    <ds:total_households>9289</ds:total_households>
+    <ds:average_household_size>2.95</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/208">
+    <socrata:rowID>208</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91325</ds:zip_code>
+    <ds:total_population>32417</ds:total_population>
+    <ds:median_age>35.4</ds:median_age>
+    <ds:total_males>15819</ds:total_males>
+    <ds:total_females>16598</ds:total_females>
+    <ds:total_households>11825</ds:total_households>
+    <ds:average_household_size>2.72</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/209">
+    <socrata:rowID>209</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91326</ds:zip_code>
+    <ds:total_population>33708</ds:total_population>
+    <ds:median_age>42.7</ds:median_age>
+    <ds:total_males>16394</ds:total_males>
+    <ds:total_females>17314</ds:total_females>
+    <ds:total_households>11770</ds:total_households>
+    <ds:average_household_size>2.86</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/210">
+    <socrata:rowID>210</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91330</ds:zip_code>
+    <ds:total_population>2702</ds:total_population>
+    <ds:median_age>19.6</ds:median_age>
+    <ds:total_males>1103</ds:total_males>
+    <ds:total_females>1599</ds:total_females>
+    <ds:total_households>2</ds:total_households>
+    <ds:average_household_size>2.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/211">
+    <socrata:rowID>211</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91331</ds:zip_code>
+    <ds:total_population>103689</ds:total_population>
+    <ds:median_age>29.5</ds:median_age>
+    <ds:total_males>52358</ds:total_males>
+    <ds:total_females>51331</ds:total_females>
+    <ds:total_households>22465</ds:total_households>
+    <ds:average_household_size>4.60</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/212">
+    <socrata:rowID>212</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91335</ds:zip_code>
+    <ds:total_population>74363</ds:total_population>
+    <ds:median_age>35.5</ds:median_age>
+    <ds:total_males>36596</ds:total_males>
+    <ds:total_females>37767</ds:total_females>
+    <ds:total_households>22855</ds:total_households>
+    <ds:average_household_size>3.21</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/213">
+    <socrata:rowID>213</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91340</ds:zip_code>
+    <ds:total_population>34188</ds:total_population>
+    <ds:median_age>30.1</ds:median_age>
+    <ds:total_males>17130</ds:total_males>
+    <ds:total_females>17058</ds:total_females>
+    <ds:total_households>8176</ds:total_households>
+    <ds:average_household_size>4.17</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/214">
+    <socrata:rowID>214</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91342</ds:zip_code>
+    <ds:total_population>91725</ds:total_population>
+    <ds:median_age>31.9</ds:median_age>
+    <ds:total_males>45786</ds:total_males>
+    <ds:total_females>45939</ds:total_females>
+    <ds:total_households>23543</ds:total_households>
+    <ds:average_household_size>3.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/215">
+    <socrata:rowID>215</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91343</ds:zip_code>
+    <ds:total_population>60254</ds:total_population>
+    <ds:median_age>32.3</ds:median_age>
+    <ds:total_males>30145</ds:total_males>
+    <ds:total_females>30109</ds:total_females>
+    <ds:total_households>16802</ds:total_households>
+    <ds:average_household_size>3.55</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/216">
+    <socrata:rowID>216</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91344</ds:zip_code>
+    <ds:total_population>51747</ds:total_population>
+    <ds:median_age>41.0</ds:median_age>
+    <ds:total_males>25212</ds:total_males>
+    <ds:total_females>26535</ds:total_females>
+    <ds:total_households>16872</ds:total_households>
+    <ds:average_household_size>3.03</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/217">
+    <socrata:rowID>217</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91345</ds:zip_code>
+    <ds:total_population>18496</ds:total_population>
+    <ds:median_age>35.7</ds:median_age>
+    <ds:total_males>9110</ds:total_males>
+    <ds:total_females>9386</ds:total_females>
+    <ds:total_households>5192</ds:total_households>
+    <ds:average_household_size>3.52</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/218">
+    <socrata:rowID>218</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91350</ds:zip_code>
+    <ds:total_population>33348</ds:total_population>
+    <ds:median_age>36.4</ds:median_age>
+    <ds:total_males>16270</ds:total_males>
+    <ds:total_females>17078</ds:total_females>
+    <ds:total_households>10991</ds:total_households>
+    <ds:average_household_size>3.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/219">
+    <socrata:rowID>219</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91351</ds:zip_code>
+    <ds:total_population>32362</ds:total_population>
+    <ds:median_age>33.9</ds:median_age>
+    <ds:total_males>16086</ds:total_males>
+    <ds:total_females>16276</ds:total_females>
+    <ds:total_households>10036</ds:total_households>
+    <ds:average_household_size>3.22</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/220">
+    <socrata:rowID>220</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91352</ds:zip_code>
+    <ds:total_population>47807</ds:total_population>
+    <ds:median_age>32.1</ds:median_age>
+    <ds:total_males>23980</ds:total_males>
+    <ds:total_females>23827</ds:total_females>
+    <ds:total_households>11985</ds:total_households>
+    <ds:average_household_size>3.95</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/221">
+    <socrata:rowID>221</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91354</ds:zip_code>
+    <ds:total_population>28722</ds:total_population>
+    <ds:median_age>36.4</ds:median_age>
+    <ds:total_males>14046</ds:total_males>
+    <ds:total_females>14676</ds:total_females>
+    <ds:total_households>9522</ds:total_households>
+    <ds:average_household_size>3.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/222">
+    <socrata:rowID>222</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91355</ds:zip_code>
+    <ds:total_population>32605</ds:total_population>
+    <ds:median_age>38.8</ds:median_age>
+    <ds:total_males>15773</ds:total_males>
+    <ds:total_females>16832</ds:total_females>
+    <ds:total_households>12772</ds:total_households>
+    <ds:average_household_size>2.51</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/223">
+    <socrata:rowID>223</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91356</ds:zip_code>
+    <ds:total_population>29458</ds:total_population>
+    <ds:median_age>41.7</ds:median_age>
+    <ds:total_males>14216</ds:total_males>
+    <ds:total_females>15242</ds:total_females>
+    <ds:total_households>11686</ds:total_households>
+    <ds:average_household_size>2.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/224">
+    <socrata:rowID>224</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91361</ds:zip_code>
+    <ds:total_population>20438</ds:total_population>
+    <ds:median_age>47.6</ds:median_age>
+    <ds:total_males>9854</ds:total_males>
+    <ds:total_females>10584</ds:total_females>
+    <ds:total_households>8374</ds:total_households>
+    <ds:average_household_size>2.43</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/225">
+    <socrata:rowID>225</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91362</ds:zip_code>
+    <ds:total_population>36045</ds:total_population>
+    <ds:median_age>42.6</ds:median_age>
+    <ds:total_males>17562</ds:total_males>
+    <ds:total_females>18483</ds:total_females>
+    <ds:total_households>13563</ds:total_households>
+    <ds:average_household_size>2.65</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/226">
+    <socrata:rowID>226</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91364</ds:zip_code>
+    <ds:total_population>25851</ds:total_population>
+    <ds:median_age>44.0</ds:median_age>
+    <ds:total_males>12739</ds:total_males>
+    <ds:total_females>13112</ds:total_females>
+    <ds:total_households>10409</ds:total_households>
+    <ds:average_household_size>2.47</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/227">
+    <socrata:rowID>227</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91367</ds:zip_code>
+    <ds:total_population>39499</ds:total_population>
+    <ds:median_age>41.0</ds:median_age>
+    <ds:total_males>19171</ds:total_males>
+    <ds:total_females>20328</ds:total_females>
+    <ds:total_households>16697</ds:total_households>
+    <ds:average_household_size>2.35</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/229">
+    <socrata:rowID>229</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91377</ds:zip_code>
+    <ds:total_population>13811</ds:total_population>
+    <ds:median_age>41.7</ds:median_age>
+    <ds:total_males>6641</ds:total_males>
+    <ds:total_females>7170</ds:total_females>
+    <ds:total_households>5158</ds:total_households>
+    <ds:average_household_size>2.68</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/230">
+    <socrata:rowID>230</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91381</ds:zip_code>
+    <ds:total_population>20158</ds:total_population>
+    <ds:median_age>36.0</ds:median_age>
+    <ds:total_males>9852</ds:total_males>
+    <ds:total_females>10306</ds:total_females>
+    <ds:total_households>6636</ds:total_households>
+    <ds:average_household_size>3.04</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/231">
+    <socrata:rowID>231</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91384</ds:zip_code>
+    <ds:total_population>29855</ds:total_population>
+    <ds:median_age>32.5</ds:median_age>
+    <ds:total_males>18503</ds:total_males>
+    <ds:total_females>11352</ds:total_females>
+    <ds:total_households>6925</ds:total_households>
+    <ds:average_household_size>3.30</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/232">
+    <socrata:rowID>232</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91387</ds:zip_code>
+    <ds:total_population>40328</ds:total_population>
+    <ds:median_age>33.0</ds:median_age>
+    <ds:total_males>20106</ds:total_males>
+    <ds:total_females>20222</ds:total_females>
+    <ds:total_households>12871</ds:total_households>
+    <ds:average_household_size>3.13</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/233">
+    <socrata:rowID>233</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91390</ds:zip_code>
+    <ds:total_population>19786</ds:total_population>
+    <ds:median_age>40.1</ds:median_age>
+    <ds:total_males>9911</ds:total_males>
+    <ds:total_females>9875</ds:total_females>
+    <ds:total_households>6369</ds:total_households>
+    <ds:average_household_size>3.07</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/234">
+    <socrata:rowID>234</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91401</ds:zip_code>
+    <ds:total_population>39285</ds:total_population>
+    <ds:median_age>36.0</ds:median_age>
+    <ds:total_males>19613</ds:total_males>
+    <ds:total_females>19672</ds:total_females>
+    <ds:total_households>14380</ds:total_households>
+    <ds:average_household_size>2.70</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/235">
+    <socrata:rowID>235</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91402</ds:zip_code>
+    <ds:total_population>69817</ds:total_population>
+    <ds:median_age>30.1</ds:median_age>
+    <ds:total_males>35095</ds:total_males>
+    <ds:total_females>34722</ds:total_females>
+    <ds:total_households>18194</ds:total_households>
+    <ds:average_household_size>3.81</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/236">
+    <socrata:rowID>236</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91403</ds:zip_code>
+    <ds:total_population>23484</ds:total_population>
+    <ds:median_age>39.4</ds:median_age>
+    <ds:total_males>11277</ds:total_males>
+    <ds:total_females>12207</ds:total_females>
+    <ds:total_households>11358</ds:total_households>
+    <ds:average_household_size>2.06</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/237">
+    <socrata:rowID>237</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91405</ds:zip_code>
+    <ds:total_population>51145</ds:total_population>
+    <ds:median_age>32.6</ds:median_age>
+    <ds:total_males>25498</ds:total_males>
+    <ds:total_females>25647</ds:total_females>
+    <ds:total_households>16256</ds:total_households>
+    <ds:average_household_size>3.11</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/238">
+    <socrata:rowID>238</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91406</ds:zip_code>
+    <ds:total_population>51558</ds:total_population>
+    <ds:median_age>33.6</ds:median_age>
+    <ds:total_males>25956</ds:total_males>
+    <ds:total_females>25602</ds:total_females>
+    <ds:total_households>17042</ds:total_households>
+    <ds:average_household_size>3.02</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/239">
+    <socrata:rowID>239</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91411</ds:zip_code>
+    <ds:total_population>24628</ds:total_population>
+    <ds:median_age>33.8</ds:median_age>
+    <ds:total_males>12495</ds:total_males>
+    <ds:total_females>12133</ds:total_females>
+    <ds:total_households>9177</ds:total_households>
+    <ds:average_household_size>2.63</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/240">
+    <socrata:rowID>240</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91423</ds:zip_code>
+    <ds:total_population>30991</ds:total_population>
+    <ds:median_age>39.2</ds:median_age>
+    <ds:total_males>14789</ds:total_males>
+    <ds:total_females>16202</ds:total_females>
+    <ds:total_households>14876</ds:total_households>
+    <ds:average_household_size>2.07</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/241">
+    <socrata:rowID>241</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91436</ds:zip_code>
+    <ds:total_population>14372</ds:total_population>
+    <ds:median_age>46.5</ds:median_age>
+    <ds:total_males>6890</ds:total_males>
+    <ds:total_females>7482</ds:total_females>
+    <ds:total_households>5552</ds:total_households>
+    <ds:average_household_size>2.57</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/242">
+    <socrata:rowID>242</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91501</ds:zip_code>
+    <ds:total_population>20849</ds:total_population>
+    <ds:median_age>38.3</ds:median_age>
+    <ds:total_males>10040</ds:total_males>
+    <ds:total_females>10809</ds:total_females>
+    <ds:total_households>8235</ds:total_households>
+    <ds:average_household_size>2.53</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/243">
+    <socrata:rowID>243</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91502</ds:zip_code>
+    <ds:total_population>11371</ds:total_population>
+    <ds:median_age>36.4</ds:median_age>
+    <ds:total_males>5402</ds:total_males>
+    <ds:total_females>5969</ds:total_females>
+    <ds:total_households>5001</ds:total_households>
+    <ds:average_household_size>2.26</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/244">
+    <socrata:rowID>244</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91504</ds:zip_code>
+    <ds:total_population>24939</ds:total_population>
+    <ds:median_age>38.6</ds:median_age>
+    <ds:total_males>12006</ds:total_males>
+    <ds:total_females>12933</ds:total_females>
+    <ds:total_households>9180</ds:total_households>
+    <ds:average_household_size>2.69</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/245">
+    <socrata:rowID>245</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91505</ds:zip_code>
+    <ds:total_population>30778</ds:total_population>
+    <ds:median_age>38.9</ds:median_age>
+    <ds:total_males>15121</ds:total_males>
+    <ds:total_females>15657</ds:total_females>
+    <ds:total_households>13180</ds:total_households>
+    <ds:average_household_size>2.33</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/246">
+    <socrata:rowID>246</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91506</ds:zip_code>
+    <ds:total_population>18904</ds:total_population>
+    <ds:median_age>40.9</ds:median_age>
+    <ds:total_males>9115</ds:total_males>
+    <ds:total_females>9789</ds:total_females>
+    <ds:total_households>7555</ds:total_households>
+    <ds:average_household_size>2.45</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/247">
+    <socrata:rowID>247</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91601</ds:zip_code>
+    <ds:total_population>37180</ds:total_population>
+    <ds:median_age>32.9</ds:median_age>
+    <ds:total_males>18932</ds:total_males>
+    <ds:total_females>18248</ds:total_females>
+    <ds:total_households>15970</ds:total_households>
+    <ds:average_household_size>2.32</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/248">
+    <socrata:rowID>248</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91602</ds:zip_code>
+    <ds:total_population>17473</ds:total_population>
+    <ds:median_age>38.0</ds:median_age>
+    <ds:total_males>8722</ds:total_males>
+    <ds:total_females>8751</ds:total_females>
+    <ds:total_households>9277</ds:total_households>
+    <ds:average_household_size>1.88</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/249">
+    <socrata:rowID>249</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91604</ds:zip_code>
+    <ds:total_population>29034</ds:total_population>
+    <ds:median_age>40.2</ds:median_age>
+    <ds:total_males>14271</ds:total_males>
+    <ds:total_females>14763</ds:total_females>
+    <ds:total_households>14292</ds:total_households>
+    <ds:average_household_size>2.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/250">
+    <socrata:rowID>250</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91605</ds:zip_code>
+    <ds:total_population>56343</ds:total_population>
+    <ds:median_age>31.9</ds:median_age>
+    <ds:total_males>28417</ds:total_males>
+    <ds:total_females>27926</ds:total_females>
+    <ds:total_households>15357</ds:total_households>
+    <ds:average_household_size>3.61</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/251">
+    <socrata:rowID>251</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91606</ds:zip_code>
+    <ds:total_population>44958</ds:total_population>
+    <ds:median_age>34.3</ds:median_age>
+    <ds:total_males>22376</ds:total_males>
+    <ds:total_females>22582</ds:total_females>
+    <ds:total_households>14903</ds:total_households>
+    <ds:average_household_size>3.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/252">
+    <socrata:rowID>252</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91607</ds:zip_code>
+    <ds:total_population>27927</ds:total_population>
+    <ds:median_age>38.2</ds:median_age>
+    <ds:total_males>13635</ds:total_males>
+    <ds:total_females>14292</ds:total_females>
+    <ds:total_households>12859</ds:total_households>
+    <ds:average_household_size>2.15</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/253">
+    <socrata:rowID>253</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91608</ds:zip_code>
+    <ds:total_population>0</ds:total_population>
+    <ds:median_age>0.0</ds:median_age>
+    <ds:total_males>0</ds:total_males>
+    <ds:total_females>0</ds:total_females>
+    <ds:total_households>0</ds:total_households>
+    <ds:average_household_size>0.00</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/254">
+    <socrata:rowID>254</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91702</ds:zip_code>
+    <ds:total_population>59705</ds:total_population>
+    <ds:median_age>29.4</ds:median_age>
+    <ds:total_males>29486</ds:total_males>
+    <ds:total_females>30219</ds:total_females>
+    <ds:total_households>15455</ds:total_households>
+    <ds:average_household_size>3.67</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/255">
+    <socrata:rowID>255</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91706</ds:zip_code>
+    <ds:total_population>76571</ds:total_population>
+    <ds:median_age>30.5</ds:median_age>
+    <ds:total_males>37969</ds:total_males>
+    <ds:total_females>38602</ds:total_females>
+    <ds:total_households>17504</ds:total_households>
+    <ds:average_household_size>4.35</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/256">
+    <socrata:rowID>256</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91709</ds:zip_code>
+    <ds:total_population>74796</ds:total_population>
+    <ds:median_age>36.6</ds:median_age>
+    <ds:total_males>36954</ds:total_males>
+    <ds:total_females>37842</ds:total_females>
+    <ds:total_households>22940</ds:total_households>
+    <ds:average_household_size>3.25</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/257">
+    <socrata:rowID>257</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91710</ds:zip_code>
+    <ds:total_population>80358</ds:total_population>
+    <ds:median_age>33.0</ds:median_age>
+    <ds:total_males>42283</ds:total_males>
+    <ds:total_females>38075</ds:total_females>
+    <ds:total_households>21952</ds:total_households>
+    <ds:average_household_size>3.43</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/258">
+    <socrata:rowID>258</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91711</ds:zip_code>
+    <ds:total_population>35705</ds:total_population>
+    <ds:median_age>38.6</ds:median_age>
+    <ds:total_males>16777</ds:total_males>
+    <ds:total_females>18928</ds:total_females>
+    <ds:total_households>11868</ds:total_households>
+    <ds:average_household_size>2.58</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/259">
+    <socrata:rowID>259</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91722</ds:zip_code>
+    <ds:total_population>34409</ds:total_population>
+    <ds:median_age>34.0</ds:median_age>
+    <ds:total_males>16859</ds:total_males>
+    <ds:total_females>17550</ds:total_females>
+    <ds:total_households>10079</ds:total_households>
+    <ds:average_household_size>3.41</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/260">
+    <socrata:rowID>260</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91723</ds:zip_code>
+    <ds:total_population>18275</ds:total_population>
+    <ds:median_age>35.0</ds:median_age>
+    <ds:total_males>8783</ds:total_males>
+    <ds:total_females>9492</ds:total_females>
+    <ds:total_households>6296</ds:total_households>
+    <ds:average_household_size>2.86</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/261">
+    <socrata:rowID>261</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91724</ds:zip_code>
+    <ds:total_population>26184</ds:total_population>
+    <ds:median_age>37.9</ds:median_age>
+    <ds:total_males>12780</ds:total_males>
+    <ds:total_females>13404</ds:total_females>
+    <ds:total_households>8508</ds:total_households>
+    <ds:average_household_size>3.05</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/262">
+    <socrata:rowID>262</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91731</ds:zip_code>
+    <ds:total_population>29591</ds:total_population>
+    <ds:median_age>32.9</ds:median_age>
+    <ds:total_males>14888</ds:total_males>
+    <ds:total_females>14703</ds:total_females>
+    <ds:total_households>8007</ds:total_households>
+    <ds:average_household_size>3.66</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/263">
+    <socrata:rowID>263</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91732</ds:zip_code>
+    <ds:total_population>61386</ds:total_population>
+    <ds:median_age>31.4</ds:median_age>
+    <ds:total_males>30755</ds:total_males>
+    <ds:total_females>30631</ds:total_females>
+    <ds:total_households>14700</ds:total_households>
+    <ds:average_household_size>4.13</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/264">
+    <socrata:rowID>264</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91733</ds:zip_code>
+    <ds:total_population>43896</ds:total_population>
+    <ds:median_age>30.5</ds:median_age>
+    <ds:total_males>22191</ds:total_males>
+    <ds:total_females>21705</ds:total_females>
+    <ds:total_households>9918</ds:total_households>
+    <ds:average_household_size>4.40</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/265">
+    <socrata:rowID>265</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91740</ds:zip_code>
+    <ds:total_population>25356</ds:total_population>
+    <ds:median_age>38.5</ds:median_age>
+    <ds:total_males>12269</ds:total_males>
+    <ds:total_females>13087</ds:total_females>
+    <ds:total_households>8376</ds:total_households>
+    <ds:average_household_size>2.94</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/266">
+    <socrata:rowID>266</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91741</ds:zip_code>
+    <ds:total_population>25824</ds:total_population>
+    <ds:median_age>41.8</ds:median_age>
+    <ds:total_males>12498</ds:total_males>
+    <ds:total_females>13326</ds:total_females>
+    <ds:total_households>9126</ds:total_households>
+    <ds:average_household_size>2.82</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/267">
+    <socrata:rowID>267</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91744</ds:zip_code>
+    <ds:total_population>85040</ds:total_population>
+    <ds:median_age>30.9</ds:median_age>
+    <ds:total_males>42564</ds:total_males>
+    <ds:total_females>42476</ds:total_females>
+    <ds:total_households>18648</ds:total_households>
+    <ds:average_household_size>4.55</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/268">
+    <socrata:rowID>268</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91745</ds:zip_code>
+    <ds:total_population>54013</ds:total_population>
+    <ds:median_age>40.1</ds:median_age>
+    <ds:total_males>26287</ds:total_males>
+    <ds:total_females>27726</ds:total_females>
+    <ds:total_households>16188</ds:total_households>
+    <ds:average_household_size>3.33</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/269">
+    <socrata:rowID>269</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91746</ds:zip_code>
+    <ds:total_population>30485</ds:total_population>
+    <ds:median_age>32.4</ds:median_age>
+    <ds:total_males>15116</ds:total_males>
+    <ds:total_females>15369</ds:total_females>
+    <ds:total_households>6743</ds:total_households>
+    <ds:average_household_size>4.50</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/270">
+    <socrata:rowID>270</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91748</ds:zip_code>
+    <ds:total_population>45406</ds:total_population>
+    <ds:median_age>39.8</ds:median_age>
+    <ds:total_males>22368</ds:total_males>
+    <ds:total_females>23038</ds:total_females>
+    <ds:total_households>13311</ds:total_households>
+    <ds:average_household_size>3.40</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/271">
+    <socrata:rowID>271</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91750</ds:zip_code>
+    <ds:total_population>33249</ds:total_population>
+    <ds:median_age>42.6</ds:median_age>
+    <ds:total_males>15881</ds:total_males>
+    <ds:total_females>17368</ds:total_females>
+    <ds:total_households>11944</ds:total_households>
+    <ds:average_household_size>2.71</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/272">
+    <socrata:rowID>272</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91754</ds:zip_code>
+    <ds:total_population>32742</ds:total_population>
+    <ds:median_age>42.9</ds:median_age>
+    <ds:total_males>15620</ds:total_males>
+    <ds:total_females>17122</ds:total_females>
+    <ds:total_households>11193</ds:total_households>
+    <ds:average_household_size>2.92</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/273">
+    <socrata:rowID>273</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91755</ds:zip_code>
+    <ds:total_population>27496</ds:total_population>
+    <ds:median_age>43.4</ds:median_age>
+    <ds:total_males>13271</ds:total_males>
+    <ds:total_females>14225</ds:total_females>
+    <ds:total_households>8760</ds:total_households>
+    <ds:average_household_size>3.12</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/274">
+    <socrata:rowID>274</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91759</ds:zip_code>
+    <ds:total_population>476</ds:total_population>
+    <ds:median_age>47.2</ds:median_age>
+    <ds:total_males>239</ds:total_males>
+    <ds:total_females>237</ds:total_females>
+    <ds:total_households>216</ds:total_households>
+    <ds:average_household_size>2.20</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/275">
+    <socrata:rowID>275</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91763</ds:zip_code>
+    <ds:total_population>36375</ds:total_population>
+    <ds:median_age>30.8</ds:median_age>
+    <ds:total_males>18099</ds:total_males>
+    <ds:total_females>18276</ds:total_females>
+    <ds:total_households>9450</ds:total_households>
+    <ds:average_household_size>3.81</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/276">
+    <socrata:rowID>276</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91765</ds:zip_code>
+    <ds:total_population>46457</ds:total_population>
+    <ds:median_age>40.8</ds:median_age>
+    <ds:total_males>22702</ds:total_males>
+    <ds:total_females>23755</ds:total_females>
+    <ds:total_households>15039</ds:total_households>
+    <ds:average_household_size>3.08</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/277">
+    <socrata:rowID>277</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91766</ds:zip_code>
+    <ds:total_population>71599</ds:total_population>
+    <ds:median_age>28.7</ds:median_age>
+    <ds:total_males>36111</ds:total_males>
+    <ds:total_females>35488</ds:total_females>
+    <ds:total_households>17708</ds:total_households>
+    <ds:average_household_size>4.01</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/278">
+    <socrata:rowID>278</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91767</ds:zip_code>
+    <ds:total_population>48068</ds:total_population>
+    <ds:median_age>31.2</ds:median_age>
+    <ds:total_males>23685</ds:total_males>
+    <ds:total_females>24383</ds:total_females>
+    <ds:total_households>13691</ds:total_households>
+    <ds:average_household_size>3.47</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/279">
+    <socrata:rowID>279</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91768</ds:zip_code>
+    <ds:total_population>34537</ds:total_population>
+    <ds:median_age>27.3</ds:median_age>
+    <ds:total_males>17509</ds:total_males>
+    <ds:total_females>17028</ds:total_females>
+    <ds:total_households>7885</ds:total_households>
+    <ds:average_household_size>3.87</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/280">
+    <socrata:rowID>280</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91770</ds:zip_code>
+    <ds:total_population>62097</ds:total_population>
+    <ds:median_age>38.3</ds:median_age>
+    <ds:total_males>30521</ds:total_males>
+    <ds:total_females>31576</ds:total_females>
+    <ds:total_households>16588</ds:total_households>
+    <ds:average_household_size>3.70</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/281">
+    <socrata:rowID>281</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91773</ds:zip_code>
+    <ds:total_population>33119</ds:total_population>
+    <ds:median_age>42.5</ds:median_age>
+    <ds:total_males>15737</ds:total_males>
+    <ds:total_females>17382</ds:total_females>
+    <ds:total_households>11941</ds:total_households>
+    <ds:average_household_size>2.73</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/282">
+    <socrata:rowID>282</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91775</ds:zip_code>
+    <ds:total_population>23988</ds:total_population>
+    <ds:median_age>41.4</ds:median_age>
+    <ds:total_males>11448</ds:total_males>
+    <ds:total_females>12540</ds:total_females>
+    <ds:total_households>8227</ds:total_households>
+    <ds:average_household_size>2.90</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/283">
+    <socrata:rowID>283</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91776</ds:zip_code>
+    <ds:total_population>38475</ds:total_population>
+    <ds:median_age>39.0</ds:median_age>
+    <ds:total_males>18751</ds:total_males>
+    <ds:total_females>19724</ds:total_females>
+    <ds:total_households>11776</ds:total_households>
+    <ds:average_household_size>3.24</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/284">
+    <socrata:rowID>284</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91780</ds:zip_code>
+    <ds:total_population>34332</ds:total_population>
+    <ds:median_age>41.1</ds:median_age>
+    <ds:total_males>16438</ds:total_males>
+    <ds:total_females>17894</ds:total_females>
+    <ds:total_households>11318</ds:total_households>
+    <ds:average_household_size>3.03</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/285">
+    <socrata:rowID>285</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91784</ds:zip_code>
+    <ds:total_population>25938</ds:total_population>
+    <ds:median_age>44.5</ds:median_age>
+    <ds:total_males>12729</ds:total_males>
+    <ds:total_females>13209</ds:total_females>
+    <ds:total_households>8934</ds:total_households>
+    <ds:average_household_size>2.90</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/286">
+    <socrata:rowID>286</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91786</ds:zip_code>
+    <ds:total_population>51165</ds:total_population>
+    <ds:median_age>33.0</ds:median_age>
+    <ds:total_males>24516</ds:total_males>
+    <ds:total_females>26649</ds:total_females>
+    <ds:total_households>18087</ds:total_households>
+    <ds:average_household_size>2.79</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/287">
+    <socrata:rowID>287</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91789</ds:zip_code>
+    <ds:total_population>43079</ds:total_population>
+    <ds:median_age>42.8</ds:median_age>
+    <ds:total_males>20988</ds:total_males>
+    <ds:total_females>22091</ds:total_females>
+    <ds:total_households>12891</ds:total_households>
+    <ds:average_household_size>3.31</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/288">
+    <socrata:rowID>288</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91790</ds:zip_code>
+    <ds:total_population>44907</ds:total_population>
+    <ds:median_age>35.2</ds:median_age>
+    <ds:total_males>21721</ds:total_males>
+    <ds:total_females>23186</ds:total_females>
+    <ds:total_households>12751</ds:total_households>
+    <ds:average_household_size>3.49</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/289">
+    <socrata:rowID>289</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91791</ds:zip_code>
+    <ds:total_population>32414</ds:total_population>
+    <ds:median_age>38.0</ds:median_age>
+    <ds:total_males>15512</ds:total_males>
+    <ds:total_females>16902</ds:total_females>
+    <ds:total_households>10236</ds:total_households>
+    <ds:average_household_size>3.15</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/290">
+    <socrata:rowID>290</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91792</ds:zip_code>
+    <ds:total_population>30854</ds:total_population>
+    <ds:median_age>35.3</ds:median_age>
+    <ds:total_males>14950</ds:total_males>
+    <ds:total_females>15904</ds:total_females>
+    <ds:total_households>9154</ds:total_households>
+    <ds:average_household_size>3.35</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/291">
+    <socrata:rowID>291</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91801</ds:zip_code>
+    <ds:total_population>52735</ds:total_population>
+    <ds:median_age>39.1</ds:median_age>
+    <ds:total_males>24833</ds:total_males>
+    <ds:total_females>27902</ds:total_females>
+    <ds:total_households>19315</ds:total_households>
+    <ds:average_household_size>2.71</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/292">
+    <socrata:rowID>292</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>91803</ds:zip_code>
+    <ds:total_population>30322</ds:total_population>
+    <ds:median_age>39.6</ds:median_age>
+    <ds:total_males>14486</ds:total_males>
+    <ds:total_females>15836</ds:total_females>
+    <ds:total_households>9894</ds:total_households>
+    <ds:average_household_size>3.04</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/293">
+    <socrata:rowID>293</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92301</ds:zip_code>
+    <ds:total_population>32725</ds:total_population>
+    <ds:median_age>25.6</ds:median_age>
+    <ds:total_males>16857</ds:total_males>
+    <ds:total_females>15868</ds:total_females>
+    <ds:total_households>8132</ds:total_households>
+    <ds:average_household_size>3.81</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/294">
+    <socrata:rowID>294</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92371</ds:zip_code>
+    <ds:total_population>16763</ds:total_population>
+    <ds:median_age>37.9</ds:median_age>
+    <ds:total_males>8565</ds:total_males>
+    <ds:total_females>8198</ds:total_females>
+    <ds:total_households>5370</ds:total_households>
+    <ds:average_household_size>3.11</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/295">
+    <socrata:rowID>295</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92372</ds:zip_code>
+    <ds:total_population>6220</ds:total_population>
+    <ds:median_age>41.8</ds:median_age>
+    <ds:total_males>3136</ds:total_males>
+    <ds:total_females>3084</ds:total_females>
+    <ds:total_households>2198</ds:total_households>
+    <ds:average_household_size>2.83</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/296">
+    <socrata:rowID>296</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92397</ds:zip_code>
+    <ds:total_population>4894</ds:total_population>
+    <ds:median_age>44.1</ds:median_age>
+    <ds:total_males>2522</ds:total_males>
+    <ds:total_females>2372</ds:total_females>
+    <ds:total_households>1998</ds:total_households>
+    <ds:average_household_size>2.45</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/297">
+    <socrata:rowID>297</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92821</ds:zip_code>
+    <ds:total_population>35533</ds:total_population>
+    <ds:median_age>38.7</ds:median_age>
+    <ds:total_males>17338</ds:total_males>
+    <ds:total_females>18195</ds:total_females>
+    <ds:total_households>13062</ds:total_households>
+    <ds:average_household_size>2.72</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/298">
+    <socrata:rowID>298</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92823</ds:zip_code>
+    <ds:total_population>3613</ds:total_population>
+    <ds:median_age>38.6</ds:median_age>
+    <ds:total_males>1757</ds:total_males>
+    <ds:total_females>1856</ds:total_females>
+    <ds:total_households>1154</ds:total_households>
+    <ds:average_household_size>3.13</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/299">
+    <socrata:rowID>299</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>92833</ds:zip_code>
+    <ds:total_population>51767</ds:total_population>
+    <ds:median_age>36.0</ds:median_age>
+    <ds:total_males>25643</ds:total_males>
+    <ds:total_females>26124</ds:total_females>
+    <ds:total_households>15849</ds:total_households>
+    <ds:average_household_size>3.23</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/300">
+    <socrata:rowID>300</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93040</ds:zip_code>
+    <ds:total_population>2031</ds:total_population>
+    <ds:median_age>29.3</ds:median_age>
+    <ds:total_males>1052</ds:total_males>
+    <ds:total_females>979</ds:total_females>
+    <ds:total_households>522</ds:total_households>
+    <ds:average_household_size>3.89</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/301">
+    <socrata:rowID>301</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93063</ds:zip_code>
+    <ds:total_population>54366</ds:total_population>
+    <ds:median_age>39.0</ds:median_age>
+    <ds:total_males>26592</ds:total_males>
+    <ds:total_females>27774</ds:total_females>
+    <ds:total_households>18650</ds:total_households>
+    <ds:average_household_size>2.90</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/302">
+    <socrata:rowID>302</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93225</ds:zip_code>
+    <ds:total_population>5077</ds:total_population>
+    <ds:median_age>44.0</ds:median_age>
+    <ds:total_males>2585</ds:total_males>
+    <ds:total_females>2492</ds:total_females>
+    <ds:total_households>2080</ds:total_households>
+    <ds:average_household_size>2.44</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/303">
+    <socrata:rowID>303</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93243</ds:zip_code>
+    <ds:total_population>1699</ds:total_population>
+    <ds:median_age>40.9</ds:median_age>
+    <ds:total_males>884</ds:total_males>
+    <ds:total_females>815</ds:total_females>
+    <ds:total_households>623</ds:total_households>
+    <ds:average_household_size>2.73</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/304">
+    <socrata:rowID>304</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93252</ds:zip_code>
+    <ds:total_population>4176</ds:total_population>
+    <ds:median_age>38.4</ds:median_age>
+    <ds:total_males>3301</ds:total_males>
+    <ds:total_females>875</ds:total_females>
+    <ds:total_households>647</ds:total_households>
+    <ds:average_household_size>2.81</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/305">
+    <socrata:rowID>305</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93510</ds:zip_code>
+    <ds:total_population>7993</ds:total_population>
+    <ds:median_age>45.2</ds:median_age>
+    <ds:total_males>4086</ds:total_males>
+    <ds:total_females>3907</ds:total_females>
+    <ds:total_households>2729</ds:total_households>
+    <ds:average_household_size>2.86</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/306">
+    <socrata:rowID>306</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93523</ds:zip_code>
+    <ds:total_population>3074</ds:total_population>
+    <ds:median_age>27.0</ds:median_age>
+    <ds:total_males>1531</ds:total_males>
+    <ds:total_females>1543</ds:total_females>
+    <ds:total_households>1056</ds:total_households>
+    <ds:average_household_size>2.91</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/307">
+    <socrata:rowID>307</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93532</ds:zip_code>
+    <ds:total_population>2932</ds:total_population>
+    <ds:median_age>41.7</ds:median_age>
+    <ds:total_males>1642</ds:total_males>
+    <ds:total_females>1290</ds:total_females>
+    <ds:total_households>1079</ds:total_households>
+    <ds:average_household_size>2.45</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/308">
+    <socrata:rowID>308</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93534</ds:zip_code>
+    <ds:total_population>39341</ds:total_population>
+    <ds:median_age>31.1</ds:median_age>
+    <ds:total_males>18601</ds:total_males>
+    <ds:total_females>20740</ds:total_females>
+    <ds:total_households>14038</ds:total_households>
+    <ds:average_household_size>2.74</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/309">
+    <socrata:rowID>309</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93535</ds:zip_code>
+    <ds:total_population>72046</ds:total_population>
+    <ds:median_age>28.3</ds:median_age>
+    <ds:total_males>34879</ds:total_males>
+    <ds:total_females>37167</ds:total_females>
+    <ds:total_households>20672</ds:total_households>
+    <ds:average_household_size>3.44</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/310">
+    <socrata:rowID>310</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93536</ds:zip_code>
+    <ds:total_population>70918</ds:total_population>
+    <ds:median_age>34.4</ds:median_age>
+    <ds:total_males>37804</ds:total_males>
+    <ds:total_females>33114</ds:total_females>
+    <ds:total_households>20964</ds:total_households>
+    <ds:average_household_size>3.07</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/311">
+    <socrata:rowID>311</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93543</ds:zip_code>
+    <ds:total_population>13033</ds:total_population>
+    <ds:median_age>32.9</ds:median_age>
+    <ds:total_males>6695</ds:total_males>
+    <ds:total_females>6338</ds:total_females>
+    <ds:total_households>3560</ds:total_households>
+    <ds:average_household_size>3.66</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/312">
+    <socrata:rowID>312</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93544</ds:zip_code>
+    <ds:total_population>1259</ds:total_population>
+    <ds:median_age>52.4</ds:median_age>
+    <ds:total_males>689</ds:total_males>
+    <ds:total_females>570</ds:total_females>
+    <ds:total_households>569</ds:total_households>
+    <ds:average_household_size>2.20</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/313">
+    <socrata:rowID>313</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93550</ds:zip_code>
+    <ds:total_population>74929</ds:total_population>
+    <ds:median_age>27.5</ds:median_age>
+    <ds:total_males>36414</ds:total_males>
+    <ds:total_females>38515</ds:total_females>
+    <ds:total_households>20864</ds:total_households>
+    <ds:average_household_size>3.58</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/314">
+    <socrata:rowID>314</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93551</ds:zip_code>
+    <ds:total_population>50798</ds:total_population>
+    <ds:median_age>37.0</ds:median_age>
+    <ds:total_males>25056</ds:total_males>
+    <ds:total_females>25742</ds:total_females>
+    <ds:total_households>15963</ds:total_households>
+    <ds:average_household_size>3.18</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/315">
+    <socrata:rowID>315</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93552</ds:zip_code>
+    <ds:total_population>38158</ds:total_population>
+    <ds:median_age>28.4</ds:median_age>
+    <ds:total_males>18711</ds:total_males>
+    <ds:total_females>19447</ds:total_females>
+    <ds:total_households>9690</ds:total_households>
+    <ds:average_household_size>3.93</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/316">
+    <socrata:rowID>316</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93553</ds:zip_code>
+    <ds:total_population>2138</ds:total_population>
+    <ds:median_age>43.3</ds:median_age>
+    <ds:total_males>1121</ds:total_males>
+    <ds:total_females>1017</ds:total_females>
+    <ds:total_households>816</ds:total_households>
+    <ds:average_household_size>2.62</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/317">
+    <socrata:rowID>317</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93560</ds:zip_code>
+    <ds:total_population>18910</ds:total_population>
+    <ds:median_age>32.4</ds:median_age>
+    <ds:total_males>9491</ds:total_males>
+    <ds:total_females>9419</ds:total_females>
+    <ds:total_households>6469</ds:total_households>
+    <ds:average_household_size>2.92</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/318">
+    <socrata:rowID>318</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93563</ds:zip_code>
+    <ds:total_population>388</ds:total_population>
+    <ds:median_age>44.5</ds:median_age>
+    <ds:total_males>263</ds:total_males>
+    <ds:total_females>125</ds:total_females>
+    <ds:total_households>103</ds:total_households>
+    <ds:average_household_size>2.53</ds:average_household_size></dsbase:zzzz-zzzz>
+<dsbase:zzzz-zzzz rdf:about="http://data.lacity.org/resource/zzzz-zzzz/319">
+    <socrata:rowID>319</socrata:rowID>
+    <rdfs:member rdf:resource="https://data.lacity.org/resource/zzzz-zzzz"/>
+    <ds:zip_code>93591</ds:zip_code>
+    <ds:total_population>7285</ds:total_population>
+    <ds:median_age>30.9</ds:median_age>
+    <ds:total_males>3653</ds:total_males>
+    <ds:total_females>3632</ds:total_females>
+    <ds:total_households>1982</ds:total_households>
+    <ds:average_household_size>3.67</ds:average_household_size></dsbase:zzzz-zzzz></rdf:RDF>
