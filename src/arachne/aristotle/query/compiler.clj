@@ -237,9 +237,7 @@
   [expr]
   (if (list? expr)
     (composite-expr expr)
-    (let [node (->> expr
-                 (s/conform ::graph/node)
-                 (replace-node))]
+    (let [node (graph/node expr)]
       (if (instance? Node_Variable node)
-        (ExprVar. node)
+        (ExprVar. (Var/alloc node))
         (NodeValue/makeNode node)))))

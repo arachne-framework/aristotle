@@ -5,7 +5,7 @@
   (:import [clojure.lang Keyword Symbol]
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
-           [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory]
+           [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
            [org.apache.jena.datatypes.xsd XSDDatatype]
            [javax.xml.bind DatatypeConverter]
            [org.apache.jena.riot RDFDataMgr])
@@ -118,6 +118,8 @@
   ([[s p o]] (triple s p o))
   ([s p o] (Triple/create (node s) (node p) (node o))))
 
+(declare load)
+
 (extend-protocol AsTriples
 
   Triple
@@ -154,7 +156,17 @@
                                      :else
                                      [(triple subject k v)]))
                            (dissoc m :rdf/about))]
-      (with-meta result-triples {::subject subject}))))
+      (with-meta result-triples {::subject subject})))
+
+  Graph
+  (triples [g]
+    (.toSet (.find g (Triple. (node '?s) (node '?p) (node '?o)))))
+
+  URL
+  (triples [url] (triples (load url)))
+
+  URI
+  (triples [uri] (triples (load uri))))
 
 (defn reify
   "Given a collection of Triples, reify each triple and return a seq of
@@ -172,10 +184,14 @@
     triples))
 
 (defn graph
-  "Convert the given set of triples to a Jena Graph object, or add them to an existing graph"
+  "Convert the given set of triples to a Jena Graph object, or add them to an
+   existing graph. Can also be use to add an existing graph to a graph."
+  ([] (Factory/createDefaultGraph))
   ([triples] (graph (Factory/createDefaultGraph) triples))
-  ([graph triples]
-   (GraphUtil/add graph triples)
+  ([graph triples-or-graph]
+   (if (instance? Graph triples-or-graph)
+     (GraphUtil/addInto graph triples-or-graph)
+     (GraphUtil/add graph triples-or-graph))
    graph))
 
 (defn load

@@ -1,0 +1,66 @@
+# Saved by TopBraid on Fri Nov 21 23:52:49 PST 2008
+# baseURI: http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl
+
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix daml:    <http://www.daml.org/2001/03/daml+oil#> .
+@prefix :        <http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+
+<http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl>
+      a       owl:Ontology ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:Company
+      a       owl:Class ;
+      rdfs:subClassOf owl:Thing .
+
+:Goldman
+      a       :Person ;
+      :isEmployedBy :TheFirm .
+
+:Long
+      a       :Person ;
+      :indirectlyContractsTo
+              :TheFirm .
+
+:Person
+      a       owl:Class ;
+      rdfs:subClassOf owl:Thing .
+
+:Spence
+      a       :Person ;
+      :freeLancesTo :TheFirm .
+
+:TheFirm
+      a       :Company .
+
+:contractsTo
+      a       owl:ObjectProperty ;
+      rdfs:domain :Person ;
+      rdfs:range :Company ;
+      rdfs:subPropertyOf :worksFor .
+
+:freeLancesTo
+      a       owl:ObjectProperty ;
+      rdfs:domain :Person ;
+      rdfs:range :Company ;
+      rdfs:subPropertyOf :contractsTo .
+
+:indirectlyContractsTo
+      a       owl:ObjectProperty ;
+      rdfs:domain :Person ;
+      rdfs:range :Company ;
+      rdfs:subPropertyOf :contractsTo .
+
+:isEmployedBy
+      a       owl:ObjectProperty ;
+      rdfs:domain :Person ;
+      rdfs:range :Company ;
+      rdfs:subPropertyOf :worksFor .
+
+:worksFor
+      a       owl:ObjectProperty ;
+      rdfs:domain :Person ;
+      rdfs:range :Company .
