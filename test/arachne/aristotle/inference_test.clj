@@ -12,7 +12,6 @@
 (reg/prefix :arachne "http://arachne-framework.org/#")
 
 (deftest basic-type-inference
-
   (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))
         gls #{[:wo.tf/Goldman]
               [:wo.tf/Long]
@@ -30,3 +29,17 @@
                :wo.tf/freeLancesTo :wo.tf/TheFirm})
     (is (= withsmith (set (q/query ppl-query m))))
     (is (= withsmith (set (q/query worksfor-query m))))))
+
+
+(deftest validation
+  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))]
+    (aa/add m {:rdf/about :wo.tf/TheFirm
+               :wo.tf/freeLancesTo :wo.tf/TheFirm})
+
+    (is (.isValid (.validate m)))
+
+    (aa/add m {:rdf/about :wo.tf/Company
+               :owl/disjointWith :wo.tf/Person})
+
+    (let [reports (iterator-seq (.getReports (.validate m)))]
+      (is (re-find #"Individual a member of disjoint classes" (.description (first reports)))))))
