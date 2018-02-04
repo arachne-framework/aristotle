@@ -1,7 +1,9 @@
-{:deps
- {org.clojure/clojure {:mvn/version "1.9.0"}
-  org.apache.jena/apache-jena-libs {:mvn/version "3.4.0" :extension "pom"}}
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.0-alpha2"},
+        org.apache.jena/apache-jena-libs {:mvn/version "3.4.0", :extension "pom"}}
+ :aliases {:dev {:extra-paths ["test"]
+                 :extra-deps {net.vanderhart/test-runner {:git/url "git@github.com:levand/test-runner"
+                                                          :sha "49aaf308ab33dc1e40ce53041fccbd266fff6372"}
+                              ch.qos.logback/logback-classic {:mvn/version "1.2.3"}}
 
- :aliases
- {:dev {:extra-paths ["dev" "test"]
-        :extra-deps {com.cognitect/rebl {:local/root "/Users/luke/src/rebl"}}}}}
+                 }}}

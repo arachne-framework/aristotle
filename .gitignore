@@ -13,3 +13,4 @@ pom.xml.asc
 *.iml
 jena-docs
 .cpcache
+.rebl

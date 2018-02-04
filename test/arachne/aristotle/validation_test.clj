@@ -1,9 +1,10 @@
-(ns arachne.aristotle.inference-test
+(ns arachne.aristotle.validation-test
   (:require [clojure.test :refer :all]
             [arachne.aristotle :as aa]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
+            [arachne.aristotle.validation :as v]
             [arachne.aristotle :as ar]
             [clojure.java.io :as io]))
 
@@ -11,25 +12,20 @@
 (reg/prefix :wo.tf "http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl#")
 (reg/prefix :arachne "http://arachne-framework.org/#")
 
-(deftest basic-type-inference
-  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))
-        gls #{[:wo.tf/Goldman]
-              [:wo.tf/Long]
-              [:wo.tf/Spence]}
-        withsmith (conj gls [:arachne/Smith])
-        ppl-query '[:project [?person]
-                    [:bgp
-                     [?person :rdf/type :wo.tf/Person]]]
-        worksfor-query '[:project [?person]
-                         [:bgp
-                          [?person :wo.tf/worksFor :wo.tf/TheFirm]]]]
-    (is (= gls (set (q/query ppl-query m))))
-    (is (= gls (set (q/query worksfor-query m))))
-    (aa/add m {:rdf/about :arachne/Smith
+(deftest disjoint-classes
+  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))]
+    (aa/add m {:rdf/about :wo.tf/TheFirm
                :wo.tf/freeLancesTo :wo.tf/TheFirm})
-    (is (= withsmith (set (q/query ppl-query m))))
-    (is (= withsmith (set (q/query worksfor-query m))))))
 
+    (is (empty? (v/validate m)))
+
+    (aa/add m {:rdf/about :wo.tf/Company
+               :owl/disjointWith :wo.tf/Person})
+
+    (let [errors (v/validate m)]
+      (is (= 2 (count errors)))
+      (is (re-find #"disjoint" (::v/description (first errors))))
+      (is (re-find #"same and different" (::v/description (second errors)))))))
 
 (def pres-props
   [{:rdf/about :wo.tf/president
@@ -42,12 +38,25 @@
    {:rdf/about :wo.tf/TheFirm
     :wo.tf/president :wo.tf/Flint}])
 
-(deftest inverse-properties
+(deftest functional-properties
   (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))]
     (aa/add m pres-props)
-    (is
-     (= [[:wo.tf/TheFirm]]
-        (q/query '[:project [?firm]
-                   [:bgp
-                    [:wo.tf/Flint :wo.tf/worksFor ?firm]]] m)))))
 
+    (is (empty? (v/validate m)))
+
+    (aa/add m {:rdf/about :wo.tf/Obsidian
+               :wo.tf/presidentOf :wo.tf/TheFirm})
+
+    (let [errors (v/validate m)]
+      (is (= 1 (count errors)))
+      (is (re-find #"Functional property violation" (::v/description (first errors)))))
+
+
+    )
+  )
+
+
+;; TODO: write validators & tests for
+
+;; inverse functional properties
+;; cardinality

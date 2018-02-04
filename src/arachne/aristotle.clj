@@ -22,6 +22,13 @@
     (.add model (.asStatement model triple)))
   model)
 
+(defn testfn
+  [x y]
+  (try
+    (/ x y)
+    (catch Exception e
+      (throw (ex-info "Error doing the thinggyjob" {:x x :y y} e)))))
+
 ;; TODO s
 ;; 1. Add scoped registries
 ;; 2. add *.rdf.edn extension, registr with Aristotle
