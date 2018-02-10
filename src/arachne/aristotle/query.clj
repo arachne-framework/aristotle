@@ -51,9 +51,11 @@
 (defn parse
   "Parse a SPARQL query string into a Jena Operation"
   [query-str]
-  (-> (AlgebraGenerator.)
-    (.compile query-str)
-    (Algebra/optimize)))
+
+  (let [q (QueryFactory/create query-str)]
+    (-> (AlgebraGenerator.)
+        (.compile q)
+        (Algebra/optimize))))
 
 (defn query
   "Build and execute a query on the given dataset."

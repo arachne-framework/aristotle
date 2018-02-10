@@ -10,7 +10,7 @@
            [org.apache.commons.lang3.reflect ConstructorUtils]
            [org.apache.jena.sparql.algebra OpAsQuery Algebra]
            [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion]
-           [org.apache.jena.sparql.expr.aggregate AggCount$AccCount AggSum AggAvg AggMin AggMax AggGroupConcat$AccGroupConcat AggSample$AccSample AggGroupConcat AggCount AggSample]
+           [org.apache.jena.sparql.expr.aggregate AggCount$AccCount AggSum AggAvg AggMin AggMax AggGroupConcat$AccGroupConcat AggSample$AccSample AggGroupConcat AggCount AggCountVar AggCountDistinct AggCountVarDistinct AggSample]
            [org.apache.jena.query SortCondition]))
 
 (defn- replace-vars
@@ -88,7 +88,13 @@
    a Jena Aggregator object"
   [[op & [a1 a2 & _ :as args]]]
   (case op
-    count (AggCount.)
+    count (cond
+            (symbol? a1) (AggCountVar. (expr a1))
+            (and (list? a1) (= 'distinct (first a1)) (and (= 1 (count a1))))
+               (AggCountDistinct.)
+            (and (list? a1) (= 'distinct (first a1)) (and (= 2 (count a1))))
+               (AggCountVarDistinct. (expr (second a1)))
+            :else (AggCount.))
     sum (AggSum. (expr a1))
     avg (AggAvg. (expr a1))
     min (AggMin. (expr a1))

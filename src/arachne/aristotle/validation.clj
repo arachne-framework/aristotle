@@ -5,12 +5,11 @@
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query :as q])
   (:import [org.apache.jena.rdf.model InfModel]
-           [org.apache.jena.reasoner ValidityReport ValidityReport$Report])
-  )
+           [org.apache.jena.reasoner ValidityReport ValidityReport$Report]))
 
 
 (defn built-in
-  "Validate using Jena's built in inference validation."
+  "Discover any validation errors returned by the Reasoner itself"
   [^InfModel m]
   (let [r (.validate m)]
     (if (.isValid r)
@@ -22,25 +21,25 @@
               ::description (.getDescription r)})
            (iterator-seq (.getReports r))))))
 
-(defn functional-properties
-  [m]
-  (let [errors (q/query '[:filter (< 1 ?count)
-                          [:group [?prop ?obj] [?count (count ?val)]
-                           [:bgp
-                            [?prop :owl/class :owl/FunctionalProperty]
-                            [?obj ?prop ?val]]]] m)]
-    (map (fn [{prop '?prop obj '?obj}]
-           {::error? true
-            ::type :functional-property-violation
-            ::description (format "Functional property violation on property %s, for subject %s"
-                                  prop obj)
-            ::info {:property prop
-                    :subject obj}})
-         errors)))
-
-(def ^:dynamic *validators* #{built-in functional-properties})
+(def default-validators
+  #{built-in})
 
 (defn validate
-  "Validate the given model, returning a sequence of validation errors or warnings"
-  [m]
-  (mapcat #(% m) *validators*))
+  "Validate the given model, returning a sequence of validation errors
+  or warnings. Uses the default validators
+ (arachne.aristotle.validation/default-validators), or optionally
+  takes a collection of custom validators.
+
+   Custom validators are functions which take a model and return a
+  collection of maps, each representing a validation error or
+  warning.
+
+  Note: unlike built-in OWL inference, some of these validators may
+  'close the world' and assert things like minCardinality that can't
+  properly be enforced using open world reasoning.
+
+  Default validators are restricted to open-world reasoning (i.e,
+  patching holes from Jena.)"
+  ([m] (validate m default-validators))
+  ([m validators]
+   (mapcat #(% m) validators)))

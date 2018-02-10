@@ -2,6 +2,7 @@
   (:require [clojure.test :refer :all]
             [arachne.aristotle :as aa]
             [arachne.aristotle.registry :as reg]
+            [arachne.aristotle.inference :as inf]
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
             [arachne.aristotle :as ar]
@@ -12,7 +13,7 @@
 (reg/prefix :arachne "http://arachne-framework.org/#")
 
 (deftest basic-type-inference
-  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))
+  (let [m (aa/add (aa/model :jena-owl) (graph/load (io/resource "TheFirm.n3")))
         gls #{[:wo.tf/Goldman]
               [:wo.tf/Long]
               [:wo.tf/Spence]}
@@ -30,7 +31,6 @@
     (is (= withsmith (set (q/query ppl-query m))))
     (is (= withsmith (set (q/query worksfor-query m))))))
 
-
 (def pres-props
   [{:rdf/about :wo.tf/president
     :owl/class :owl/FunctionalProperty
@@ -43,11 +43,74 @@
     :wo.tf/president :wo.tf/Flint}])
 
 (deftest inverse-properties
-  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))]
+  (let [m (aa/add (aa/model :jena-owl) (graph/load (io/resource "TheFirm.n3")))]
     (aa/add m pres-props)
     (is
      (= [[:wo.tf/TheFirm]]
         (q/query '[:project [?firm]
                    [:bgp
                     [:wo.tf/Flint :wo.tf/worksFor ?firm]]] m)))))
+
+(def custom-ruleset
+  [(inf/rule :body '[[?thing :arachne/eats ?food]
+                     [?food :rdf/type :arachne/Animal]]
+             :head '[[?thing :arachne/carnivore true]])])
+
+(deftest custom-rules
+  (let [m (aa/add (aa/model :jena-rules (concat inf/owl-rules custom-ruleset))
+                  [{:rdf/about :arachne/leo
+                    :arachne/name "Leo"
+                    :arachne/eats :arachne/jumper}
+                   {:rdf/about :arachne/jumper
+                    :rdf/type :arachne/Gazelle}
+                   {:rdf/about :arachne/Gazelle
+                    :rdfs/subClassOf :arachne/Animal}])]
+    (is (= [[:arachne/leo]]
+           (q/query '[:project [?e]
+                      [:bgp
+                       [?e :arachne/carnivore true]]] m)))))
+
+
+;; -- TODO: THIS ISN'T WORKING
+[{:rdf/about :arachne/Person
+  :rdfs/subClassOf :owl/Thing}
+
+ {:rdf/about :arachne/legal-spouse
+  ;;:rdf/type :owl/FunctionalProperty
+  :rdfs/domain :arachne/Person
+  :rdfs/range :arachne/Person
+
+  }
+ {:rdf/about :arachne/jon
+  :arachne/name "John"
+  :arachne/legal-spouse [{:rdf/about :arachne/will
+                          :arachne/name "William"}
+                         {:rdf/about :arachne/bill
+                          :arachne/name "Bill"}]}]
+
+
+
+(deftest functional-properties
+  (let [m (aa/add (aa/model :jena-owl)
+                  [{:rdf/about :arachne/legalSpouse
+                    :rdf/type [:owl/ObjectProperty :owl/FunctionalProperty]
+                    :rdfs/domain :arachne/Person
+                    :rdfs/range :arachne/Person}
+                   {:rdf/about :arachne/jon
+                    :arachne/name "John"
+                    :arachne/legalSpouse [{:rdf/about :arachne/will
+                                           :arachne/name "William"}]}
+                   {:rdf/about :arachne/jon
+                    :arachne/legalSpouse [{:rdf/about :arachne/bill
+                                           :arachne/name "Bill"}]}])]
+
+    (q/query '[:project [?b]
+               [:bgp
+                [?b :arachne/name "William"]
+                [?b :arachne/name "Bill"]]] m)))
+
+
+
+
+
 

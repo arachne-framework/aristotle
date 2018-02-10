@@ -8,7 +8,8 @@
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
            [org.apache.jena.datatypes.xsd XSDDatatype]
            [javax.xml.bind DatatypeConverter]
-           [org.apache.jena.riot RDFDataMgr])
+           [org.apache.jena.riot RDFDataMgr]
+           [org.apache.jena.reasoner TriplePattern])
   (:refer-clojure :exclude [reify load]))
 
 (defn variable?
@@ -95,6 +96,8 @@
   (node [node] node))
 
 (extend-protocol AsClojureData
+  nil
+  (data [n] nil)
   Node_URI
   (data [n] (let [uri (.getURI n)]
                  (or (reg/kw uri)
@@ -104,7 +107,10 @@
                  (.getTime (.asCalendar (.getLiteralValue n)))
                  (.getLiteralValue n)))
   Node_Variable
-  (data [n] (symbol (str "?" (.getName n)))))
+  (data [n] (symbol (str "?" (.getName n))))
+
+  Node_Blank
+  (data [n] (symbol (.getLabelString (.getBlankNodeId n)))))
 
 (defn- triple?
   "Does an object look like a triple?"
@@ -208,3 +214,4 @@
                                      (.getAbsoluteFile)
                                      (.toURI)
                                      (str)))))
+

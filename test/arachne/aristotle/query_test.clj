@@ -69,5 +69,33 @@
   (is (= 2 (count (q/query '[:union
                              [:bgp [?zip :ds/zip_code "92821"]]
                              [:bgp [?zip :ds/zip_code "90831"]]]
-                    test-graph)))))
+                           test-graph)))))
+
+
+(reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
+(reg/prefix :test "http://example.com/test/")
+
+(def ca-model (-> (ar/model :simple) (ar/add [{:rdf/about :test/olivia
+                                               :foaf/name "Olivia Person"
+                                               :foaf/title "Dr"}
+                                              {:rdf/about :test/frank
+                                               :foaf/name "Frank Person"
+                                               :foaf/title "Dr"}
+                                              {:rdf/about :test/jenny
+                                               :foaf/name "Jenny Person"}
+                                              {:rdf/about :test/sophia
+                                               :foaf/name "Sophie Person"
+                                               :foaf/title "Commander"}])))
+
+(deftest count-aggregates
+  (is (= [[4 3 4 2]]
+         (q/query '[:project [?simple-count ?title-count ?distinct-count ?distinct-title-count]
+                    [:group [] [?simple-count (count)
+                                ?title-count (count ?title)
+                                            ?distinct-count (count (distinct))
+                                            ?distinct-title-count (count (distinct ?title))]
+                     [:conditional
+                      [:bgp [?p :foaf/name ?name]]
+                      [:bgp [?p :foaf/title ?title]]]]]
+                  ca-model))))
 

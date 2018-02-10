@@ -1,0 +1,85 @@
+(ns arachne.aristotle.inference
+  "Tools for adding additional inference rules to a model.
+
+  See https://jena.apache.org/documentation/inference/"
+  (:require [clojure.spec.alpha :as s]
+            [arachne.aristotle.graph :as g]
+            [arachne.aristotle.registry :as reg])
+  (:import [org.apache.jena.graph Triple Node_Blank Node_Variable]
+           [org.apache.jena.reasoner.rulesys Rule]
+           [org.apache.jena.reasoner TriplePattern]
+           [org.apache.jena.reasoner.rulesys
+            FBRuleReasoner OWLFBRuleReasoner Node_RuleVariable]
+           [org.apache.jena.reasoner ReasonerRegistry]))
+
+(def ^:private ^:dynamic *assignments*)
+
+(defn- find-or-assign
+  "Find an existing var in the same rule, or construct a new one."
+  [^Node_Variable n]
+  (let [name (str "?" (.getName n))
+        [_ assignments] (swap! *assignments*
+                               (fn [[idx assignments :as val]]
+                                 (if (get assignments name)
+                                   val
+                                   [(inc idx)
+                                    (assoc assignments name
+                                           (Node_RuleVariable. name idx))])))]
+    (get assignments name)))
+
+(defn- sub
+  "Substitute a general RDF node for the type that should be used in a
+  TriplePattern as part of a rule."
+  [node]
+  (cond
+    (instance? Node_Blank node) (Node_RuleVariable/WILD)
+    (instance? Node_Variable node) (find-or-assign node)
+    :else node))
+
+(defn- pattern
+  [triples]
+  (for [^Triple t (g/triples triples)]
+    (TriplePattern. (sub (.getSubject t))
+                    (sub (.getPredicate t))
+                    (sub (.getObject t)))))
+
+(defn- coll-of? [class coll]
+  (and (seqable? coll)
+       (every? #(instance? class %) (seq coll))))
+
+(defn- extract
+  "Return a map of variable assignments used in the given object."
+  [val]
+  (cond
+    (instance? Node_RuleVariable val) (if (= Node_RuleVariable/WILD val)
+                                        {}
+                                        {(.getName val) val})
+    (instance? TriplePattern val) (merge (extract (.getSubject val))
+                                         (extract (.getPredicate val))
+                                         (extract (.getObject val)))
+    (instance? Rule val) (apply merge (map extract (concat (.getHead val) (.getBody val))))
+    :else {}))
+
+(defn rule
+  "Create an implication rule. Takes the following keyword args:
+
+  :name - name of the rule
+  :body - The premesis, or left-hand-side of a rule. Specified as a
+          data pattern using the `arachne.aristotle.graph/AsTriples`
+          protocol.
+  :head - the consequent, or right-hand-side of a rule. May be a data
+          pattern or an instance of Rule.
+  :dir - :forward if the rule is a forward-chaining rule, or :back for
+         a backward-chaining rule. Defaults to :back."
+  [& {:keys [name body head dir]}]
+  (binding [*assignments* (let [vars (extract head)]
+                            (atom [(inc (count vars)) vars]))]
+    (doto (Rule. name (if (instance? Rule head)
+                        [head]
+                        (pattern head))
+                 (pattern body))
+      (.setBackward (not (= :forward dir))))))
+
+(def owl-rules
+  "Basic OWL rules"
+  (.getRules (ReasonerRegistry/getOWLReasoner)))

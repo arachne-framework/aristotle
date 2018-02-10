@@ -13,7 +13,7 @@
 (reg/prefix :arachne "http://arachne-framework.org/#")
 
 (deftest disjoint-classes
-  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))]
+  (let [m (aa/add (aa/model :jena-owl) (graph/load (io/resource "TheFirm.n3")))]
     (aa/add m {:rdf/about :wo.tf/TheFirm
                :wo.tf/freeLancesTo :wo.tf/TheFirm})
 
@@ -29,7 +29,7 @@
 
 (def pres-props
   [{:rdf/about :wo.tf/president
-    :owl/class :owl/FunctionalProperty
+    :rdf/type :owl/FunctionalProperty
     :rdfs/domain :wo.tf/Company
     :rdfs/range :wo.tf/Person
     :owl/inverseOf :wo.tf/presidentOf}
@@ -38,25 +38,32 @@
    {:rdf/about :wo.tf/TheFirm
     :wo.tf/president :wo.tf/Flint}])
 
-(deftest functional-properties
-  (let [m (aa/add (aa/model) (graph/load (io/resource "TheFirm.n3")))]
-    (aa/add m pres-props)
-
-    (is (empty? (v/validate m)))
-
-    (aa/add m {:rdf/about :wo.tf/Obsidian
-               :wo.tf/presidentOf :wo.tf/TheFirm})
-
+(deftest functional-object-properties
+  (let [m (aa/add (aa/model :jena-owl)
+                  [{:rdf/about :arachne/legalSpouse
+                    :rdf/type [:owl/ObjectProperty :owl/FunctionalProperty]
+                    :rdfs/domain :arachne/Person
+                    :rdfs/range :arachne/Person}
+                   {:rdf/about :arachne/jon
+                    :arachne/name "John"
+                    :arachne/legalSpouse [{:rdf/about :arachne/will
+                                           :arachne/name "William"}]}
+                   {:rdf/about :arachne/jon
+                    :arachne/legalSpouse [{:rdf/about :arachne/bill
+                                           :arachne/name "Bill"
+                                           :owl/differentFrom :arachne/will}]}])]
     (let [errors (v/validate m)]
-      (is (= 1 (count errors)))
-      (is (re-find #"Functional property violation" (::v/description (first errors)))))
+      (is (not (empty? errors)))
+      (is (some #(re-find #"too many values" (::v/jena-type %)) errors)))))
 
-
-    )
-  )
-
-
-;; TODO: write validators & tests for
-
-;; inverse functional properties
-;; cardinality
+(deftest functional-datatype-properties
+  (let [m (aa/add (aa/model :jena-owl)
+                  [{:rdf/about :arachne/name
+                    :rdf/type [:owl/DatatypeProperty :owl/FunctionalProperty]
+                    :rdfs/domain :arachne/Person
+                    :rdfs/range :arachne/Person}
+                   {:rdf/about :arachne/jon
+                    :arachne/name #{"John" "Jeff"}}])]
+    (let [errors (v/validate m)]
+      (is (not (empty? errors)))
+      (is (some #(re-find #"too many values" (::v/jena-type %)) errors)))))
