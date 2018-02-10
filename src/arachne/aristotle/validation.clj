@@ -9,7 +9,8 @@
 
 
 (defn built-in
-  "Discover any validation errors returned by the Reasoner itself"
+  "Validator which discovers any validation errors returned by the
+  Reasoner itself"
   [^InfModel m]
   (let [r (.validate m)]
     (if (.isValid r)
@@ -21,25 +22,20 @@
               ::description (.getDescription r)})
            (iterator-seq (.getReports r))))))
 
-(def default-validators
-  #{built-in})
-
 (defn validate
   "Validate the given model, returning a sequence of validation errors
-  or warnings. Uses the default validators
- (arachne.aristotle.validation/default-validators), or optionally
-  takes a collection of custom validators.
+  or warnings. Always returns validation errors from the internal
+  reaswoner's own consistency checks, as well as any additional
+  validators provided.
 
-   Custom validators are functions which take a model and return a
+  Custom validators are functions which take a model and return a
   collection of maps, each representing a validation error or
-  warning.
+  warining.
 
-  Note: unlike built-in OWL inference, some of these validators may
-  'close the world' and assert things like minCardinality that can't
-  properly be enforced using open world reasoning.
-
-  Default validators are restricted to open-world reasoning (i.e,
-  patching holes from Jena.)"
-  ([m] (validate m default-validators))
+  Unlike the built-in validators, custom validators may peform
+  arbitrary logic (i.e, perform validations such as minCardinality
+  that require a closed-world reasoning model instaed of OWL's
+  open-world default.)"
+  ([m] (validate m []))
   ([m validators]
-   (mapcat #(% m) validators)))
+   (mapcat #(% m) (conj validators built-in))))

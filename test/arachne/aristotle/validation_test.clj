@@ -5,7 +5,6 @@
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
             [arachne.aristotle.validation :as v]
-            [arachne.aristotle :as ar]
             [clojure.java.io :as io]))
 
 (reg/prefix :daml "http://www.daml.org/2001/03/daml+oil#")
@@ -26,17 +25,6 @@
       (is (= 2 (count errors)))
       (is (re-find #"disjoint" (::v/description (first errors))))
       (is (re-find #"same and different" (::v/description (second errors)))))))
-
-(def pres-props
-  [{:rdf/about :wo.tf/president
-    :rdf/type :owl/FunctionalProperty
-    :rdfs/domain :wo.tf/Company
-    :rdfs/range :wo.tf/Person
-    :owl/inverseOf :wo.tf/presidentOf}
-   {:rdf/about :wo.tf/presidentOf
-    :rdfs/subPropertyOf :wo.tf/isEmployedBy}
-   {:rdf/about :wo.tf/TheFirm
-    :wo.tf/president :wo.tf/Flint}])
 
 (deftest functional-object-properties
   (let [m (aa/add (aa/model :jena-owl)

@@ -95,6 +95,25 @@
   Node
   (node [node] node))
 
+(defn- subject-map
+  "Given a set of triples with the same subject, emit a Clojure map"
+  [subject triples]
+  (->> triples
+       (group-by #(.getPredicate %))
+       (map (fn [[pred triples]]
+              (let [objects (map #(data (.getObject %)) triples)]
+                [(data pred) (if (= 1 (count objects))
+                               (first objects)
+                               objects)])))
+       (into {:rdf/about (data subject)})))
+
+(defn- graph->clj
+  "Convert a Graph to a Clojure data structure"
+  [g]
+  (->> (iterator-seq (.find g))
+       (group-by #(.getSubject %))
+       (map (fn [[subject triples]] (subject-map subject triples)))))
+
 (extend-protocol AsClojureData
   nil
   (data [n] nil)
@@ -110,7 +129,10 @@
   (data [n] (symbol (str "?" (.getName n))))
 
   Node_Blank
-  (data [n] (symbol (.getLabelString (.getBlankNodeId n)))))
+  (data [n] (symbol (.getLabelString (.getBlankNodeId n))))
+
+  Graph
+  (data [g] (graph->clj g)))
 
 (defn- triple?
   "Does an object look like a triple?"
@@ -142,27 +164,27 @@
     (let [subject (if-let [about (:rdf/about m)]
                     (node about)
                     (NodeFactory/createBlankNode))
+
           child-map-triples (fn [property child-map]
                               (let [child-triples (triples child-map)
                                     child-subject (.getSubject (first child-triples))]
                                 (cons
                                   (triple subject property child-subject)
-                                  child-triples)))
-          result-triples (mapcat (fn [[k v]]
-                                   (cond
-                                     (instance? Map v)
-                                     (child-map-triples k v)
+                                  child-triples)))]
+      (mapcat (fn [[k v]]
+                (cond
+                  (instance? Map v)
+                  (child-map-triples k v)
 
-                                     (instance? Collection v)
-                                     (mapcat (fn [child]
-                                               (if (instance? Map child)
-                                                 (child-map-triples k v)
-                                                 [(triple subject k child)])) v)
+                  (instance? Collection v)
+                  (mapcat (fn [child]
+                            (if (instance? Map child)
+                              (child-map-triples k child)
+                              [(triple subject k child)])) v)
 
-                                     :else
-                                     [(triple subject k v)]))
-                           (dissoc m :rdf/about))]
-      (with-meta result-triples {::subject subject})))
+                  :else
+                  [(triple subject k v)]))
+              (dissoc m :rdf/about))))
 
   Graph
   (triples [g]
@@ -201,7 +223,8 @@
    graph))
 
 (defn load
-  "Load a file containing RDF data into a Jena Graph object. Attempts to infer the RDF language.
+  "Load a file containing RDF data into a Jena Graph object.
+   Attempts to infer the RDF language.
 
   Argument may be a string URI, or a URI, URL, or File object."
   [uri]

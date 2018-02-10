@@ -70,26 +70,6 @@
                       [:bgp
                        [?e :arachne/carnivore true]]] m)))))
 
-
-;; -- TODO: THIS ISN'T WORKING
-[{:rdf/about :arachne/Person
-  :rdfs/subClassOf :owl/Thing}
-
- {:rdf/about :arachne/legal-spouse
-  ;;:rdf/type :owl/FunctionalProperty
-  :rdfs/domain :arachne/Person
-  :rdfs/range :arachne/Person
-
-  }
- {:rdf/about :arachne/jon
-  :arachne/name "John"
-  :arachne/legal-spouse [{:rdf/about :arachne/will
-                          :arachne/name "William"}
-                         {:rdf/about :arachne/bill
-                          :arachne/name "Bill"}]}]
-
-
-
 (deftest functional-properties
   (let [m (aa/add (aa/model :jena-owl)
                   [{:rdf/about :arachne/legalSpouse
