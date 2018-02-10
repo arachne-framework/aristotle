@@ -13,7 +13,7 @@
 (reg/prefix :arachne "http://arachne-framework.org/#")
 
 (deftest basic-type-inference
-  (let [m (aa/add (aa/model :jena-owl) (graph/load (io/resource "TheFirm.n3")))
+  (let [m (aa/add (aa/model :jena-mini) (graph/load (io/resource "TheFirm.n3")))
         gls #{[:wo.tf/Goldman]
               [:wo.tf/Long]
               [:wo.tf/Spence]}
@@ -43,7 +43,7 @@
     :wo.tf/president :wo.tf/Flint}])
 
 (deftest inverse-properties
-  (let [m (aa/add (aa/model :jena-owl) (graph/load (io/resource "TheFirm.n3")))]
+  (let [m (aa/add (aa/model :jena-mini) (graph/load (io/resource "TheFirm.n3")))]
     (aa/add m pres-props)
     (is
      (= [[:wo.tf/TheFirm]]
@@ -71,7 +71,7 @@
                        [?e :arachne/carnivore true]]] m)))))
 
 (deftest functional-properties
-  (let [m (aa/add (aa/model :jena-owl)
+  (let [m (aa/add (aa/model :jena-mini)
                   [{:rdf/about :arachne/legalSpouse
                     :rdf/type [:owl/ObjectProperty :owl/FunctionalProperty]
                     :rdfs/domain :arachne/Person

@@ -22,6 +22,40 @@
               ::description (.getDescription r)})
            (iterator-seq (.getReports r))))))
 
+(let [q (q/build
+         '[:project [?e ?p ?expected ?actual]
+           [:filter (< ?actual ?expected)
+            [:group [?c ?e ?p ?expected] [?actual (count ?val)]
+             [:join
+              [:disjunction
+               [:bgp [?c :owl/cardinality ?expected]]
+               [:bgp [?c :owl/minCardinality ?expected]]]
+              [:conditional
+               [:bgp
+                [?c :owl/onProperty ?p]
+                [?e :rdf/type ?c]]
+               [:bgp [?e ?p ?val]]]]]]])]
+  (defn min-cardinality
+    "Return a validation error for all entities that do not conform to any
+  minCardinality restrictions on their parent classes.
+
+   This validator is only correct when using Jena's Owl mini
+  reasoner. The full reasoner uses minCardinality to infer the
+  existence of blank nodes as values of a minCardinality property
+  which while technically valid is not helpful for determining if
+  something is logically missing."
+    [m]
+    (mapv (fn [[entity property expected actual]]
+           {::error? true
+            ::type ::min-cardinality
+            ::description (format "Min-cardinality violation on %s. Expected at least %s distinct values for property %s, got %s"
+                                  entity expected property actual)
+            ::details {:entity entity
+                       :property property
+                       :expected expected
+                       :actual actual}})
+         (q/run q m))))
+
 (defn validate
   "Validate the given model, returning a sequence of validation errors
   or warnings. Always returns validation errors from the internal

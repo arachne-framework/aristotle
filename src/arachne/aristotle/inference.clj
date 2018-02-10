@@ -81,5 +81,9 @@
       (.setBackward (not (= :forward dir))))))
 
 (def owl-rules
-  "Basic OWL rules"
+  "The maximal set of OWL rules supported by Jena"
   (.getRules (ReasonerRegistry/getOWLReasoner)))
+
+(def mini-rules
+  "The OWL rules supported by Jena's mini Reasoner"
+  (.getRules (ReasonerRegistry/getOWLMiniReasoner)))

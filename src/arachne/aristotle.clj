@@ -17,8 +17,8 @@
    Built-in types are:
 
    :simple - A basic in-memory RDF store with no reasoner.
-   :jena-owl - Jena's partial implementation of OWL Full with
-                an in-memory store.
+   :jena-mini - Jena's partial implementation of OWL Full with
+                an in-memory store (.
    :jena-rules - Jena's GenericRuleReasoner. Takes a second argument,
                  which is a collection of rules to use (see
                  arachne.aristotle.inference for tools to create
@@ -29,9 +29,9 @@
   [_]
   (ModelFactory/createModelForGraph (Factory/createGraphMem)))
 
-(defmethod model :jena-owl
+(defmethod model :jena-mini
   [_]
-  (ModelFactory/createOntologyModel OntModelSpec/OWL_MEM_RULE_INF))
+  (ModelFactory/createOntologyModel OntModelSpec/OWL_MEM_MINI_RULE_INF))
 
 (defmethod model :jena-rules
   [_ rules]

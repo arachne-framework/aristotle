@@ -164,7 +164,10 @@
     (let [subject (if-let [about (:rdf/about m)]
                     (node about)
                     (NodeFactory/createBlankNode))
-
+          m (dissoc m :rdf/about)
+          m (if (empty? m)
+              {:rdf/type :rdfs/Resource}
+              m)
           child-map-triples (fn [property child-map]
                               (let [child-triples (triples child-map)
                                     child-subject (.getSubject (first child-triples))]
@@ -184,7 +187,7 @@
 
                   :else
                   [(triple subject k v)]))
-              (dissoc m :rdf/about))))
+              m)))
 
   Graph
   (triples [g]
