@@ -8,9 +8,9 @@
             [arachne.aristotle :as ar]
             [clojure.java.io :as io]))
 
-(reg/prefix :daml "http://www.daml.org/2001/03/daml+oil#")
-(reg/prefix :wo.tf "http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl#")
-(reg/prefix :arachne "http://arachne-framework.org/#")
+(reg/prefix 'daml "http://www.daml.org/2001/03/daml+oil#")
+(reg/prefix 'wo.tf "http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl#")
+(reg/prefix 'arachne "http://arachne-framework.org/#")
 
 (deftest basic-type-inference
   (let [m (aa/add (aa/model :jena-mini) (graph/load (io/resource "TheFirm.n3")))

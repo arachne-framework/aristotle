@@ -41,7 +41,7 @@
      (InfModelImpl. (.bind reasoner (Factory/createGraphMem)))))
 
 (defn add
-  "Add the given triples to the specified ontology model. Triples may be
+  "Add the given triples to the specified model. Triples may be
    specified as Clojure data structures, Jena graph objects, or resolvable
    URL/URIs containing RDF data"
   [^Model model & triples]

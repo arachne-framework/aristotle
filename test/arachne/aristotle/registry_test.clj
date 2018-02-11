@@ -8,7 +8,7 @@
   (is (= "http://example.com/people/#mike" (reg/iri :mike))))
 
 
-(reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
+(reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (deftest prefix-registration
   (is (= "http://xmlns.com/foaf/0.1/name"
         (reg/iri :foaf/name))))

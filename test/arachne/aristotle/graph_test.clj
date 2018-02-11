@@ -4,8 +4,8 @@
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]))
 
-(reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
-(reg/prefix :test "http://example.org/arachne-test#")
+(reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
+(reg/prefix 'test "http://example.com/aristotle#")
 
 (deftest nested-card-many
   (let [data [{:rdf/about :test/jane

@@ -6,16 +6,16 @@
             [arachne.aristotle :as ar]
             [clojure.java.io :as io]))
 
-(reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
-(reg/prefix :arachne "http://example.com/person/")
-(reg/prefix :socrata "http://www.socrata.com/rdf/terms#")
-(reg/prefix :dcat "http://www.w3.org/ns/dcat#")
-(reg/prefix :ods "http://open-data-standards.github.com/2012/01/open-data-standards#")
-(reg/prefix :dcterm "http://purl.org/dc/terms/")
-(reg/prefix :geo "http://www.w3.org/2003/01/geo/wgs84_pos#")
-(reg/prefix :skos "http://www.w3.org/2004/02/skos/core#")
-(reg/prefix :dsbase "http://data.lacity.org/resource/")
-(reg/prefix :ds "https://data.lacity.org/resource/zzzz-zzzz/")
+(reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
+(reg/prefix 'arachne "http://arachne-framework.org/#")
+(reg/prefix 'socrata "http://www.socrata.com/rdf/terms#")
+(reg/prefix 'dcat "http://www.w3.org/ns/dcat#")
+(reg/prefix 'ods "http://open-data-standards.github.com/2012/01/open-data-standards#")
+(reg/prefix 'dcterm "http://purl.org/dc/terms/")
+(reg/prefix 'geo "http://www.w3.org/2003/01/geo/wgs84_pos#")
+(reg/prefix 'skos "http://www.w3.org/2004/02/skos/core#")
+(reg/prefix 'dsbase "http://data.lacity.org/resource/")
+(reg/prefix 'ds "https://data.lacity.org/resource/zzzz-zzzz/")
 
 (def test-graph (graph/load (io/resource "la_census.rdf")))
 
@@ -72,8 +72,8 @@
                            test-graph)))))
 
 
-(reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
-(reg/prefix :test "http://example.com/test/")
+(reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
+(reg/prefix 'test "http://example.com/aristotle#")
 
 (def ca-model (-> (ar/model :simple) (ar/add [{:rdf/about :test/olivia
                                                :foaf/name "Olivia Person"
