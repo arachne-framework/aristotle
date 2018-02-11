@@ -3,7 +3,7 @@
             [arachne.aristotle.registry :as reg])
   (:import [clojure.lang ExceptionInfo]))
 
-(reg/register :mike "http://example.com/people/#mike")
+(reg/alias :mike "http://example.com/people/#mike")
 (deftest kw-registration
   (is (= "http://example.com/people/#mike" (reg/iri :mike))))
 
@@ -24,3 +24,4 @@
   (is (= :foaf/name (reg/kw "http://xmlns.com/foaf/0.1/name")))
   (is (= :mike (reg/kw "http://example.com/people/#mike")))
   (is (nil? (reg/kw "http://this-is-not-registered#foobar"))))
+
