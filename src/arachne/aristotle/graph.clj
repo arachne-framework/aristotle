@@ -146,8 +146,6 @@
   ([[s p o]] (triple s p o))
   ([s p o] (Triple/create (node s) (node p) (node o))))
 
-(declare load)
-
 (extend-protocol AsTriples
 
   Triple
@@ -191,13 +189,7 @@
 
   Graph
   (triples [g]
-    (.toSet (.find g (Triple. (node '?s) (node '?p) (node '?o)))))
-
-  URL
-  (triples [url] (triples (load url)))
-
-  URI
-  (triples [uri] (triples (load uri))))
+    (.toSet (.find g (Triple. (node '?s) (node '?p) (node '?o))))))
 
 (defn reify
   "Given a collection of Triples, reify each triple and return a seq of
@@ -213,31 +205,3 @@
                  :rdf/predicate (.getPredicate t)
                  :rdf/object (.getObject t)})))
     triples))
-
-(defn graph
-  "Convert the given set of triples to a Jena Graph object, or add them to an
-   existing graph. Can also be use to add an existing graph to a graph."
-  ([] (Factory/createDefaultGraph))
-  ([triples] (graph (Factory/createDefaultGraph) triples))
-  ([graph triples-or-graph]
-   (if (instance? Graph triples-or-graph)
-     (GraphUtil/addInto graph triples-or-graph)
-     (GraphUtil/add graph triples-or-graph))
-   graph))
-
-(defn load
-  "Load a file containing RDF data into a Jena Graph object.
-   Attempts to infer the RDF language.
-
-  Argument may be a string URI, or a URI, URL, or File object."
-  [uri]
-  (cond
-    (string? uri) (RDFDataMgr/loadGraph uri)
-    (uri? uri) (load (str uri))
-    (instance? java.net.URL uri) (RDFDataMgr/loadGraph (str (.toURI uri)))
-    (instance? java.io.File uri) (RDFDataMgr/loadGraph
-                                   (-> uri
-                                     (.getAbsoluteFile)
-                                     (.toURI)
-                                     (str)))))
-

@@ -3,7 +3,6 @@
             [arachne.aristotle :as aa]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.inference :as inf]
-            [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
             [arachne.aristotle :as ar]
             [clojure.java.io :as io]))
@@ -13,7 +12,8 @@
 (reg/prefix 'arachne "http://arachne-framework.org/#")
 
 (deftest basic-type-inference
-  (let [m (aa/add (aa/model :jena-mini) (graph/load (io/resource "TheFirm.n3")))
+  (let [m (aa/add (aa/model :jena-mini)
+                  (io/resource "TheFirm.n3"))
         gls #{[:wo.tf/Goldman]
               [:wo.tf/Long]
               [:wo.tf/Spence]}
@@ -43,7 +43,7 @@
     :wo.tf/president :wo.tf/Flint}])
 
 (deftest inverse-properties
-  (let [m (aa/add (aa/model :jena-mini) (graph/load (io/resource "TheFirm.n3")))]
+  (let [m (aa/add (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
     (aa/add m pres-props)
     (is
      (= [[:wo.tf/TheFirm]]

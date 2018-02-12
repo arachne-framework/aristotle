@@ -2,14 +2,15 @@
   "Primary API"
   (:require [arachne.aristotle.graph :as g]
             [arachne.aristotle.query :as q]
+            [arachne.aristotle.locks :as l]
             [arachne.aristotle.registry :as reg]
             [clojure.java.io :as io])
   (:import [org.apache.jena.rdf.model ModelFactory Model]
            [org.apache.jena.ontology OntModelSpec]
            [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
            [org.apache.jena.graph Factory]
-           [org.apache.jena.rdf.model.impl InfModelImpl]))
-
+           [org.apache.jena.rdf.model.impl InfModelImpl]
+           [org.apache.jena.riot RDFDataMgr]))
 
 (defmulti model
   "Build a new, empty model of the specified type.
@@ -41,15 +42,24 @@
      (InfModelImpl. (.bind reasoner (Factory/createGraphMem)))))
 
 (defn add
-  "Add the given triples to the specified model. Triples may be
-   specified as Clojure data structures, Jena graph objects, or resolvable
-   URL/URIs containing RDF data"
-  [^Model model & triples]
-  (doseq [triple (mapcat g/triples triples)]
-    (.add model (.asStatement model triple)))
+  "Add the given data to a model. Valid types include:
+
+  - String URIs, URIs, URLs or java.io.File objects represention
+    locations from which to load serialized RDF.
+  - Data satisfying arachne.aristotle.graph/AsTriples"
+  [model data]
+  (l/write model
+    (cond
+      (string? data) (RDFDataMgr/read ^Model model ^String data)
+      (uri? data) (add model (str data))
+      (instance? java.net.URL data) (RDFDataMgr/read model (str (.toURI data)))
+      (instance? java.io.File data) (RDFDataMgr/read model
+                                                     (-> data
+                                                         (.getAbsoluteFile)
+                                                         (.toURI)
+                                                         (str)))
+      :else (let [triples (g/triples data)]
+              (doseq [triple triples]
+                (.add model (.asStatement model triple))))))
   model)
 
-;; TODO s
-;; 1. Add scoped registries
-;; 2. add *.rdf.edn extension, registr with Aristotle
-;; 3. profit...?

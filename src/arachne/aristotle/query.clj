@@ -2,6 +2,7 @@
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query.compiler :as qc]
             [arachne.aristotle.graph :as graph]
+            [arachne.aristotle.locks :as l]
             [clojure.spec.alpha :as s])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
            [org.apache.jena.sparql.algebra AlgebraGenerator Algebra OpAsQuery Op]
@@ -20,19 +21,20 @@
     :else nil))
 
 (defn run
-  "Given an input dataset (which may be a Graph or a Model) and an Operation,
-   evaluate the query and return the results as a realized Clojure data structure."
-  [op data]
-  (let [result-seq (iterator-seq (Algebra/exec ^Op op data))]
-    (if-let [vars (find-vars op)]
-      (mapv (fn [^Binding binding]
-              (mapv #(graph/data (.get binding %)) vars))
-        result-seq)
-      (mapv (fn [^Binding binding]
-              (into {}
-                (for [var (iterator-seq (.vars binding))]
-                  [(graph/data var) (graph/data (.get binding var))])))
-        result-seq))))
+  "Given an input Model and an Operation, evaluate the query and return
+  the results as a realized Clojure data structure."
+  [op model]
+  (l/read model
+   (let [result-seq (iterator-seq (Algebra/exec ^Op op model))]
+     (if-let [vars (find-vars op)]
+       (mapv (fn [^Binding binding]
+               (mapv #(graph/data (.get binding %)) vars))
+             result-seq)
+       (mapv (fn [^Binding binding]
+               (into {}
+                     (for [var (iterator-seq (.vars binding))]
+                       [(graph/data var) (graph/data (.get binding var))])))
+             result-seq)))))
 
 (defn build
   "Build a Jena Operation object from the given query, represented as a
@@ -58,6 +60,6 @@
         (Algebra/optimize))))
 
 (defn query
-  "Build and execute a query on the given dataset."
-  [query dataset]
-  (run (build query) dataset))
+  "Build and execute a query on the given model."
+  [query model]
+  (run (build query) model))
