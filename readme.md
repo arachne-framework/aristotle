@@ -207,5 +207,16 @@ Example:
 
 ### Adding data to a model
 
-In order to do anything useful to a model, you w
+In order to do anything useful with a model, you must add additional facts using the `arachne.aristotle/add` function. `add` takes a model and some data to add. The data will be interpreted 
+
+
+
+
+
+
+
+
+
+
+
 

@@ -17,7 +17,7 @@
 (reg/prefix 'dsbase "http://data.lacity.org/resource/")
 (reg/prefix 'ds "https://data.lacity.org/resource/zzzz-zzzz/")
 
-(def test-graph (aa/add (aa/model :simple) (io/resource "la_census.rdf")))
+(def test-graph (aa/read (aa/model :simple) (io/resource "la_census.rdf")))
 
 (deftest basic-query
   (is (= [["57110"]]
@@ -75,7 +75,7 @@
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'test "http://example.com/aristotle#")
 
-#_(def ca-model (-> (aa/model :simple) (aa/add [{:rdf/about :test/olivia
+(def ca-model (-> (aa/model :simple) (aa/add [{:rdf/about :test/olivia
                                                :foaf/name "Olivia Person"
                                                :foaf/title "Dr"}
                                               {:rdf/about :test/frank
@@ -87,7 +87,7 @@
                                                :foaf/name "Sophie Person"
                                                :foaf/title "Commander"}])))
 
-#_(deftest count-aggregates
+(deftest count-aggregates
   (is (= [[4 3 4 2]]
          (q/query '[:project [?simple-count ?title-count ?distinct-count ?distinct-title-count]
                     [:group [] [?simple-count (count)

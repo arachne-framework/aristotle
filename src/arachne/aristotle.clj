@@ -10,7 +10,8 @@
            [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
            [org.apache.jena.graph Factory]
            [org.apache.jena.rdf.model.impl InfModelImpl]
-           [org.apache.jena.riot RDFDataMgr]))
+           [org.apache.jena.riot RDFDataMgr])
+  (:refer-clojure :exclude [read]))
 
 (defmulti model
   "Build a new, empty model of the specified type.
@@ -49,6 +50,21 @@
   - Data satisfying arachne.aristotle.graph/AsTriples"
   [model data]
   (l/write model
+    (let [triples (g/triples data)]
+      (doseq [triple triples]
+        (.add model (.asStatement model triple)))))
+  model)
+
+(defn read
+  "Load a file of serialized RDF data into a model. The file may be
+  identified instances of:
+
+  - String URIs,
+  - java.net.URI,
+  - java.net.URL
+  - java.io.File"
+  [model data]
+  (l/write model
     (cond
       (string? data) (RDFDataMgr/read ^Model model ^String data)
       (uri? data) (add model (str data))
@@ -57,9 +73,6 @@
                                                      (-> data
                                                          (.getAbsoluteFile)
                                                          (.toURI)
-                                                         (str)))
-      :else (let [triples (g/triples data)]
-              (doseq [triple triples]
-                (.add model (.asStatement model triple))))))
+                                                         (str)))))
   model)
 

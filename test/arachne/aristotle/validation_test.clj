@@ -11,7 +11,7 @@
 (reg/prefix 'arachne "http://arachne-framework.org/#")
 
 (deftest disjoint-classes
-  (let [m (aa/add (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
+  (let [m (aa/read (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
     (aa/add m {:rdf/about :wo.tf/TheFirm
                :wo.tf/freeLancesTo :wo.tf/TheFirm})
 

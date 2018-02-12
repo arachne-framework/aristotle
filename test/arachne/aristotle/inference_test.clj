@@ -12,8 +12,8 @@
 (reg/prefix 'arachne "http://arachne-framework.org/#")
 
 (deftest basic-type-inference
-  (let [m (aa/add (aa/model :jena-mini)
-                  (io/resource "TheFirm.n3"))
+  (let [m (aa/read (aa/model :jena-mini)
+                   (io/resource "TheFirm.n3"))
         gls #{[:wo.tf/Goldman]
               [:wo.tf/Long]
               [:wo.tf/Spence]}
@@ -43,7 +43,7 @@
     :wo.tf/president :wo.tf/Flint}])
 
 (deftest inverse-properties
-  (let [m (aa/add (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
+  (let [m (aa/read (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
     (aa/add m pres-props)
     (is
      (= [[:wo.tf/TheFirm]]
@@ -88,9 +88,4 @@
                [:bgp
                 [?b :arachne/name "William"]
                 [?b :arachne/name "Bill"]]] m)))
-
-
-
-
-
 
