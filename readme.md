@@ -26,6 +26,8 @@ Aristotle does not provide direct access to other RDF frameworks (such as RDF4j,
   - [Literals](#literals)
   - [Data Structures](#data-structures)
 - [API](#api)
+- [Query](#query)
+- [Validation](#validation)
 
 ## Data Model
 
@@ -207,9 +209,40 @@ Example:
 
 ### Adding data to a model
 
-In order to do anything useful with a model, you must add additional facts using the `arachne.aristotle/add` function. `add` takes a model and some data to add. The data will be interpreted 
+In order to do anything useful with a model, you must add additional facts. Facts may be added either programatically in your code, or by reading serialized data from a file or remote URL.
 
+#### Adding data programatically
 
+To add data programatically, use the `arachne.aristotle/add` function, which takes a model and some data to add. The data is processed into RDF triples using  `arachne.aristotle.graph/triples`, using the data format documented above. For example:
+
+```
+(require '[arachne.aristotle :as aa])
+
+(def m (aa/model :jena-mini))
+
+(aa/add m {:rdf/about ::luke
+           :foaf/firstName "Luke"
+           :foaf/lastName "VanderHart"})
+```
+
+#### Adding data from a file
+
+To add data from a file, use the `arachne.aristotle/read` function, which takes a model and a file. The file may be specified by a:
+
+  - String of the absolute or process-relative filename
+  - java.net.URI
+  - java.net.URL
+  - java.io.File
+
+Jena will detect what format the file is in, which may be one of RDF/XML, Turtle, N3, or N-Triples. All of the statements it contains will be added to the model. Example:
+
+## Query
+
+TODO
+
+## Validation
+
+TODO
 
 
 
