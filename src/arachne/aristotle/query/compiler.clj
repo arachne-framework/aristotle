@@ -8,10 +8,13 @@
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList E_GreaterThan E_Equals E_LessThan E_GreaterThanOrEqual E_LogicalNot E_LogicalAnd E_LogicalOr E_NotEquals E_LessThanOrEqual E_BNode E_Bound E_Conditional E_Datatype E_DateTimeDay E_DateTimeHours E_DateTimeMinutes E_DateTimeMonth E_DateTimeSeconds E_DateTimeTimezone E_DateTimeYear E_Divide E_Exists E_IRI E_IsIRI E_IsBlank E_IsLiteral E_IsNumeric E_IsURI E_Add E_Lang E_LangMatches E_MD5 E_Multiply E_Subtract E_Now E_NumAbs E_NumCeiling E_NumFloor E_NumRound E_Random E_Regex E_SameTerm E_Str E_SHA1 E_SHA224 E_SHA256 E_SHA384 E_SHA512 E_StrAfter E_StrBefore E_StrConcat E_StrContains E_StrDatatype E_StrLength E_StrEndsWith E_StrStartsWith E_StrLang E_StrSubstring E_StrUpperCase E_StrUUID E_StrLowerCase E_UnaryPlus E_UnaryMinus E_URI E_Version E_UUID E_StrEncodeForURI E_StrReplace E_Coalesce E_OneOf E_NotOneOf E_Function E_NotExists ExprAggregator]
            [org.apache.jena.sparql.core BasicPattern Var VarExprList QuadPattern Quad]
            [org.apache.commons.lang3.reflect ConstructorUtils]
-           [org.apache.jena.sparql.algebra OpAsQuery Algebra]
-           [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion]
+           [org.apache.jena.sparql.algebra OpAsQuery Algebra Table]
+           [org.apache.jena.sparql.algebra.table Table1 TableN]
+           [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion OpTable ]
            [org.apache.jena.sparql.expr.aggregate AggCount$AccCount AggSum AggAvg AggMin AggMax AggGroupConcat$AccGroupConcat AggSample$AccSample AggGroupConcat AggCount AggCountVar AggCountDistinct AggCountVarDistinct AggSample]
-           [org.apache.jena.query SortCondition]))
+           [org.apache.jena.query SortCondition]
+           [org.apache.jena.sparql.engine.binding BindingHashMap]
+           [org.apache.jena.sparql.core Var]))
 
 (defn- replace-vars
   "Given a collection of Triples, mutate the triples to replace Node_variable
@@ -42,7 +45,7 @@
   (s/assert* ::graph/triples data)
   (replace-vars (graph/triples data)))
 
-(defn- var-seq
+(defn var-seq
   "Convert a seq of variable names to a list of Var nodes"
   [s]
   (mapv #(Var/alloc (graph/node %)) s))
@@ -102,10 +105,36 @@
     group-concat (AggGroupConcat. (expr a1) a2)
     sample (AggSample. a1)))
 
+(defn- table-bindings
+  "Add a bindings map entry to the given table"
+  [t [k v]]
+  (if (coll? v)
+    (doseq [node v]
+      (let [binding (BindingHashMap.)]
+        (if (coll? k)
+          (mapv #(.add binding (Var/alloc (graph/node %1)) (graph/node %2)) k node)
+          (.add binding (Var/alloc (graph/node k)) (graph/node node)))
+        (.addBinding t binding)))
+    (let [binding (BindingHashMap.)]
+      (.add binding (Var/alloc (graph/node k)) (graph/node v))
+      (.addBinding t binding))))
+
+(defn build-table
+  "Construct a OpTable from a bindings map."
+  [bm]
+  (if (and (= 1 (count bm)) (not (coll? (val (first bm)))))
+    (OpTable/create (Table1. (Var/alloc (graph/node (key (first bm))))
+                             (graph/node (val (first bm)))))
+    (do
+      (let [t (TableN.)]
+        (doall (map #(table-bindings t %) bm))
+        (OpTable/create t)))))
+
 (defn op
   "Convert a Clojure data structure to an Arq Op"
   [[op-name & [a1 a2 & amore :as args]]]
   (case op-name
+    :table (build-table a1)
     :distinct (OpDistinct/create (op a1))
     :project (OpProject. (op a2) (var-seq a1))
     :filter (OpFilter/filterBy (ExprList. (map expr (butlast args))) (op (last args)))

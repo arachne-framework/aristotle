@@ -3,38 +3,30 @@
             [arachne.aristotle.query.compiler :as qc]
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.locks :as l]
+            [arachne.aristotle.query.spec :as qs]
             [clojure.spec.alpha :as s])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
            [org.apache.jena.sparql.algebra AlgebraGenerator Algebra OpAsQuery Op]
-           [org.apache.jena.sparql.algebra.op OpProject Op1]
+           [org.apache.jena.sparql.algebra.op OpProject Op1 OpSequence]
            [org.apache.jena.rdf.model Model]
            [com.sun.org.apache.xpath.internal.operations Mod]
            [org.apache.jena.graph Graph]
            [org.apache.jena.sparql.engine.binding Binding]))
 
-(defn- find-vars
-  "Unwrap the given operation until we find an OpProject, then return the list of vars."
-  [op]
-  (cond
-    (instance? OpProject op) (.getVars ^OpProject op)
-    (instance? Op1 op) (recur (.getSubOp ^Op1 op))
-    :else nil))
+(s/def ::data-bindings
+  (s/coll-of
+   (s/or :var->value (s/tuple ::graph/variable (complement coll?))
+         :var->values (s/tuple ::graph/variable
+                                   (s/coll-of (complement coll?)))
+         :vars->values (s/tuple (s/coll-of ::graph/variable :kind vector?)
+                                (s/coll-of (s/coll-of (complement coll?) :kind vector?)                                                      :kind vector?)))
+   :into #{}))
 
-(defn run
-  "Given an input Model and an Operation, evaluate the query and return
-  the results as a realized Clojure data structure."
-  [op model]
-  (l/read model
-   (let [result-seq (iterator-seq (Algebra/exec ^Op op model))]
-     (if-let [vars (find-vars op)]
-       (mapv (fn [^Binding binding]
-               (mapv #(graph/data (.get binding %)) vars))
-             result-seq)
-       (mapv (fn [^Binding binding]
-               (into {}
-                     (for [var (iterator-seq (.vars binding))]
-                       [(graph/data var) (graph/data (.get binding var))])))
-             result-seq)))))
+(s/def ::run-args (s/cat :bindings (s/? (s/coll-of ::graph/variable))
+                         :query (s/or :op #(instance? Op %)
+                                      :query ::qs/query)
+                         :model #(instance? Model %)
+                         :data (s/? ::data-bindings)))
 
 (defn build
   "Build a Jena Operation object from the given query, represented as a
@@ -43,6 +35,54 @@
   (let [op (qc/op query)
         op (Algebra/optimize op)]
     op))
+
+(defn- bind-data
+  "Wrap the given operation in an OpTable, establishing initial
+  bindings for the vars in the data map."
+  [op data]
+  (OpSequence/create
+   (qc/build-table data)
+   op))
+
+(defn- project
+  "Wrap the operation in a projection over the specified vars."
+  [op binding-vars]
+  (OpProject. op (qc/var-seq binding-vars)))
+
+
+(defn run
+  "Given a model and a query (which may be either a precompiled instance
+  of org.apache.sparql.algebra.Op, or a Query data structure), execute
+  the query and return results.
+
+  Results will be returned as a sequence of maps of variable bindings,
+  unless an optional binding vector is passed as the first
+  argument. If it is, results are returned as a set of vectors.
+
+  Takes an optional final argument which is a map of initial variable
+  bindings. This is how parameterized inputs are passed into the
+  query."
+;  {:arglists '[bindings? model query data?]}
+  [& args]
+  (let [{:keys [bindings model query data] :as r} (s/conform ::run-args args)
+        _ (when (= r ::s/invalid) (s/assert* ::run-args args))
+        operation (if (= :op (first query))
+                    (second query)
+                    (build (s/unform ::qs/query (second query))))
+        data (when data (map second data))
+        operation (if data (bind-data operation data) operation)
+        binding-vars (when bindings (qc/var-seq bindings))
+        operation (if binding-vars (project operation binding-vars) operation)
+        result-seq (iterator-seq (Algebra/exec ^Op operation ^Model model))]
+    (if binding-vars
+      (into #{} (map (fn [^Binding binding]
+                       (mapv #(graph/data (.get binding %)) binding-vars))
+                     result-seq))
+      (mapv (fn [^Binding binding]
+                  (into {}
+                        (for [var (iterator-seq (.vars binding))]
+                          [(graph/data var) (graph/data (.get binding var))])))
+            result-seq))))
 
 (defn sparql
   "Return a SPARQL query string for the given Jena Operation (as returned from `build`).
@@ -53,13 +93,7 @@
 (defn parse
   "Parse a SPARQL query string into a Jena Operation"
   [query-str]
-
   (let [q (QueryFactory/create query-str)]
     (-> (AlgebraGenerator.)
         (.compile q)
         (Algebra/optimize))))
-
-(defn query
-  "Build and execute a query on the given model."
-  [query model]
-  (run (build query) model))
