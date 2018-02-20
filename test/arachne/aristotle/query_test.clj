@@ -130,166 +130,38 @@
                             [?e ?a ?v]]
              test-graph
              {'?zip "90001"
-              '?id "228"})))
-    )
+              '?id "228"}))))
 
+  (testing "multiple vars, multiple values"
+    (is (= #{["51223"]}
+           (q/run '[?pop] '[:bgp
+                            [?e ?ds/zip_code ?zip]
+                            [?e :socrata/rowID ?id]
+                            [?e :ds/total_population ?pop]
+                            [?e ?a ?v]]
+             test-graph
+             {'?zip ["90001" "90002"]
+              '?id ["2" "3"]}))))
 
-  )
+  (testing "relational values"
+    (is (= #{["57110"]}
+           (q/run '[?pop] '[:bgp
+                            [?e ?ds/zip_code ?zip]
+                            [?e :socrata/rowID ?id]
+                            [?e :ds/total_population ?pop]
+                            [?e ?a ?v]]
+             test-graph
+             {'[?zip ?id] [["90001" "1"]
+                           ["90002" "0"]]}))))
 
-
-(comment
-
-  (clojure.pprint/pprint
-   (q/query '[:project [?e ?zip ?id]
-              [:bgp
-               [?e :ds/zip_code ?zip]
-               [?e :socrata/rowID ?id]
-               [?e :ds/total_population "1"]
-               ]]
-            test-graph
-            ))
-
-
-
-  )
-
-
-;; Providing data:
-
-
-;; Examples of binding forms. All of these should result in an outermost OpTable.
-
-{'?a "a"} ; single var single value
-{'?a ["a" "b"]} ; single var multiple values
-{'[?a ?b] [["a" "b"]
-           ["c" "d"]]} ; multiple vars multiple bindings
-
-;; All should of course be tested.
-
-(comment
-
-  (def q
-"PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-PREFIX :     <http://example.org/book/> 
-PREFIX ns:   <http://example.org/ns#> 
-
-SELECT ?book ?title ?price
-{
-   VALUES ?book { :book1 :book3 }
-   ?book dc:title ?title ;
-         ns:price ?price .
-}")
-
-  (def q "PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-PREFIX :     <http://example.org/book/> 
-PREFIX ns:   <http://example.org/ns#> 
-
-SELECT ?book ?title ?price
-{
-   ?book dc:title ?title ;
-         ns:price ?price .
-}
-VALUES (?book ?title)
-{ (UNDEF \"SPARQL Tutorial\")
-  (:book2 UNDEF)
-}")
-
-    (def q "PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-PREFIX :     <http://example.org/book/> 
-PREFIX ns:   <http://example.org/ns#> 
-
-SELECT ?book ?title ?price
-{
-   ?book dc:title ?title ;
-         ns:price ?price .
-}
-VALUES (?book ?title)
-{ (:book2 \"SPARQL Tutorial\")
-  (:book3 \"Foobook\")
-}")
-
-    (println (Algebra/optimize (parse q)))
-
-    (def op (parse q))
-    (def tableOp (.get (.getSubOp op) 0))
-
-    (iterator-seq (.rows (.getTable tableOp)))
-
-    (println op)
-
-    (println
-     (build '[:table {?a 1}
-              [:bgp [?a :a/b ?b]]]))
-
-    (println
-     (build '[:table {?a [1 2]}
-              [:bgp [?a :a/b ?b]]]))
-
-    (println
-     (build '[:table {[?a ?b] [["1" "2"]
-                               ["3" "4"]]}
-              [:bgp [?a :a/b ?b]]]))
-
-    (println
-     (build '[:table {?a ["a1" "a2"]
-                      ?b "2"}
-              [:bgp [?a :a/b ?b]]]))
-
-
-    
-
-  )
-
-(comment
-
- (require '[arachne.aristotle :as aa])
- (require '[clojure.java.io :as io])
-
- (def test-graph (aa/read (aa/model :simple) (io/resource "la_census.rdf")))
-
- (instance? Model test-graph)
-
- (reg/prefix 'ds "https://data.lacity.org/resource/zzzz-zzzz/")
- (reg/prefix 'socrata "http://www.socrata.com/rdf/terms#")
-
- (def q p(build '[:bgp
-                 [?e :ds/zip_code ?zip_code]
-                 [?e :socrata/rowID ?id]]))
-
- (run test-graph q)
-
- (run
-   ;'[?zip_code]
-   test-graph q '{?zip_code "90001"})
-
-
- (run test-graph q '{?zip_code "90001"})
-
- (run test-graph q '{?zip_code ["90001" "90002"]})
-
- ;; TODO: Does not restrict? Only obeys second binding.
- ;;Eg, 228 doesn't match 90001 and 90002
- (run test-graph q '{?zip_code ["90001" "90002"]
-                     ?id ["228"]})
-
-
-
- ;; Note, rows are a logical OR. This will return three values.
- ;; Should I fix the default? so it's an AND? that seems more usable intuitive by default...
- ;; Other option, allow multiple maps
-
- (run test-graph q '{?zip_code ["90001" "90002"]
-                     ?id ["228"]})
-
- ;; Combinatorals work as expected
- (run test-graph q '{[?zip_code ?id] [["90001" "1"]
-                                      ["90002" "4"]]})
-
- (run test-graph q '{[?a ?b] [[42 43]]})
-
- (println
-  (run '[?a ?b] test-graph q '{[?a ?b] [[42 43]]}))
- (run '[?a ?b] test-graph q '{[?a ?b] [[42 43]]})
-
-
- )
+  (testing "relational values, some unbound"
+    (is (= #{["57110"]
+             ["51223"]}
+           (q/run '[?pop] '[:bgp
+                            [?e ?ds/zip_code ?zip]
+                            [?e :socrata/rowID ?id]
+                            [?e :ds/total_population ?pop]
+                            [?e ?a ?v]]
+             test-graph
+             {'[?zip ?id] [["90001" "1"]
+                           ["90002" nil]]})))))

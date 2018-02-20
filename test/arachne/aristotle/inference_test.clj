@@ -18,18 +18,16 @@
               [:wo.tf/Long]
               [:wo.tf/Spence]}
         withsmith (conj gls [:arachne/Smith])
-        ppl-query '[:project [?person]
-                    [:bgp
-                     [?person :rdf/type :wo.tf/Person]]]
-        worksfor-query '[:project [?person]
-                         [:bgp
-                          [?person :wo.tf/worksFor :wo.tf/TheFirm]]]]
-    (is (= gls (set (q/query ppl-query m))))
-    (is (= gls (set (q/query worksfor-query m))))
+        ppl-query '[:bgp
+                    [?person :rdf/type :wo.tf/Person]]
+        worksfor-query '[:bgp
+                         [?person :wo.tf/worksFor :wo.tf/TheFirm]]]
+    (is (= gls (set (q/run '[?person] ppl-query m ))))
+    (is (= gls (set (q/run '[?person] worksfor-query m))))
     (aa/add m {:rdf/about :arachne/Smith
                :wo.tf/freeLancesTo :wo.tf/TheFirm})
-    (is (= withsmith (set (q/query ppl-query m))))
-    (is (= withsmith (set (q/query worksfor-query m))))))
+    (is (= withsmith (set (q/run '[?person] ppl-query m))))
+    (is (= withsmith (set (q/run '[?person] worksfor-query m))))))
 
 (def pres-props
   [{:rdf/about :wo.tf/president
@@ -46,10 +44,10 @@
   (let [m (aa/read (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
     (aa/add m pres-props)
     (is
-     (= [[:wo.tf/TheFirm]]
-        (q/query '[:project [?firm]
-                   [:bgp
-                    [:wo.tf/Flint :wo.tf/worksFor ?firm]]] m)))))
+     (= #{[:wo.tf/TheFirm]}
+        (q/run '[?firm]
+          '[:bgp
+            [:wo.tf/Flint :wo.tf/worksFor ?firm]] m)))))
 
 (def custom-ruleset
   [(inf/rule :body '[[?thing :arachne/eats ?food]
@@ -65,10 +63,9 @@
                     :rdf/type :arachne/Gazelle}
                    {:rdf/about :arachne/Gazelle
                     :rdfs/subClassOf :arachne/Animal}])]
-    (is (= [[:arachne/leo]]
-           (q/query '[:project [?e]
-                      [:bgp
-                       [?e :arachne/carnivore true]]] m)))))
+    (is (= #{[:arachne/leo]}
+           (q/run '[?e] '[:bgp
+                          [?e :arachne/carnivore true]] m)))))
 
 (deftest functional-properties
   (let [m (aa/add (aa/model :jena-mini)
@@ -84,8 +81,7 @@
                     :arachne/legalSpouse [{:rdf/about :arachne/bill
                                            :arachne/name "Bill"}]}])]
 
-    (q/query '[:project [?b]
-               [:bgp
-                [?b :arachne/name "William"]
-                [?b :arachne/name "Bill"]]] m)))
+    (q/run '[?b] '[:bgp
+                   [?b :arachne/name "William"]
+                   [?b :arachne/name "Bill"]] m)))
 

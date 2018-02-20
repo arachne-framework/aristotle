@@ -13,6 +13,9 @@
            [org.apache.jena.riot RDFDataMgr])
   (:refer-clojure :exclude [read]))
 
+(defmethod clojure.core/print-method Model [model writer]
+  (.write writer (str "#Model[" (.hashCode model) "]")))
+
 (defmulti model
   "Build a new, empty model of the specified type.
 

@@ -23,18 +23,18 @@
            (iterator-seq (.getReports r))))))
 
 (let [q (q/build
-         '[:project [?e ?p ?expected ?actual]
-           [:filter (< ?actual ?expected)
-            [:group [?c ?e ?p ?expected] [?actual (count ?val)]
-             [:join
-              [:disjunction
-               [:bgp [?c :owl/cardinality ?expected]]
-               [:bgp [?c :owl/minCardinality ?expected]]]
-              [:conditional
-               [:bgp
-                [?c :owl/onProperty ?p]
-                [?e :rdf/type ?c]]
-               [:bgp [?e ?p ?val]]]]]]])]
+         '[:filter (< ?actual ?expected)
+           [:group [?c ?e ?p ?expected] [?actual (count ?val)]
+            [:join
+             [:disjunction
+              [:bgp [?c :owl/cardinality ?expected]]
+              [:bgp [?c :owl/minCardinality ?expected]]]
+             [:conditional
+              [:bgp
+               [?c :owl/onProperty ?p]
+               [?e :rdf/type ?c]]
+              [:bgp [?e ?p ?val]]]]]])]
+
   (defn min-cardinality
     "Return a validation error for all entities that do not conform to any
   minCardinality restrictions on their parent classes.
@@ -54,7 +54,7 @@
                        :property property
                        :expected expected
                        :actual actual}})
-         (q/run q m))))
+         (q/run '[?e ?p ?expected ?actual] q m))))
 
 (defn validate
   "Validate the given model, returning a sequence of validation errors

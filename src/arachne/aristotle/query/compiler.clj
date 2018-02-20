@@ -112,7 +112,7 @@
     (doseq [node v]
       (let [binding (BindingHashMap.)]
         (if (coll? k)
-          (mapv #(.add binding (Var/alloc (graph/node %1)) (graph/node %2)) k node)
+          (mapv #(when %2 (.add binding (Var/alloc (graph/node %1)) (graph/node %2))) k node)
           (.add binding (Var/alloc (graph/node k)) (graph/node node)))
         (.addBinding t binding)))
     (let [binding (BindingHashMap.)]
@@ -120,15 +120,15 @@
       (.addBinding t binding))))
 
 (defn build-table
-  "Construct a OpTable from a bindings map."
+  "Given a bindings map, return an OpSequence including a nested table
+  for each map."
   [bm]
-  (if (and (= 1 (count bm)) (not (coll? (val (first bm)))))
-    (OpTable/create (Table1. (Var/alloc (graph/node (key (first bm))))
-                             (graph/node (val (first bm)))))
-    (do
-      (let [t (TableN.)]
-        (doall (map #(table-bindings t %) bm))
-        (OpTable/create t)))))
+  (->> bm
+       (map #(let [t (TableN.)]
+              (table-bindings t %)
+              (OpTable/create t)))
+       (reduce (fn [op t]
+                 (OpSequence/create op t)))))
 
 (defn op
   "Convert a Clojure data structure to an Arq Op"

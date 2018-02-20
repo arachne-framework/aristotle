@@ -244,7 +244,7 @@ To invoke a query, use the `arachne.aristotle.query/query` function, which takes
 
 SPARQL itself is string oriented, with a grammar that does not translate cleanly to nested data structures. However, SPARQL has an internal algebra that *is* very clean and composable. Aristotle's query data uses this internal SPARQL alegebra (which is exposed by Jena's ARQ data model) ignoring SPARQL syntax. All queries expressible in SPARQL syntax are also expressible in Aristotle's query data, modulo some features that are not implemented yet (e.g, query fedration across remote data sources.)
 
-Unfortunately, the SPARQL algebra is not well documented. A [rough overview](https://www.w3.org/2011/09/SparqlAlgebra/ARQalgebra) is available, and this readme will document some of the more common forms. It may be necesary, though, to read the code to gain a precise details of system's behavior.
+Unfortunately, the SPARQL algebra has no well documented syntax. A [rough overview](https://www.w3.org/2011/09/SparqlAlgebra/ARQalgebra) is available, and this readme will document some of the more common forms. It may be necesary, though, to read the code to gain a precise details of system's behavior.
 
 Aristotle queries are expressed as compositions of algebraic operations, using the generalied form `[operation (expression* | binding* ) operation+]`
 
