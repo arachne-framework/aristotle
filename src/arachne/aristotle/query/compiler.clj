@@ -67,8 +67,8 @@
   "Given a vector of var/aggregate bindings return a Jena VarExprList with
    vars and aggregates"
   [bindings]
-  (for [[v e] (partition 2 bindings)]
-    (ExprAggregator. (Var/alloc (graph/node v)) (aggregator e))))
+  (vec (for [[v e] (partition 2 bindings)]
+         (ExprAggregator. (Var/alloc (graph/node v)) (aggregator e)))))
 
 (defn- sort-conditions
   "Given a seq of expressions and the keyword :asc or :desc, return a list of
@@ -93,10 +93,10 @@
   (case op
     count (cond
             (symbol? a1) (AggCountVar. (expr a1))
-            (and (list? a1) (= 'distinct (first a1)) (and (= 1 (count a1))))
-            (AggCountDistinct.)
-            (and (list? a1) (= 'distinct (first a1)) (and (= 2 (count a1))))
-               (AggCountVarDistinct. (expr (second a1)))
+            (and (seq? a1) (= 'distinct (first a1)) (and (= 1 (count a1))))
+              (AggCountDistinct.)
+            (and (seq? a1) (= 'distinct (first a1)) (and (= 2 (count a1))))
+              (AggCountVarDistinct. (expr (second a1)))
             :else (AggCount.))
     sum (AggSum. (expr a1))
     avg (AggAvg. (expr a1))

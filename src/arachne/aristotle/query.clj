@@ -4,7 +4,8 @@
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.locks :as l]
             [arachne.aristotle.query.spec :as qs]
-            [clojure.spec.alpha :as s])
+            [clojure.spec.alpha :as s]
+            [clojure.walk :as w])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
            [org.apache.jena.sparql.algebra AlgebraGenerator Algebra OpAsQuery Op]
            [org.apache.jena.sparql.algebra.op OpProject Op1 OpSequence]
@@ -60,7 +61,7 @@
         _ (when (= r ::s/invalid) (s/assert* ::run-args args))
         operation (if (= :op (first query))
                     (second query)
-                    (build (s/unform ::qs/operation (second query))))
+                    (build (w/prewalk identity (s/unform ::qs/operation (second query)))))
         data (when data (map second data))
         operation (if data (bind-data operation data) operation)
         binding-vars (when bindings (qc/var-seq bindings))

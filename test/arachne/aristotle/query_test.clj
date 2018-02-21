@@ -4,7 +4,8 @@
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
             [arachne.aristotle :as aa]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [clojure.walk :as w]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'arachne "http://arachne-framework.org/#")
@@ -97,46 +98,6 @@
               [:bgp [?p :foaf/name ?name]]
               [:bgp [?p :foaf/title ?title]]]]
            ca-model))))
-
-(comment
-
-  (q/run
-    '[:group [] [?simple-count (count)
-                 ?title-count (count ?title)
-                 ?distinct-count (count (distinct))
-                 ?distinct-title-count (count (distinct ?title))]
-      [:conditional
-       [:bgp [?p :foaf/name ?name]]
-       [:bgp [?p :foaf/title ?title]]]]
-    ca-model)
-
-  (println
-   (q/build
-    '[:group [] [?simple-count (count)
-                 ?title-count (count ?title)
-                 ?distinct-count (count (distinct))
-                 ?distinct-title-count (count (distinct ?title))]
-      [:conditional
-       [:bgp [?p :foaf/name ?name]]
-       [:bgp [?p :foaf/title ?title]]]]))
-
-  (def x (q/build '[:group [] [?x (count (distinct ?a))]
-                    [:bgp [?a ?b ?c]]]))
-
-  (require '[clojure.spec.alpha :as s])
-  (require '[arachne.aristotle.query.spec :as qs])
-
-  (s/unform ::qs/group
-   (s/conform ::qs/group
-              '[:group [] [?simple-count (count)
-                           ?title-count (count ?title)
-                           ?distinct-count (count (distinct))
-                           ?distinct-title-count (count (distinct ?title))]
-                [:conditional
-                 [:bgp [?p :foaf/name ?name]]
-                 [:bgp [?p :foaf/title ?title]]]]))
-
-  )
 
 (deftest query-parameters
   (testing "single var, single value"
