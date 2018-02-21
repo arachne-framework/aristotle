@@ -94,7 +94,7 @@
     count (cond
             (symbol? a1) (AggCountVar. (expr a1))
             (and (list? a1) (= 'distinct (first a1)) (and (= 1 (count a1))))
-               (AggCountDistinct.)
+            (AggCountDistinct.)
             (and (list? a1) (= 'distinct (first a1)) (and (= 2 (count a1))))
                (AggCountVarDistinct. (expr (second a1)))
             :else (AggCount.))
@@ -161,13 +161,14 @@
                     (BasicPattern/wrap (mapcat triples (rest args))))
     :reduced (OpReduced/create (op a1))
     :sequence (OpSequence/create (op a1) (op a2))
-    :slice (OpSlice. a1 a2 (op (first amore)))
-    :top-n (OpTopN. (op (first amore)) a1 (sort-conditions a2))
+    :slice (OpSlice. (op a1) (long a1) (long (first amore)))
+    :top-n (OpTopN. (op (first amore)) (long a1) (sort-conditions a2))
     :union (OpUnion. (op a1) (op a2))
     :service (throw (ex-info "SPARQL federated queries not yet supported" {}))
     :path (throw (ex-info "SPARQL property paths not yet supported" {}))
     (throw (ex-info (str "Unknown operation " op-name) {:op-name op-name
                                                         :args args}))))
+
 
 ;;https://github.com/apache/jena/blob/master/jena-extras/jena-querybuilder/src/main/java/org/apache/jena/arq/querybuilder/ExprFactory.java
 
@@ -270,9 +271,14 @@
 (defn expr
   "Convert a Clojure data structure to an Arq Expr"
   [expr]
-  (if (list? expr)
+  (if (instance? java.util.List expr)
     (composite-expr expr)
     (let [node (graph/node expr)]
       (if (instance? Node_Variable node)
         (ExprVar. (Var/alloc node))
         (NodeValue/makeNode node)))))
+
+(comment
+  (s/conform :org.arachne.aristotle.query.spec/expr '(< 105000 (:xsd/integer ?pop)))
+  
+  )

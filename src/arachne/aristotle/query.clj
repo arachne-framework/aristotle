@@ -13,20 +13,12 @@
            [org.apache.jena.graph Graph]
            [org.apache.jena.sparql.engine.binding Binding]))
 
-(s/def ::data-bindings
-  (s/coll-of
-   (s/or :var->value (s/tuple ::graph/variable (complement coll?))
-         :var->values (s/tuple ::graph/variable
-                                   (s/coll-of (complement coll?)))
-         :vars->values (s/tuple (s/coll-of ::graph/variable :kind vector?)
-                                (s/coll-of (s/coll-of (complement coll?) :kind vector?)                                                      :kind vector?)))
-   :into #{}))
 
 (s/def ::run-args (s/cat :bindings (s/? (s/coll-of ::graph/variable))
                          :query (s/or :op #(instance? Op %)
-                                      :query ::qs/query)
+                                      :query ::qs/operation)
                          :model #(instance? Model %)
-                         :data (s/? ::data-bindings)))
+                         :data (s/? ::qs/bindings)))
 
 (defn build
   "Build a Jena Operation object from the given query, represented as a
@@ -68,7 +60,7 @@
         _ (when (= r ::s/invalid) (s/assert* ::run-args args))
         operation (if (= :op (first query))
                     (second query)
-                    (build (s/unform ::qs/query (second query))))
+                    (build (s/unform ::qs/operation (second query))))
         data (when data (map second data))
         operation (if data (bind-data operation data) operation)
         binding-vars (when bindings (qc/var-seq bindings))

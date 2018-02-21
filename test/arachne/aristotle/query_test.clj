@@ -56,7 +56,7 @@
                          ?avgn (avg (:xsd/integer ?pop))]
               [:bgp
                [_ :ds/total_population ?pop]]]]
-          test-graph))))
+           test-graph))))
 
 (deftest minus
   (is (= 5 (count (q/run '[:diff
@@ -96,8 +96,47 @@
              [:conditional
               [:bgp [?p :foaf/name ?name]]
               [:bgp [?p :foaf/title ?title]]]]
-                  ca-model))))
+           ca-model))))
 
+(comment
+
+  (q/run
+    '[:group [] [?simple-count (count)
+                 ?title-count (count ?title)
+                 ?distinct-count (count (distinct))
+                 ?distinct-title-count (count (distinct ?title))]
+      [:conditional
+       [:bgp [?p :foaf/name ?name]]
+       [:bgp [?p :foaf/title ?title]]]]
+    ca-model)
+
+  (println
+   (q/build
+    '[:group [] [?simple-count (count)
+                 ?title-count (count ?title)
+                 ?distinct-count (count (distinct))
+                 ?distinct-title-count (count (distinct ?title))]
+      [:conditional
+       [:bgp [?p :foaf/name ?name]]
+       [:bgp [?p :foaf/title ?title]]]]))
+
+  (def x (q/build '[:group [] [?x (count (distinct ?a))]
+                    [:bgp [?a ?b ?c]]]))
+
+  (require '[clojure.spec.alpha :as s])
+  (require '[arachne.aristotle.query.spec :as qs])
+
+  (s/unform ::qs/group
+   (s/conform ::qs/group
+              '[:group [] [?simple-count (count)
+                           ?title-count (count ?title)
+                           ?distinct-count (count (distinct))
+                           ?distinct-title-count (count (distinct ?title))]
+                [:conditional
+                 [:bgp [?p :foaf/name ?name]]
+                 [:bgp [?p :foaf/title ?title]]]]))
+
+  )
 
 (deftest query-parameters
   (testing "single var, single value"
