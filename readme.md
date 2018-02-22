@@ -242,34 +242,148 @@ Aristotle provides a data-oriented interface to Jena's SPARQL query engine. Quer
 
 To invoke a query, use the `arachne.aristotle.query/query` function, which takes a query data structure, a model, and any query inputs. It returns the results of the query.
 
-SPARQL itself is string oriented, with a grammar that does not translate cleanly to nested data structures. However, SPARQL has an internal algebra that *is* very clean and composable. Aristotle's query data uses this internal SPARQL alegebra (which is exposed by Jena's ARQ data model) ignoring SPARQL syntax. All queries expressible in SPARQL syntax are also expressible in Aristotle's query data, modulo some features that are not implemented yet (e.g, query fedration across remote data sources.)
+SPARQL itself is string oriented, with a heavily lexical grammar that does not translate cleanly to data structures. However, SPARQL has an internal algebra that *is* very clean and composable. Aristotle's query data uses this internal SPARQL alegebra (which is exposed by Jena's ARQ data model) ignoring SPARQL syntax. All queries expressible in SPARQL syntax are also expressible in Aristotle's query data, modulo some features that are not implemented yet (e.g, query fedration across remote data sources.)
 
-Unfortunately, the SPARQL algebra has no well documented syntax. A [rough overview](https://www.w3.org/2011/09/SparqlAlgebra/ARQalgebra) is available, and this readme will document some of the more common forms. It may be necesary, though, to read the code to gain a precise details of system's behavior.
+Unfortunately, the SPARQL algebra has no well documented syntax. A [rough overview](https://www.w3.org/2011/09/SparqlAlgebra/ARQalgebra) is available, and this readme will document some of the more common forms. For more details, see the [query specs](https://github.com/arachne-framework/aristotle/blob/master/src/arachne/aristotle/query/spec.clj) with their associated docstrings.
 
-Aristotle queries are expressed as compositions of algebraic operations, using the generalied form `[operation (expression* | binding* ) operation+]`
+Aristotle queries are expressed as compositions of algebraic operations, using the generalized form `[operation expression* sub-operation*]` These operation vectors may be nested arbitrarily.
 
-For example, the following is a very basic query to find the names of everyone that an individual knows:
+Expressions are specified using a Clojure list form, with the expression type as a symbol. These expressions take the general form `(expr-type arg*)`.
+
+### Running Queries
+
+To run a query, use the `arachne.aristotle.query/run` function. This function takes an (optional) binding vector, a query, a model, and (optionally) a map of variable bindings which serve as query inputs. 
+
+If a binding vector is given, results will be returned as a set of tuples, one for each unique binding of the variables in the binding vector.
+
+If no binding vector is supplied, results will be returned as a sequence of query solutions, with each solution represented as a map of the variables it binds. In this case, solutions may not be unique (unless the query specifically inclues a `:distinct` operation.)
+
+Some examples follow:
+
+#### Sample: simple query
 
 ```clojure
 (require '[arachne.aristotle.query :as q])
 
-(q/query '[:project [?name]
-            [:bgp [:example/luke :foaf/knows ?person]
-                  [?person :foaf/name ?name]]]
-          my-model)                  
+(q/run '[:bgp [:example/luke :foaf/knows ?person]
+              [?person :foaf/name ?name]])
 ```
 
-This query is the composition of two ARQ operations: `:bgp` (Basic Graph Pattern) and `:project` (which narrows the set of result variables.) 
+This query is a single pattern match (using a "basic graph pattern" or "bgp"), binding the `:foaf/name` property of each entity that is the subject of `:foaf/knows` for an entity identified by `:example/luke`. 
 
+An example of the results that might be returned by this query is:
 
+```clojure
+({?person <http://example.com/person#james> ?name "Jim"},
+ {?person <http://example.com/person#sara> ?name "Sara"},
+ {?person <http://example.com/person#jules> ?name "Jules"})
+```
 
-### Optimization
+#### Sample: simple query with result binding
 
+This is the same query, but using a binding vector
 
+```clojure
+(q/run '[?name] 
+       '[:bgp [:example/luke :foaf/knows ?person]
+              [?person :foaf/name ?name]]]
+          my-model)                  
+```
+In this case, results would look like:
+
+```clojure
+#{["Jim"]
+  ["Sara"]
+  ["Jules"]}
+```
+
+#### Sample: query with filtering expression
+
+This example expands on the previous query, using a `:filter` operation with an expression to only return acquaintances above the age of 18: 
+
+```clojure
+(q/run '[?name]
+       '[:filter (< 18 ?age)
+         '[:bgp [:example/luke :foaf/knows ?person]
+                [?person :foaf/name ?name]
+                [?person :foaf/age ?age]]]
+  my-model) 
+```
+
+#### Sample: providing inputs
+
+This example is the same as those above, except instead of hardcoding the base individual as `:example/luke`, the starting individual is bound in a separate binding map provided to `q/run`. 
+
+```clojure
+(q/run '[?name]
+        [:bgp [?individual :foaf/knows ?person]
+              [?person :foaf/name ?name]]
+  my-model
+  '{?individual :example/luke})
+```
+
+It is also possible to bind multiple possibilities for the value of `?individual`: 
+
+```clojure
+(q/run '[?name]
+        [:bgp [?individual :foaf/knows ?person]
+              [?person :foaf/name ?name]]
+  my-model
+  '{?individual #{:example/luke
+                  :example/carin
+                  :example/dan}})
+```
+
+This will find the names of all persons who are known by Luke, Carin OR Dan.
+
+### Precompiled Queries
+
+Queries can also be precompiled into a Jena Operation object, meaning they do not need to be parsed, interpreted, and optimized again every time they are invoked. To precompile a query, use the `arachne.aristotle.query/build` function: 
+
+```clojure
+(def friends-q (q/build '[:bgp [?individual :foaf/knows ?person]
+                               [?person :foaf/name ?name]]))
+```
+
+You can then use the precompiled query object (bound in this case to `friends-q` in calls to `arachne.aristotle.query/run`:
+
+```clojure
+(q/run friends-q my-model '{?individual :example/luke})
+```
+
+The results will be exactly the same as using the inline version.
 
 ## Validation
 
-TODO
+One common use case is to take a given Model and "validate" it, ensuring its internal consistency (including whether entities in it conform to any OWL or RDFS schema that is present.)
+
+To do this, run the `arachne.aristotle.validation/validate` function. Passed only a model, it will return any errors returned by the Jena Reasoner that was used when constructing the model. The `:simple` reasoner will never return any errors, the `:jena-mini` reasoner will return OWL inconsistencies, etc.
+
+If validation is successfull, the validator will return nil or an empty list. If there were any errors, each error will be returned as a map containing details about the specific error type.
+
+#### Closed-World validation
+
+The built-in reasoners use the standard open-world assumption of RDF and OWL. This means that many scenarios that would intuitively be "invalid" to a human (such as a missing min-cardinality attribute) will not be identified, because the reasoner alwas operates under the assumption that it doesn't yet know all the facts.
+
+However, for certain use cases, it can be desirable to assert that yes, the model actually does contain all pertinent facts, and that we want to make some assertions based on what the model *actually* knows at a given moment, never mind what facts may be added in the future.
+
+To do this, you can pass additional validator functions to `validate`, providing  a sequence of optional validators as a second argument.
+
+Each of these validator functions takes a model as its argument, and returns a sequence of validation error maps. An empty sequence implies that the model is valid.
+
+The "min-cardinality" situation mentioned above has a built in validator, `arachne.aristotle.validators/min-cardinality`. It works by running a SPARQL query on the provided model that detects if any min-cardinality attributes are missing from entities known to be of an OWL class where they are supposed to be present.
+
+To use it, just provide it in the list of custom validators passed to `validate`: 
+
+```clojure
+(v/validate m [v/min-cardinality])
+```
+
+This will return the set not only of built in OWL validation errors, but also any min-cardinality violations that are discovered.
+
+Of course, you can provide any additional validator functions as well.
+
+
 
 
 
