@@ -38,6 +38,9 @@
   [_]
   (ModelFactory/createOntologyModel OntModelSpec/OWL_MEM_MINI_RULE_INF))
 
+;; Note: You'll probably want to include the basic tabling rule to
+;; avoid infinite lookups on recursive backchains
+
 (defmethod model :jena-rules
   [_ rules]
   (let [reasoner (GenericRuleReasoner. rules)]

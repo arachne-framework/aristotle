@@ -73,12 +73,14 @@
          a backward-chaining rule. Defaults to :back."
   [& {:keys [name body head dir]}]
   (binding [*assignments* (let [vars (extract head)]
-                            (atom [(inc (count vars)) vars]))]
+                            (atom [(count vars) vars]))]
+
     (doto (Rule. name (if (instance? Rule head)
                         [head]
                         (pattern head))
                  (pattern body))
-      (.setBackward (not (= :forward dir))))))
+      (.setBackward (not (= :forward dir)))
+      (.setNumVars (count (second @*assignments*))))))
 
 (def owl-rules
   "The maximal set of OWL rules supported by Jena"
@@ -87,3 +89,8 @@
 (def mini-rules
   "The OWL rules supported by Jena's mini Reasoner"
   (.getRules (ReasonerRegistry/getOWLMiniReasoner)))
+
+(def table-all
+  "Rule that calls the built in TableAll directive. This usually
+   desirable, to prevent infinite circular backwards inferences."
+  (Rule/parseRule "-> tableAll()."))

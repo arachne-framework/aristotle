@@ -10,6 +10,7 @@
 (reg/prefix 'daml "http://www.daml.org/2001/03/daml+oil#")
 (reg/prefix 'wo.tf "http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl#")
 (reg/prefix 'arachne "http://arachne-framework.org/#")
+(reg/prefix (ns-name *ns*) "http://example.com/#")
 
 (deftest basic-type-inference
   (let [m (aa/read (aa/model :jena-mini)
@@ -81,7 +82,35 @@
                     :arachne/legalSpouse [{:rdf/about :arachne/bill
                                            :arachne/name "Bill"}]}])]
 
-    (q/run '[?b] '[:bgp
-                   [?b :arachne/name "William"]
-                   [?b :arachne/name "Bill"]] m)))
+    (is (= #{[:arachne/will :arachne/bill]})
+        '[:bgp
+          [?b :arachne/name "William"]
+          [?b :arachne/name "Bill"]])))
+
+(reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
+(reg/prefix :dc "http://purl.org/dc/elements/1.1/")
+
+(deftest custom-forward-rules
+  (let [inverse-rule (inf/rule :body '[?p :owl/inverseOf ?q]
+                               :head (inf/rule :body '[?y ?q ?x]
+                                               :head '[?x ?p ?y])
+                               :dir :forward)
+        knows-rule (inf/rule :body '[[?a :foaf/made ?work]
+                                     [?b :foaf/made ?work]]
+                             :head '[?a :foaf/knows ?b])
+        m (aa/model :jena-rules [inf/table-all inverse-rule knows-rule])]
+    (aa/read m (io/resource "foaf.rdf"))
+    (aa/add m [{:rdf/about ::practical-clojure
+                      :dc/title "Practical Clojure"
+                      :foaf/maker [::luke
+                                   ::stuart]}])
+    (is (= #{[::stuart]}
+           (q/run '[?s]
+             '[:filter (not= ::luke ?s)
+               [:bgp [::luke :foaf/knows ?s]]]
+             m)))))
+
+
+
+
 
