@@ -4,15 +4,14 @@
             [arachne.aristotle.graph :as g]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query :as q])
-  (:import [org.apache.jena.rdf.model InfModel]
-           [org.apache.jena.reasoner ValidityReport ValidityReport$Report]))
+  (:import [org.apache.jena.reasoner ValidityReport ValidityReport$Report]))
 
 
 (defn built-in
   "Validator which discovers any validation errors returned by the
   Reasoner itself"
-  [^InfModel m]
-  (let [r (.validate m)]
+  [graph]
+  (let [r (.validate graph)]
     (if (.isValid r)
       []
       (map (fn [^ValidityReport$Report r]
@@ -57,12 +56,12 @@
          (q/run '[?e ?p ?expected ?actual] q m))))
 
 (defn validate
-  "Validate the given model, returning a sequence of validation errors
+  "Validate the given graph, returning a sequence of validation errors
   or warnings. Always returns validation errors from the internal
   reaswoner's own consistency checks, as well as any additional
   validators provided.
 
-  Custom validators are functions which take a model and return a
+  Custom validators are functions which take a graph and return a
   collection of maps, each representing a validation error or
   warining.
 
@@ -70,6 +69,6 @@
   arbitrary logic (i.e, perform validations such as minCardinality
   that require a closed-world reasoning model instaed of OWL's
   open-world default.)"
-  ([m] (validate m []))
-  ([m validators]
-   (mapcat #(% m) (conj validators built-in))))
+  ([g] (validate g []))
+  ([g validators]
+   (mapcat #(% g) (conj validators built-in))))

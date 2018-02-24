@@ -2,14 +2,12 @@
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query.compiler :as qc]
             [arachne.aristotle.graph :as graph]
-            [arachne.aristotle.locks :as l]
             [arachne.aristotle.query.spec :as qs]
             [clojure.spec.alpha :as s]
             [clojure.walk :as w])
   (:import [org.apache.jena.query QueryFactory QueryExecutionFactory]
            [org.apache.jena.sparql.algebra AlgebraGenerator Algebra OpAsQuery Op]
            [org.apache.jena.sparql.algebra.op OpProject Op1 OpSequence]
-           [org.apache.jena.rdf.model Model]
            [com.sun.org.apache.xpath.internal.operations Mod]
            [org.apache.jena.graph Graph]
            [org.apache.jena.sparql.engine.binding Binding]))
@@ -18,7 +16,7 @@
 (s/def ::run-args (s/cat :bindings (s/? (s/coll-of ::graph/variable))
                          :query (s/or :op #(instance? Op %)
                                       :query ::qs/operation)
-                         :model #(instance? Model %)
+                         :graph #(instance? Graph %)
                          :data (s/? ::qs/bindings)))
 
 (defn build
@@ -44,7 +42,7 @@
 
 
 (defn run
-  "Given a model and a query (which may be either a precompiled instance
+  "Given a graph and a query (which may be either a precompiled instance
   of org.apache.sparql.algebra.Op, or a Query data structure), execute
   the query and return results.
 
@@ -55,9 +53,8 @@
   Takes an optional final argument which is a map of initial variable
   bindings. This is how parameterized inputs are passed into the
   query."
-;  {:arglists '[bindings? model query data?]}
   [& args]
-  (let [{:keys [bindings model query data] :as r} (s/conform ::run-args args)
+  (let [{:keys [bindings graph query data] :as r} (s/conform ::run-args args)
         _ (when (= r ::s/invalid) (s/assert* ::run-args args))
         operation (if (= :op (first query))
                     (second query)
@@ -66,7 +63,7 @@
         operation (if data (bind-data operation data) operation)
         binding-vars (when bindings (qc/var-seq bindings))
         operation (if binding-vars (project operation binding-vars) operation)
-        result-seq (iterator-seq (Algebra/exec ^Op operation ^Model model))]
+        result-seq (iterator-seq (Algebra/exec ^Op operation ^Graph graph))]
     (if binding-vars
       (into #{} (map (fn [^Binding binding]
                        (mapv #(graph/data (.get binding %)) binding-vars))

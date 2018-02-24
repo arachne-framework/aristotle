@@ -17,7 +17,8 @@
 (reg/prefix 'skos "http://www.w3.org/2004/02/skos/core#")
 (reg/prefix 'dsbase "http://data.lacity.org/resource/")
 (reg/prefix 'ds "https://data.lacity.org/resource/zzzz-zzzz/")
-(def test-graph (aa/read (aa/model :simple) (io/resource "la_census.rdf")))
+
+(def test-graph (aa/read (aa/graph :simple) (io/resource "la_census.rdf")))
 
 (deftest basic-query
   (is (= #{["57110"]}
@@ -75,7 +76,7 @@
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'test "http://example.com/aristotle#")
 
-(def ca-model (-> (aa/model :simple) (aa/add [{:rdf/about :test/olivia
+(def ca-graph (-> (aa/graph :simple) (aa/add [{:rdf/about :test/olivia
                                                :foaf/name "Olivia Person"
                                                :foaf/title "Dr"}
                                               {:rdf/about :test/frank
@@ -97,7 +98,7 @@
              [:conditional
               [:bgp [?p :foaf/name ?name]]
               [:bgp [?p :foaf/title ?title]]]]
-           ca-model))))
+           ca-graph))))
 
 (deftest query-parameters
   (testing "single var, single value"

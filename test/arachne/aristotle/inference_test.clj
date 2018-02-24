@@ -13,7 +13,7 @@
 (reg/prefix (ns-name *ns*) "http://example.com/#")
 
 (deftest basic-type-inference
-  (let [m (aa/read (aa/model :jena-mini)
+  (let [g (aa/read (aa/graph :jena-mini)
                    (io/resource "TheFirm.n3"))
         gls #{[:wo.tf/Goldman]
               [:wo.tf/Long]
@@ -23,12 +23,12 @@
                     [?person :rdf/type :wo.tf/Person]]
         worksfor-query '[:bgp
                          [?person :wo.tf/worksFor :wo.tf/TheFirm]]]
-    (is (= gls (set (q/run '[?person] ppl-query m ))))
-    (is (= gls (set (q/run '[?person] worksfor-query m))))
-    (aa/add m {:rdf/about :arachne/Smith
-               :wo.tf/freeLancesTo :wo.tf/TheFirm})
-    (is (= withsmith (set (q/run '[?person] ppl-query m))))
-    (is (= withsmith (set (q/run '[?person] worksfor-query m))))))
+    (is (= gls (set (q/run '[?person] ppl-query g))))
+    (is (= gls (set (q/run '[?person] worksfor-query g))))
+    (let [g (aa/add g {:rdf/about :arachne/Smith
+                       :wo.tf/freeLancesTo :wo.tf/TheFirm})]
+      (is (= withsmith (set (q/run '[?person] ppl-query g))))
+      (is (= withsmith (set (q/run '[?person] worksfor-query g)))))))
 
 (def pres-props
   [{:rdf/about :wo.tf/president
@@ -42,13 +42,13 @@
     :wo.tf/president :wo.tf/Flint}])
 
 (deftest inverse-properties
-  (let [m (aa/read (aa/model :jena-mini) (io/resource "TheFirm.n3"))]
-    (aa/add m pres-props)
+  (let [g (aa/read (aa/graph :jena-mini) (io/resource "TheFirm.n3"))
+        g (aa/add g pres-props)]
     (is
      (= #{[:wo.tf/TheFirm]}
         (q/run '[?firm]
           '[:bgp
-            [:wo.tf/Flint :wo.tf/worksFor ?firm]] m)))))
+            [:wo.tf/Flint :wo.tf/worksFor ?firm]] g)))))
 
 (def custom-ruleset
   [(inf/rule :body '[[?thing :arachne/eats ?food]
@@ -56,7 +56,7 @@
              :head '[[?thing :arachne/carnivore true]])])
 
 (deftest custom-rules
-  (let [m (aa/add (aa/model :jena-rules (concat inf/owl-rules custom-ruleset))
+  (let [g (aa/add (aa/graph :jena-rules (concat inf/owl-rules custom-ruleset))
                   [{:rdf/about :arachne/leo
                     :arachne/name "Leo"
                     :arachne/eats :arachne/jumper}
@@ -66,10 +66,10 @@
                     :rdfs/subClassOf :arachne/Animal}])]
     (is (= #{[:arachne/leo]}
            (q/run '[?e] '[:bgp
-                          [?e :arachne/carnivore true]] m)))))
+                          [?e :arachne/carnivore true]] g)))))
 
 (deftest functional-properties
-  (let [m (aa/add (aa/model :jena-mini)
+  (let [g (aa/add (aa/graph :jena-mini)
                   [{:rdf/about :arachne/legalSpouse
                     :rdf/type [:owl/ObjectProperty :owl/FunctionalProperty]
                     :rdfs/domain :arachne/Person
@@ -82,10 +82,12 @@
                     :arachne/legalSpouse [{:rdf/about :arachne/bill
                                            :arachne/name "Bill"}]}])]
 
-    (is (= #{[:arachne/will :arachne/bill]})
-        '[:bgp
-          [?b :arachne/name "William"]
-          [?b :arachne/name "Bill"]])))
+    (is (= #{[:arachne/will] [:arachne/bill]}
+           (q/run '[?b]
+             '[:bgp
+               [?b :arachne/name "William"]
+               [?b :arachne/name "Bill"]]
+             g)))))
 
 (reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix :dc "http://purl.org/dc/elements/1.1/")
@@ -98,17 +100,50 @@
         knows-rule (inf/rule :body '[[?a :foaf/made ?work]
                                      [?b :foaf/made ?work]]
                              :head '[?a :foaf/knows ?b])
-        m (aa/model :jena-rules [inf/table-all inverse-rule knows-rule])]
-    (aa/read m (io/resource "foaf.rdf"))
-    (aa/add m [{:rdf/about ::practical-clojure
+        g (aa/graph :jena-rules [inf/table-all inverse-rule knows-rule])
+        g (aa/read g (io/resource "foaf.rdf"))
+        g (aa/add g [{:rdf/about ::practical-clojure
                       :dc/title "Practical Clojure"
                       :foaf/maker [::luke
-                                   ::stuart]}])
+                                   ::stuart]}])]
     (is (= #{[::stuart]}
            (q/run '[?s]
              '[:filter (not= ::luke ?s)
                [:bgp [::luke :foaf/knows ?s]]]
-             m)))))
+             g)))))
+
+#_(deftest dynamic-rules
+  (let [m (aa/graph :jena-rules [])]
+
+    (inf/add m inf/mini-rules)
+
+    (println "rebinding")
+    (.reset m)
+    (.rebind m)
+    (.prepare m)
+
+    (aa/read m (io/resource "foaf.rdf"))
+    (aa/add m [{:rdf/about ::practical-clojure
+                :dc/title "Practical Clojure"
+                :foaf/maker [::luke
+                             ::stuart]}])
+    #_(is (empty? (q/run '[?a]
+                  '[:bgp [?a :rdf/type :foaf/Agent]]
+                  m)))
+
+
+    (q/run '[?a]
+      '[:bgp [?a :rdf/type :foaf/Agent]]
+      m)
+
+    ;(.getGraph m)
+    ;(count (iterator-seq (.listStatements (.getRawModel m))))
+    ;(class (.getGraph (.getRawModel m)))
+
+    )
+
+
+  )
 
 
 

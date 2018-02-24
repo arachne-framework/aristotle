@@ -14,7 +14,7 @@ Key features:
 
 RDF is a powerful framework for working with highly-annotated data in very abstract ways. Although it isn't perfect, it is highly researched, well defined and understood, and the industry standard for "rich" semi-structured, open-ended information modeling.
 
-Most of the existing Clojure tools for RDF are focused mostly on creating and manipulating RDF graphs in pure Clojure at a low level. I desired a more comprehensive library with the specific objective of bridging existing idioms for working with Clojure data to RDF models.
+Most of the existing Clojure tools for RDF are focused mostly on creating and manipulating RDF graphs in pure Clojure at a low level. I desired a more comprehensive library with the specific objective of bridging existing idioms for working with Clojure data to RDF graphs.
 
 Apache Jena is a very capable, well-designed library for working with RDF and the RDF ecosystem. It uses the Apache software license, which unlike many other RDF tools is compatible with Clojure's EPL. However, Jena's core APIs can only be described as agressively object-oriented. Since RDF is at its core highly data-oriented, and Clojure is also data-oriented, using an object-oriented or imperative API seems especially cumbersome. Aristotle attempts to preserve "good parts" of Jena, while replacing the cumbersome APIs with clean data-driven interfaces.
 
@@ -178,19 +178,26 @@ Expressed in expanded triples, this is:
 
 ## API
 
-Aristotle's primary API is exposed in its top-level namespace, `arachne.aristotle`, which defines functions to create and interact with _models_. 
+Aristotle's primary API is exposed in its top-level namespace, `arachne.aristotle`, which defines functions to create and interact with _graphs_.
 
-A model is a collection of RDF data, together with (optionally) logic and/or inferencing engines. Models may be stored in memory or be a facade to an external RDF database (although all the model constructors shipped with Aristotle are for in-memory models.)
+A graph is a collection of RDF data, together with (optionally) logic and/or inferencing engines. Graphs may be stored in memory or be a facade to an external RDF database (although all the graph constructors shipped with Aristotle are for in-memory graphs.)
 
-Models are instances of `org.apache.jena.rdf.model.Model`, and are stateful mutable objects (mutability is too deeply ingrained in Jena to provide an immutable facade.)
+Graphs are instances of `org.apache.jena.graph.Graph`, which are
+stateful mutable objects (mutability is too deeply ingrained in Jena
+to provide an immutable facade.) However, Aristotle's APIs are
+consistent in returning the model from any update operations, as if
+graphs were immutable Clojure-style collections. It is reccomended to
+rely on the return value of update operations, as if graphs were
+immutable, so your code does not break if immutable graph
+representations are ever supported.
 
-Jena Models are not thread-safe by default. However, all of Aristotle's built-in functions perform the necessary locking to support safe concurrent access. Direct uses of the Model via interop will need to follow the [Jena Concurrency Guidelines](https://jena.apache.org/documentation/notes/concurrency-howto.html), and can leverage the `arachne.aristotle.lock/read` and `arachne.aristotle.lock/write` macros.
+Jena Graphs are not thread-safe by default; make sure you limit concurrent graph access.
 
-### Creating a Model
+### Creating a Graph
 
-To create a new model, invoke the `arachne.aristotle/model` multimethod. The first argument to `model` is a keyword specifying the type of model to construct, additional arguments vary depending on the type of model.
+To create a new graph, invoke the `arachne.aristotle/graph` multimethod. The first argument to `graph` is a keyword specifying the type of graph to construct, additional arguments vary depending on the type of graph.
 
-Model constructors provided by Aristotle include:
+Graph constructors provided by Aristotle include:
 
 |type|model|
 |----|-----|
@@ -198,51 +205,51 @@ Model constructors provided by Aristotle include:
 |:jena-mini| In-memory triple store that performs OWL 1 inferencing using Jena's "Mini" inferencer (a subset of OWL Full with restrictions on some of the less useful forward entailments.)
 |:jena-rules| In-memory triple store supporting custom rules, using Jena's [hybrid backward/forward rules engine](https://jena.apache.org/documentation/inference/#rules). Takes a collection of `org.apache.jena.reasoner.rulesys.Rule` objects as an additional argument (the prebuilt collection of rules for Jena Mini is provided at `arachne.aristotle.inference/mini-rules`) |
 
-Clients may wish to provide additional implementations of the `model` multimethod to support additional model or inference types; the only requirement is that the method return an instance of `org.apache.jena.rdf.model.Model`. For example, for your project, you may wish to use the more powerful Pellet reasoner, which has Jena integration but is not shipped with Aristotle due to license restrictions.
+Clients may wish to provide additional implementations of the `graph` multimethod to support additional underlying graphy or inference types; the only requirement is that the method return an instance of `org.apache.jena.rdf.graph.Graph`. For example, for your project, you may wish to create a Graph backed by on-disk or database storag, or which uses the more powerful Pellet reasoner, which has Jena integration but is not shipped with Aristotle due to license restrictions.
 
 Example:
 
 ```
 (require '[arachne.aristotle :as aa])
-(def m (aa/model :jena-mini))
+(def m (aa/graph :jena-mini))
 ```
 
-### Adding data to a model
+### Adding data to a graph
 
-In order to do anything useful with a model, you must add additional facts. Facts may be added either programatically in your code, or by reading serialized data from a file or remote URL.
+In order to do anything useful with a graph, you must add additional facts. Facts may be added either programatically in your code, or by reading serialized data from a file or remote URL.
 
 #### Adding data programatically
 
-To add data programatically, use the `arachne.aristotle/add` function, which takes a model and some data to add. The data is processed into RDF triples using  `arachne.aristotle.graph/triples`, using the data format documented above. For example:
+To add data programatically, use the `arachne.aristotle/add` function, which takes a graph and some data to add. The data is processed into RDF triples using  `arachne.aristotle.graph/triples`, using the data format documented above. For example:
 
 ```
 (require '[arachne.aristotle :as aa])
 
-(def m (aa/model :jena-mini))
+(def g (aa/graph :jena-mini))
 
-(aa/add m {:rdf/about ::luke
+(aa/add g {:rdf/about ::luke
            :foaf/firstName "Luke"
            :foaf/lastName "VanderHart"})
 ```
 
 #### Adding data from a file
 
-To add data from a file, use the `arachne.aristotle/read` function, which takes a model and a file. The file may be specified by a:
+To add data from a file, use the `arachne.aristotle/read` function, which takes a graph and a file. The file may be specified by a:
 
   - String of the absolute or process-relative filename
   - java.net.URI
   - java.net.URL
   - java.io.File
 
-Jena will detect what format the file is in, which may be one of RDF/XML, Turtle, N3, or N-Triples. All of the statements it contains will be added to the model. Example:
+Jena will detect what format the file is in, which may be one of RDF/XML, Turtle, N3, or N-Triples. All of the statements it contains will be added to the graph. Example:
 
 ## Query
 
 Aristotle provides a data-oriented interface to Jena's SPARQL query engine. Queries themselves are expressed as Clojure data, and can be programatically generated and combined (similar to queries in Datomic.)
 
-To invoke a query, use the `arachne.aristotle.query/query` function, which takes a query data structure, a model, and any query inputs. It returns the results of the query.
+To invoke a query, use the `arachne.aristotle.query/query` function, which takes a query data structure, a graph, and any query inputs. It returns the results of the query.
 
-SPARQL itself is string oriented, with a heavily lexical grammar that does not translate cleanly to data structures. However, SPARQL has an internal algebra that *is* very clean and composable. Aristotle's query data uses this internal SPARQL alegebra (which is exposed by Jena's ARQ data model) ignoring SPARQL syntax. All queries expressible in SPARQL syntax are also expressible in Aristotle's query data, modulo some features that are not implemented yet (e.g, query fedration across remote data sources.)
+SPARQL itself is string oriented, with a heavily lexical grammar that does not translate cleanly to data structures. However, SPARQL has an internal algebra that *is* very clean and composable. Aristotle's query data uses this internal SPARQL alegebra (which is exposed by Jena's ARQ data graph) ignoring SPARQL syntax. All queries expressible in SPARQL syntax are also expressible in Aristotle's query data, modulo some features that are not implemented yet (e.g, query fedration across remote data sources.)
 
 Unfortunately, the SPARQL algebra has no well documented syntax. A [rough overview](https://www.w3.org/2011/09/SparqlAlgebra/ARQalgebra) is available, and this readme will document some of the more common forms. For more details, see the [query specs](https://github.com/arachne-framework/aristotle/blob/master/src/arachne/aristotle/query/spec.clj) with their associated docstrings.
 
@@ -252,7 +259,7 @@ Expressions are specified using a Clojure list form, with the expression type as
 
 ### Running Queries
 
-To run a query, use the `arachne.aristotle.query/run` function. This function takes an (optional) binding vector, a query, a model, and (optionally) a map of variable bindings which serve as query inputs. 
+To run a query, use the `arachne.aristotle.query/run` function. This function takes an (optional) binding vector, a query, a graph, and (optionally) a map of variable bindings which serve as query inputs. 
 
 If a binding vector is given, results will be returned as a set of tuples, one for each unique binding of the variables in the binding vector.
 
@@ -284,10 +291,10 @@ An example of the results that might be returned by this query is:
 This is the same query, but using a binding vector
 
 ```clojure
-(q/run '[?name] 
+(q/run '[?name]
        '[:bgp [:example/luke :foaf/knows ?person]
               [?person :foaf/name ?name]]]
-          my-model)                  
+          my-graph)
 ```
 In this case, results would look like:
 
@@ -307,7 +314,7 @@ This example expands on the previous query, using a `:filter` operation with an 
          '[:bgp [:example/luke :foaf/knows ?person]
                 [?person :foaf/name ?name]
                 [?person :foaf/age ?age]]]
-  my-model) 
+  my-graph)
 ```
 
 #### Sample: providing inputs
@@ -318,7 +325,7 @@ This example is the same as those above, except instead of hardcoding the base i
 (q/run '[?name]
         [:bgp [?individual :foaf/knows ?person]
               [?person :foaf/name ?name]]
-  my-model
+  my-graph
   '{?individual :example/luke})
 ```
 
@@ -328,7 +335,7 @@ It is also possible to bind multiple possibilities for the value of `?individual
 (q/run '[?name]
         [:bgp [?individual :foaf/knows ?person]
               [?person :foaf/name ?name]]
-  my-model
+  my-graph
   '{?individual #{:example/luke
                   :example/carin
                   :example/dan}})
@@ -348,16 +355,16 @@ Queries can also be precompiled into a Jena Operation object, meaning they do no
 You can then use the precompiled query object (bound in this case to `friends-q` in calls to `arachne.aristotle.query/run`:
 
 ```clojure
-(q/run friends-q my-model '{?individual :example/luke})
+(q/run friends-q my-graph '{?individual :example/luke})
 ```
 
 The results will be exactly the same as using the inline version.
 
 ## Validation
 
-One common use case is to take a given Model and "validate" it, ensuring its internal consistency (including whether entities in it conform to any OWL or RDFS schema that is present.)
+One common use case is to take a given Graph and "validate" it, ensuring its internal consistency (including whether entities in it conform to any OWL or RDFS schema that is present.)
 
-To do this, run the `arachne.aristotle.validation/validate` function. Passed only a model, it will return any errors returned by the Jena Reasoner that was used when constructing the model. The `:simple` reasoner will never return any errors, the `:jena-mini` reasoner will return OWL inconsistencies, etc.
+To do this, run the `arachne.aristotle.validation/validate` function. Passed only a graph, it will return any errors returned by the Jena Reasoner that was used when constructing the graph. The `:simple` reasoner will never return any errors, the `:jena-mini` reasoner will return OWL inconsistencies, etc.
 
 If validation is successfull, the validator will return nil or an empty list. If there were any errors, each error will be returned as a map containing details about the specific error type.
 
@@ -365,13 +372,13 @@ If validation is successfull, the validator will return nil or an empty list. If
 
 The built-in reasoners use the standard open-world assumption of RDF and OWL. This means that many scenarios that would intuitively be "invalid" to a human (such as a missing min-cardinality attribute) will not be identified, because the reasoner alwas operates under the assumption that it doesn't yet know all the facts.
 
-However, for certain use cases, it can be desirable to assert that yes, the model actually does contain all pertinent facts, and that we want to make some assertions based on what the model *actually* knows at a given moment, never mind what facts may be added in the future.
+However, for certain use cases, it can be desirable to assert that yes, the graph actually does contain all pertinent facts, and that we want to make some assertions based on what the graph *actually* knows at a given moment, never mind what facts may be added in the future.
 
 To do this, you can pass additional validator functions to `validate`, providing  a sequence of optional validators as a second argument.
 
-Each of these validator functions takes a model as its argument, and returns a sequence of validation error maps. An empty sequence implies that the model is valid.
+Each of these validator functions takes a graph as its argument, and returns a sequence of validation error maps. An empty sequence implies that the graph is valid.
 
-The "min-cardinality" situation mentioned above has a built in validator, `arachne.aristotle.validators/min-cardinality`. It works by running a SPARQL query on the provided model that detects if any min-cardinality attributes are missing from entities known to be of an OWL class where they are supposed to be present.
+The "min-cardinality" situation mentioned above has a built in validator, `arachne.aristotle.validators/min-cardinality`. It works by running a SPARQL query on the provided graph that detects if any min-cardinality attributes are missing from entities known to be of an OWL class where they are supposed to be present.
 
 To use it, just provide it in the list of custom validators passed to `validate`: 
 

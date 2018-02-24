@@ -1,5 +1,5 @@
 (ns arachne.aristotle.inference
-  "Tools for adding additional inference rules to a model.
+  "Tools for adding additional inference rules to a graph.
 
   See https://jena.apache.org/documentation/inference/"
   (:require [clojure.spec.alpha :as s]
@@ -59,6 +59,12 @@
                                          (extract (.getObject val)))
     (instance? Rule val) (apply merge (map extract (concat (.getHead val) (.getBody val))))
     :else {}))
+
+(defn add
+  "Given a graph, return a new graph with a reasoner including the given
+  rules."
+  [g rules]
+  (throw (ex-info "not yet implemented" {})))
 
 (defn rule
   "Create an implication rule. Takes the following keyword args:
