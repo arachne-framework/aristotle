@@ -62,9 +62,12 @@
 
 (defn add
   "Given a graph, return a new graph with a reasoner including the given
-  rules."
+  rules. This may be expensive, given that it rebuilds the reasoner
+  for the entire graph."
   [g rules]
-  (throw (ex-info "not yet implemented" {})))
+  (let [reasoner (.getReasoner g)]
+    (.addRules reasoner rules)
+    (.bind reasoner (.getRawGraph g))))
 
 (defn rule
   "Create an implication rule. Takes the following keyword args:

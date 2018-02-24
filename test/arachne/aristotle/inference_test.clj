@@ -112,40 +112,17 @@
                [:bgp [::luke :foaf/knows ?s]]]
              g)))))
 
-#_(deftest dynamic-rules
-  (let [m (aa/graph :jena-rules [])]
-
-    (inf/add m inf/mini-rules)
-
-    (println "rebinding")
-    (.reset m)
-    (.rebind m)
-    (.prepare m)
-
-    (aa/read m (io/resource "foaf.rdf"))
-    (aa/add m [{:rdf/about ::practical-clojure
-                :dc/title "Practical Clojure"
-                :foaf/maker [::luke
-                             ::stuart]}])
-    #_(is (empty? (q/run '[?a]
-                  '[:bgp [?a :rdf/type :foaf/Agent]]
-                  m)))
-
-
+(deftest dynamic-rules
+  (let [g (aa/graph :jena-rules [])
+        g (aa/read g (io/resource "foaf.rdf"))
+        g (aa/add g [{:rdf/about ::practical-clojure
+                      :dc/title "Practical Clojure"
+                      :foaf/maker [::luke
+                                   ::stuart]}])
+        g (inf/add g inf/mini-rules)]
     (q/run '[?a]
       '[:bgp [?a :rdf/type :foaf/Agent]]
-      m)
-
-    ;(.getGraph m)
-    ;(count (iterator-seq (.listStatements (.getRawModel m))))
-    ;(class (.getGraph (.getRawModel m)))
-
-    )
-
-
-  )
-
-
+      g)))
 
 
 
