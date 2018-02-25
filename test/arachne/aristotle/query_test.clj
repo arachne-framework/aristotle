@@ -8,7 +8,6 @@
             [clojure.walk :as w]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
-(reg/prefix 'arachne "http://arachne-framework.org/#")
 (reg/prefix 'socrata "http://www.socrata.com/rdf/terms#")
 (reg/prefix 'dcat "http://www.w3.org/ns/dcat#")
 (reg/prefix 'ods "http://open-data-standards.github.com/2012/01/open-data-standards#")

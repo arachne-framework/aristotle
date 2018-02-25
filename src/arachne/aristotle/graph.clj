@@ -207,16 +207,15 @@
     (.toSet (.find g (Triple. (node '?s) (node '?p) (node '?o))))))
 
 (defn reify
-  "Given a collection of Triples, reify each triple and return a seq of
-   triples explicitly stating the rdf type, subject, predicate and object of
-   each input triple."
-  [triples]
-  (mapcat (fn [t]
-            (let [n (NodeFactory/createBlankNode)]
-              (arachne.aristotle.graph/triples
-                {:rdf/about n
-                 :rdf/type :rdf/Statement
-                 :rdf/subject (.getSubject t)
-                 :rdf/predicate (.getPredicate t)
-                 :rdf/object (.getObject t)})))
-    triples))
+  "Given a graph, a property and an object, add reification triples to
+  the graph an add a [statement property subject] triple on the
+  reified statement."
+  [graph property subject]
+  (doseq [t (triples graph)]
+    (doseq [tt (triples {:rdf/type :rdf/Statement
+                         :rdf/subject (.getSubject t)
+                         :rdf/predicate (.getPredicate t)
+                         :rdf/object (.getObject t)
+                         property subject})]
+      (.add graph tt)))
+  graph)
