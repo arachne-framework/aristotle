@@ -211,11 +211,12 @@
   the graph an add a [statement property subject] triple on the
   reified statement."
   [graph property subject]
-  (doseq [t (triples graph)]
-    (doseq [tt (triples {:rdf/type :rdf/Statement
-                         :rdf/subject (.getSubject t)
-                         :rdf/predicate (.getPredicate t)
-                         :rdf/object (.getObject t)
-                         property subject})]
-      (.add graph tt)))
+  (let [new-triples (mapcat (fn [t]
+                              (triples {:rdf/type :rdf/Statement
+                                        :rdf/subject (.getSubject t)
+                                        :rdf/predicate (.getPredicate t)
+                                        :rdf/object (.getObject t)
+                                        property subject}))
+                            (triples graph))]
+    (GraphUtil/add ^Graph graph ^java.util.List new-triples))
   graph)

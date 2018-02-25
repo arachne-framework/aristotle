@@ -17,9 +17,7 @@
 
     (is (= 3 (count (graph/triples g))))
     (let [g (graph/reify g "<http://example.com/graph>" "<http://example.com/graph1>")]
-      (is (= 18 (count (graph/triples g))))
-      (clojure.pprint/pprint (seq (graph/triples g)))
-      )))
+      (is (= 18 (count (graph/triples g)))))))
 
 (comment
   ;; Reification Benchmarking

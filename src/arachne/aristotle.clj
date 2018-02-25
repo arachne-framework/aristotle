@@ -7,7 +7,7 @@
             [arachne.aristotle.rdf-edn]
             [clojure.java.io :as io])
   (:import [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
-           [org.apache.jena.graph Factory Graph]
+           [org.apache.jena.graph Factory Graph GraphUtil]
            [org.apache.jena.riot RDFDataMgr])
   (:refer-clojure :exclude [read]))
 
@@ -45,10 +45,12 @@
 
 (defn add
   "Add the given data to a graph, returning the graph. Data must satisfy
-  arachne.aristotle.graph/AsTriples."
+  arachne.aristotle.graph/AsTriples. If the data is a Graph it will be
+  added directly."
   [graph data]
-  (doseq [triple (g/triples data)]
-    (.add graph triple))
+  (if (instance? Graph data)
+    (GraphUtil/addInto ^Graph graph ^Graph data)
+    (GraphUtil/add ^Graph graph ^java.util.List (g/triples data)))
   graph)
 
 (defn read
