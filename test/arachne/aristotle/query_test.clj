@@ -104,7 +104,7 @@
   (testing "single var, single value"
     (is (= #{["90001" "57110"]}
            (q/run '[?zip ?pop] '[:bgp
-                                 [?e ?ds/zip_code ?zip]
+                                 [?e :ds/zip_code ?zip]
                                  [?e :socrata/rowID ?id]
                                  [?e :ds/total_population ?pop]
                                  [?e ?a ?v]]
@@ -115,7 +115,7 @@
     (is (= #{["90001" "57110"]
              ["90005" "37681"]}
            (q/run '[?zip ?pop] '[:bgp
-                                 [?e ?ds/zip_code ?zip]
+                                 [?e :ds/zip_code ?zip]
                                  [?e :socrata/rowID ?id]
                                  [?e :ds/total_population ?pop]
                                                        [?e ?a ?v]]
@@ -125,7 +125,7 @@
   (testing "multiple vars, single values."
     (is (= #{}
            (q/run '[?pop] '[:bgp
-                            [?e ?ds/zip_code ?zip]
+                            [?e :ds/zip_code ?zip]
                             [?e :socrata/rowID ?id]
                             [?e :ds/total_population ?pop]
                             [?e ?a ?v]]
@@ -136,7 +136,7 @@
   (testing "multiple vars, multiple values"
     (is (= #{["51223"]}
            (q/run '[?pop] '[:bgp
-                            [?e ?ds/zip_code ?zip]
+                            [?e :ds/zip_code ?zip]
                             [?e :socrata/rowID ?id]
                             [?e :ds/total_population ?pop]
                             [?e ?a ?v]]
@@ -147,7 +147,7 @@
   (testing "relational values"
     (is (= #{["57110"]}
            (q/run '[?pop] '[:bgp
-                            [?e ?ds/zip_code ?zip]
+                            [?e :ds/zip_code ?zip]
                             [?e :socrata/rowID ?id]
                             [?e :ds/total_population ?pop]
                             [?e ?a ?v]]
@@ -159,7 +159,7 @@
     (is (= #{["57110"]
              ["51223"]}
            (q/run '[?pop] '[:bgp
-                            [?e ?ds/zip_code ?zip]
+                            [?e :ds/zip_code ?zip]
                             [?e :socrata/rowID ?id]
                             [?e :ds/total_population ?pop]
                             [?e ?a ?v]]

@@ -37,5 +37,13 @@
              '[:bgp [?p :foaf/name "Luke"]]
              (ar/add (ar/graph :simple) data))))))
 
+(reg/prefix :ex "http://example.com")
 
+(deftest symbol-type-test
+  (let [data [{:rdf/about :ex/luke
+               :ex/ctor 'foo.bar/biz}]]
+    (is (= #{['foo.bar/biz]}
+           (q/run '[?ctor]
+             '[:bgp [:ex/luke :ex/ctor ?ctor]]
+             (ar/add (ar/graph :simple) data))))))
 

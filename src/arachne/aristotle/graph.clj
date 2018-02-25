@@ -6,6 +6,7 @@
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
+           [org.apache.jena.datatypes BaseDatatype]
            [org.apache.jena.datatypes.xsd XSDDatatype]
            [javax.xml.bind DatatypeConverter]
            [org.apache.jena.riot RDFDataMgr]
@@ -54,6 +55,12 @@
   "A Node that can be converted back to Clojure data"
   (data [node] "Convert this node to Clojure data"))
 
+(def symbol-datatype (proxy [BaseDatatype] ["urn:clojure.org:symbol"]
+                       (isValidValue [val] (symbol? val))
+                       (getJavaClass [] clojure.lang.Symbol)
+                       (parse [lexical-form] (symbol lexical-form))
+                       (toString [val] (str val))))
+
 (extend-protocol AsNode
   Keyword
   (node [kw] (NodeFactory/createURI (reg/iri kw)))
@@ -65,8 +72,9 @@
   (node [sym]
     (cond
       (= '_ sym) (NodeFactory/createBlankNode)
+      (.startsWith (name sym) "_") (NodeFactory/createBlankNode (str sym))
       (.startsWith (name sym) "?") (NodeFactory/createVariable (subs (name sym) 1))
-      :else (NodeFactory/createBlankNode (str sym))))
+      :else (NodeFactory/createLiteral (str sym) symbol-datatype)))
   String
   (node [obj]
     (if-let [uri (second (re-find #"^<(.*)>$" obj))]
@@ -123,8 +131,8 @@
                      (str "<" uri ">"))))
   Node_Literal
   (data [n] (if (= XSDDatatype/XSDdateTime (.getLiteralDatatype n))
-                 (.getTime (.asCalendar (.getLiteralValue n)))
-                 (.getLiteralValue n)))
+              (.getTime (.asCalendar (.getLiteralValue n)))
+              (.getLiteralValue n)))
   Node_Variable
   (data [n] (symbol (str "?" (.getName n))))
 

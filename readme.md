@@ -52,7 +52,8 @@ Clojure primitive values map to Jena Node objects of the appropriate type.
 java.net.URI|IRI|
 |symbols starting with `?`| variable node (for patterns or queries)|
 |the symbol `_`|unique blank node|
-|other symbols| blank node with the symbol's `toString` as its label
+|symbols starting with `_`| named blank node|
+|other symbols| custom literal datatype with URN `<urn:clojure.org:symbol>`|
 
 #### IRI/Keyword Registry
 
