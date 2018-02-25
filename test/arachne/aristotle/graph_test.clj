@@ -22,20 +22,21 @@
 (deftest load-rdf-edn
   (let [g (ar/read (ar/graph :simple) (io/resource "sample.rdf.edn"))]
     (is (= #{["Jim"]}
-           (q/run '[?name]
+           (q/run g '[?name]
              '[:bgp
                ["<http://example.com/luke>" :foaf/knows ?person]
-               [?person :foaf/name ?name]]
-             g)))))
+               [?person :foaf/name ?name]])))))
 
 (deftest inline-prefix-test
   (let [data [#rdf/prefix [:foo "http://foo.com/#"]
               {:rdf/about :foo/luke
                :foaf/name "Luke"}]]
     (is (= #{["<http://foo.com/#luke>"]}
-           (q/run '[?p]
+           (q/run
+             (ar/add (ar/graph :simple) data)
+             '[?p]
              '[:bgp [?p :foaf/name "Luke"]]
-             (ar/add (ar/graph :simple) data))))))
+)))))
 
 (reg/prefix :ex "http://example.com")
 
@@ -43,7 +44,8 @@
   (let [data [{:rdf/about :ex/luke
                :ex/ctor 'foo.bar/biz}]]
     (is (= #{['foo.bar/biz]}
-           (q/run '[?ctor]
-             '[:bgp [:ex/luke :ex/ctor ?ctor]]
-             (ar/add (ar/graph :simple) data))))))
+           (q/run
+             (ar/add (ar/graph :simple) data)
+             '[?ctor]
+             '[:bgp [:ex/luke :ex/ctor ?ctor]])))))
 

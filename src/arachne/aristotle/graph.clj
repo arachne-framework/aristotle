@@ -39,9 +39,12 @@
 
 (s/def ::triple (s/tuple ::node ::node ::node))
 
+(defn graph? [obj] (instance? Graph obj))
+
 (s/def ::triples (s/or :map map?
                        :triples (s/coll-of ::triple :min-count 1)
-                       :single-triple ::triple))
+                       :single-triple ::triple
+                       :graph graph?))
 
 (defprotocol AsTriples
   "An object that can be converted to a collection of Jena Triples."

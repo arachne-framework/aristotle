@@ -13,10 +13,10 @@
            [org.apache.jena.sparql.engine.binding Binding]))
 
 
-(s/def ::run-args (s/cat :bindings (s/? (s/coll-of ::graph/variable))
+(s/def ::run-args (s/cat :graph #(instance? Graph %)
+                         :bindings (s/? (s/coll-of ::graph/variable))
                          :query (s/or :op #(instance? Op %)
                                       :query ::qs/operation)
-                         :graph #(instance? Graph %)
                          :data (s/? ::qs/bindings)))
 
 (defn build

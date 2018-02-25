@@ -43,7 +43,7 @@
   existence of blank nodes as values of a minCardinality property
   which while technically valid is not helpful for determining if
   something is logically missing."
-    [m]
+    [g]
     (mapv (fn [[entity property expected actual]]
            {::error? true
             ::type ::min-cardinality
@@ -53,7 +53,7 @@
                        :property property
                        :expected expected
                        :actual actual}})
-         (q/run '[?e ?p ?expected ?actual] q m))))
+         (q/run g '[?e ?p ?expected ?actual] q))))
 
 (defn validate
   "Validate the given graph, returning a sequence of validation errors

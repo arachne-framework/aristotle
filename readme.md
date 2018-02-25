@@ -260,7 +260,7 @@ Expressions are specified using a Clojure list form, with the expression type as
 
 ### Running Queries
 
-To run a query, use the `arachne.aristotle.query/run` function. This function takes an (optional) binding vector, a query, a graph, and (optionally) a map of variable bindings which serve as query inputs. 
+To run a query, use the `arachne.aristotle.query/run` function. This function takes a graph, an (optional) binding vector, a query, and (optionally) a map of variable bindings which serve as query inputs.
 
 If a binding vector is given, results will be returned as a set of tuples, one for each unique binding of the variables in the binding vector.
 
@@ -273,8 +273,8 @@ Some examples follow:
 ```clojure
 (require '[arachne.aristotle.query :as q])
 
-(q/run '[:bgp [:example/luke :foaf/knows ?person]
-              [?person :foaf/name ?name]])
+(q/run my-graph '[:bgp [:example/luke :foaf/knows ?person]
+                       [?person :foaf/name ?name]])
 ```
 
 This query is a single pattern match (using a "basic graph pattern" or "bgp"), binding the `:foaf/name` property of each entity that is the subject of `:foaf/knows` for an entity identified by `:example/luke`. 
@@ -292,10 +292,9 @@ An example of the results that might be returned by this query is:
 This is the same query, but using a binding vector
 
 ```clojure
-(q/run '[?name]
+(q/run my-graph '[?name]
        '[:bgp [:example/luke :foaf/knows ?person]
-              [?person :foaf/name ?name]]]
-          my-graph)
+              [?person :foaf/name ?name]])
 ```
 In this case, results would look like:
 
@@ -310,12 +309,11 @@ In this case, results would look like:
 This example expands on the previous query, using a `:filter` operation with an expression to only return acquaintances above the age of 18: 
 
 ```clojure
-(q/run '[?name]
+(q/run my-graph '[?name]
        '[:filter (< 18 ?age)
          '[:bgp [:example/luke :foaf/knows ?person]
                 [?person :foaf/name ?name]
-                [?person :foaf/age ?age]]]
-  my-graph)
+                [?person :foaf/age ?age]]])
 ```
 
 #### Sample: providing inputs
@@ -323,20 +321,18 @@ This example expands on the previous query, using a `:filter` operation with an 
 This example is the same as those above, except instead of hardcoding the base individual as `:example/luke`, the starting individual is bound in a separate binding map provided to `q/run`. 
 
 ```clojure
-(q/run '[?name]
+(q/run my-graph '[?name]
         [:bgp [?individual :foaf/knows ?person]
               [?person :foaf/name ?name]]
-  my-graph
   '{?individual :example/luke})
 ```
 
 It is also possible to bind multiple possibilities for the value of `?individual`: 
 
 ```clojure
-(q/run '[?name]
+(q/run my-graph '[?name]
         [:bgp [?individual :foaf/knows ?person]
               [?person :foaf/name ?name]]
-  my-graph
   '{?individual #{:example/luke
                   :example/carin
                   :example/dan}})
@@ -356,7 +352,7 @@ Queries can also be precompiled into a Jena Operation object, meaning they do no
 You can then use the precompiled query object (bound in this case to `friends-q` in calls to `arachne.aristotle.query/run`:
 
 ```clojure
-(q/run friends-q my-graph '{?individual :example/luke})
+(q/run my-graph friends-q '{?individual :example/luke})
 ```
 
 The results will be exactly the same as using the inline version.
@@ -390,15 +386,3 @@ To use it, just provide it in the list of custom validators passed to `validate`
 This will return the set not only of built in OWL validation errors, but also any min-cardinality violations that are discovered.
 
 Of course, you can provide any additional validator functions as well.
-
-
-
-
-
-
-
-
-
-
-
-

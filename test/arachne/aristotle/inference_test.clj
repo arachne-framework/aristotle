@@ -23,12 +23,12 @@
                     [?person :rdf/type :wo.tf/Person]]
         worksfor-query '[:bgp
                          [?person :wo.tf/worksFor :wo.tf/TheFirm]]]
-    (is (= gls (set (q/run '[?person] ppl-query g))))
-    (is (= gls (set (q/run '[?person] worksfor-query g))))
+    (is (= gls (set (q/run g '[?person] ppl-query))))
+    (is (= gls (set (q/run g '[?person] worksfor-query))))
     (let [g (aa/add g {:rdf/about :arachne/Smith
                        :wo.tf/freeLancesTo :wo.tf/TheFirm})]
-      (is (= withsmith (set (q/run '[?person] ppl-query g))))
-      (is (= withsmith (set (q/run '[?person] worksfor-query g)))))))
+      (is (= withsmith (set (q/run g '[?person] ppl-query))))
+      (is (= withsmith (set (q/run g '[?person] worksfor-query)))))))
 
 (def pres-props
   [{:rdf/about :wo.tf/president
@@ -46,9 +46,9 @@
         g (aa/add g pres-props)]
     (is
      (= #{[:wo.tf/TheFirm]}
-        (q/run '[?firm]
+        (q/run g '[?firm]
           '[:bgp
-            [:wo.tf/Flint :wo.tf/worksFor ?firm]] g)))))
+            [:wo.tf/Flint :wo.tf/worksFor ?firm]])))))
 
 (def custom-ruleset
   [(inf/rule :body '[[?thing :arachne/eats ?food]
@@ -65,8 +65,8 @@
                    {:rdf/about :arachne/Gazelle
                     :rdfs/subClassOf :arachne/Animal}])]
     (is (= #{[:arachne/leo]}
-           (q/run '[?e] '[:bgp
-                          [?e :arachne/carnivore true]] g)))))
+           (q/run g '[?e] '[:bgp
+                            [?e :arachne/carnivore true]])))))
 
 (deftest functional-properties
   (let [g (aa/add (aa/graph :jena-mini)
@@ -83,11 +83,10 @@
                                            :arachne/name "Bill"}]}])]
 
     (is (= #{[:arachne/will] [:arachne/bill]}
-           (q/run '[?b]
+           (q/run g '[?b]
              '[:bgp
                [?b :arachne/name "William"]
-               [?b :arachne/name "Bill"]]
-             g)))))
+               [?b :arachne/name "Bill"]])))))
 
 (reg/prefix :foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix :dc "http://purl.org/dc/elements/1.1/")
@@ -107,10 +106,9 @@
                       :foaf/maker [::luke
                                    ::stuart]}])]
     (is (= #{[::stuart]}
-           (q/run '[?s]
+           (q/run g '[?s]
              '[:filter (not= ::luke ?s)
-               [:bgp [::luke :foaf/knows ?s]]]
-             g)))))
+               [:bgp [::luke :foaf/knows ?s]]])))))
 
 (deftest dynamic-rules
   (let [g (aa/graph :jena-rules [])
@@ -120,9 +118,8 @@
                       :foaf/maker [::luke
                                    ::stuart]}])
         g (inf/add g inf/mini-rules)]
-    (q/run '[?a]
-      '[:bgp [?a :rdf/type :foaf/Agent]]
-      g)))
+    (q/run g '[?a]
+      '[:bgp [?a :rdf/type :foaf/Agent]])))
 
 
 

@@ -28,9 +28,14 @@
       (assoc-in [:iri->kw iri] kw)))
 
 (defn prefix
-  "Register a namespace as an RDF IRI prefix."
-  [namespace prefix]
-  (alter-var-root #'*registry* add-prefix false namespace prefix))
+  "Register a namespace as an RDF IRI prefix. If no namespace is
+  supplied, registers in the current namespace. If no prefix is
+  supplied, generates a URN prefix based on the current namespace."
+  ([] (prefix (ns-name *ns*) (str "urn:" (ns-name *ns*) ":")))
+  ([iri-prefix] (prefix (ns-name *ns*) iri-prefix))
+  ([namespace iri-prefix]
+   (alter-var-root #'*registry* add-prefix false namespace iri-prefix)
+   nil))
 
 (defn alias
   "Register a mapping between a keyword and a specific IRI"
