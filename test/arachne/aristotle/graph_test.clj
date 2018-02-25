@@ -1,8 +1,10 @@
 (ns arachne.aristotle.graph-test
   (:require [clojure.test :refer :all]
+            [arachne.aristotle :as ar]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
-            [arachne.aristotle.query :as q]))
+            [arachne.aristotle.query :as q]
+            [clojure.java.io :as io]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'test "http://example.com/aristotle#")
@@ -16,3 +18,15 @@
                              :arachne/name "Nicole"}]}]
         triples (graph/triples data)]
     (is (= 5 (count triples)))))
+
+(deftest load-rdf-edn
+  (let [g (ar/read (ar/graph :simple) (io/resource "sample.rdf.edn"))]
+    (is (= #{["Jim"]}
+           (q/run '[?name]
+             '[:bgp
+               ["<http://example.com/luke>" :foaf/knows ?person]
+               [?person :foaf/name ?name]]
+             g)))))
+
+
+

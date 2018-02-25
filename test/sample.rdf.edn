@@ -1,0 +1,5 @@
+[{:rdf/about "<http://example.com/luke>"
+  :foaf/name "Luke"
+  :foaf/knows _jim}
+ {:rdf/about _jim
+  :foaf/name "Jim"}]

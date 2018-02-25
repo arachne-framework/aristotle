@@ -4,6 +4,7 @@
             [arachne.aristotle.query :as q]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.inference :as inf]
+            [arachne.aristotle.rdf-edn]
             [clojure.java.io :as io])
   (:import [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
            [org.apache.jena.graph Factory Graph]
@@ -69,4 +70,5 @@
                                                        (.toURI)
                                                        (str))))
   graph)
+
 
