@@ -28,5 +28,14 @@
                [?person :foaf/name ?name]]
              g)))))
 
+(deftest inline-prefix-test
+  (let [data [#rdf/prefix [:foo "http://foo.com/#"]
+              {:rdf/about :foo/luke
+               :foaf/name "Luke"}]]
+    (is (= #{["<http://foo.com/#luke>"]}
+           (q/run '[?p]
+             '[:bgp [?p :foaf/name "Luke"]]
+             (ar/add (ar/graph :simple) data))))))
+
 
 

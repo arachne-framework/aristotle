@@ -18,7 +18,7 @@
 (defn- read-edn
   "Read EDN from an input stream or Reader into the given StreamRDF output object"
   [input ^StreamRDF output]
-  (let [data (edn/read-string (slurp input))
+  (let [data (edn/read-string {:readers *data-readers*} (slurp input))
         triples (g/triples data)]
     (.start output)
     (doseq [t triples]

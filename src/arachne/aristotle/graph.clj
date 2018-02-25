@@ -148,44 +148,51 @@
 
 (extend-protocol AsTriples
 
+  arachne.aristotle.registry.Prefix
+  (triples [prefix]
+    (reg/install-prefix prefix)
+    [])
+
   Triple
   (triples [triple] [triple])
 
   Collection
   (triples [coll]
-    (if (triple? coll)
-      [(apply triple (map node coll))]
-      (mapcat triples coll)))
+    (reg/with {}
+      (if (triple? coll)
+        [(apply triple (map node coll))]
+        (mapcat triples coll))))
 
   Map
   (triples [m]
-    (let [subject (if-let [about (:rdf/about m)]
-                    (node about)
-                    (NodeFactory/createBlankNode))
-          m (dissoc m :rdf/about)
-          m (if (empty? m)
-              {:rdf/type :rdfs/Resource}
-              m)
-          child-map-triples (fn [property child-map]
-                              (let [child-triples (triples child-map)
-                                    child-subject (.getSubject (first child-triples))]
-                                (cons
-                                  (triple subject property child-subject)
-                                  child-triples)))]
-      (mapcat (fn [[k v]]
-                (cond
-                  (instance? Map v)
-                  (child-map-triples k v)
+    (reg/with {}
+      (let [subject (if-let [about (:rdf/about m)]
+                      (node about)
+                      (NodeFactory/createBlankNode))
+            m (dissoc m :rdf/about)
+            m (if (empty? m)
+                {:rdf/type :rdfs/Resource}
+                m)
+            child-map-triples (fn [property child-map]
+                                (let [child-triples (triples child-map)
+                                      child-subject (.getSubject (first child-triples))]
+                                  (cons
+                                   (triple subject property child-subject)
+                                   child-triples)))]
+        (mapcat (fn [[k v]]
+                  (cond
+                    (instance? Map v)
+                    (child-map-triples k v)
 
-                  (instance? Collection v)
-                  (mapcat (fn [child]
-                            (if (instance? Map child)
-                              (child-map-triples k child)
-                              [(triple subject k child)])) v)
+                    (instance? Collection v)
+                    (mapcat (fn [child]
+                              (if (instance? Map child)
+                                (child-map-triples k child)
+                                [(triple subject k child)])) v)
 
-                  :else
-                  [(triple subject k v)]))
-              m)))
+                    :else
+                    [(triple subject k v)]))
+                m))))
 
   Graph
   (triples [g]

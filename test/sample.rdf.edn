@@ -1,4 +1,5 @@
-[{:rdf/about "<http://example.com/luke>"
+[#rdf/prefix [:ex "http://example.com/"]
+ {:rdf/about :ex/luke
   :foaf/name "Luke"
   :foaf/knows _jim}
  {:rdf/about _jim

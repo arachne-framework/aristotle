@@ -68,6 +68,18 @@
                                 ~prefix-map)]
      ~@body))
 
+(defrecord Prefix [prefix iri])
+
+(defn read-prefix
+  "Constructor for a prefix, called by data reader."
+  [[prefix iri]]
+  (->Prefix prefix iri))
+
+(defn install-prefix
+  "Install a prefix in the thread-local data reader"
+  [prefix]
+  (set! *registry* (add-prefix *registry* true (:prefix prefix) (:iri prefix))))
+
 (prefix 'rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 (prefix 'rdfs "http://www.w3.org/2000/01/rdf-schema#")
 (prefix 'xsd "http://www.w3.org/2001/XMLSchema#")
