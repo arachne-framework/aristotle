@@ -42,9 +42,11 @@
 (defn graph? [obj] (instance? Graph obj))
 
 (s/def ::triples (s/or :map map?
+                       :maps (s/coll-of map? :min-count 1)
                        :triples (s/coll-of ::triple :min-count 1)
                        :single-triple ::triple
-                       :graph graph?))
+                       :graph graph?
+                       :empty #(and (coll? %) (empty? %))))
 
 (defprotocol AsTriples
   "An object that can be converted to a collection of Jena Triples."
@@ -86,7 +88,13 @@
   Long
   (node [obj]
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDlong))
+  Integer
+  (node [obj]
+    (NodeFactory/createLiteralByValue obj XSDDatatype/XSDlong))
   Double
+  (node [obj]
+    (NodeFactory/createLiteralByValue obj XSDDatatype/XSDdouble))
+  Float
   (node [obj]
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDdouble))
   Boolean
