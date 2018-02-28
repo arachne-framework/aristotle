@@ -9,7 +9,7 @@
            [org.apache.jena.sparql.algebra AlgebraGenerator Algebra OpAsQuery Op]
            [org.apache.jena.sparql.algebra.op OpProject Op1 OpSequence]
            [com.sun.org.apache.xpath.internal.operations Mod]
-           [org.apache.jena.graph Graph]
+           [org.apache.jena.graph Graph Triple Node]
            [org.apache.jena.sparql.engine.binding Binding]))
 
 
@@ -87,3 +87,92 @@
     (-> (AlgebraGenerator.)
         (.compile q)
         (Algebra/optimize))))
+
+
+(s/def ::pull-pattern
+  (s/coll-of ::pull-attr :min-count 1))
+
+(s/def ::pull-attr
+  (s/or :wildcard #{'*}
+        :attr-name ::graph/iri
+        :map ::pull-map))
+
+(s/def ::pull-map
+  (s/map-of ::graph/iri (s/or :pattern ::pull-pattern
+                              :recur #{'...}
+                              :recur-n int?)
+            :conform-keys true))
+
+(s/conform ::pull-pattern [:a/b '* :c/d {:foo/bar [:x/y]}])
+
+(def ^:private pull-q
+  (build '[:conditional
+           [:bgp [?subj ?pred ?obj]]
+           [:sequence
+            [:bgp
+             [?subj :rdf/type ?class]
+             [?class :owl/onProperty ?pred]]
+            [:disjunction
+             [:bgp [?class :owl/cardinality 1]]
+             [:bgp [?class :owl/maxCardinality 1]]]]]))
+
+(declare pull*)
+
+(defn- compile-pattern
+  "Compile a pattern to a function."
+  [pattern]
+  (let [pattern (set pattern)
+        wild? (pattern '*)
+        keys (->> pattern
+                  (mapcat #(cond (map? %) (keys %)
+                                 (= '* %) []
+                                 :else [%]))
+                  set)
+        subs (->> pattern
+                  (filter map?)
+                  (apply merge)
+                  (map (fn [[k v]]
+                         (when (vector? v) [k (compile-pattern v)])))
+                  (into {}))
+        limits (->> pattern
+                    (filter map?)
+                    (apply merge)
+                    (map (fn [[k v]]
+                           (cond
+                             (int? v) [k v]
+                             (= '... v) [k Long/MAX_VALUE]
+                             :else nil)))
+                    (into {}))]
+    (fn parse-val [graph depth pred val]
+      (when (or wild? (keys pred))
+        (let [subparser (subs pred)
+              limit (limits pred)]
+          (cond
+            subparser (pull* graph val subparser 0)
+            limit (if (<= limit depth)
+                    val
+                    (pull* graph val parse-val (inc depth)))
+            :else val))))))
+
+(defn- pull*
+  [graph subject parse-val depth]
+  (let [results (run graph pull-q {'?subj subject})]
+     (when-not (empty? results)
+       (reduce (fn [acc {card1 '?class, pred '?pred, val '?obj}]
+                 (if-let [val (parse-val graph depth pred val)]
+                   (if card1
+                     (assoc acc pred val)
+                     (update acc pred (fnil conj #{}) val))
+                   acc))
+               {:rdf/about subject} results))))
+
+(defn pull
+  "Get all the properties associated with a subject using syntax similar
+  to Datomic's Pull.
+
+  Cardinality-1 properties will be returned as single values,
+  otherwise property values will be wrapped in sets. Graph must
+  support OWL inferencing to make this determination."
+  [graph subject pattern]
+  (pull* graph subject (compile-pattern pattern) 0))
+

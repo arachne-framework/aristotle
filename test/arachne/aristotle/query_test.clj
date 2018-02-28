@@ -16,6 +16,8 @@
 (reg/prefix 'skos "http://www.w3.org/2004/02/skos/core#")
 (reg/prefix 'dsbase "http://data.lacity.org/resource/")
 (reg/prefix 'ds "https://data.lacity.org/resource/zzzz-zzzz/")
+(reg/prefix)
+
 
 (def test-graph (aa/read (aa/graph :simple) (io/resource "la_census.rdf")))
 
@@ -161,3 +163,80 @@
                [?e ?a ?v]]
              {'[?zip ?id] [["90001" "1"]
                            ["90002" nil]]})))))
+
+
+(def pull-graph (-> (aa/graph :jena-mini)
+                    (aa/add [[::name :rdfs/domain ::Person]
+                             {:rdf/about ::Person
+                              :rdfs/subClassOf [{:rdf/type :owl/Restriction
+                                                 :owl/onProperty ::name
+                                                 :owl/cardinality 1}
+                                                {:rdf/type :owl/Restriction
+                                                 :owl/onProperty ::spouse
+                                                 :owl/maxCardinality 1}]}])
+                    (aa/add [{:rdf/about ::luke
+;                              :rdf/type ::Person
+                              ::age 32
+                              ::eyes "blue"
+                              ::hair "brown"
+                              ::name "Luke"
+                              ::spouse {:rdf/about ::hannah
+                                        ::name "Hannah"}
+                              ::friends [{:rdf/about ::jim
+                                          ::name "Jim"
+                                          ::friends {:rdf/about ::sara
+                                                     ::name "Sara"
+                                                     ::friends {:rdf/about ::thom
+                                                                ::name "Thom"}}}
+                                         {:rdf/about ::jamie
+                                          ::name "Jamie"}]}])))
+
+(deftest pull
+
+  (testing "pull limited fields, with cardinality semantics"
+    (is (= {:rdf/about ::luke ::name "Luke" ::spouse ::hannah ::age #{32}}
+           (q/pull pull-graph ::luke [::spouse ::name ::age]))))
+
+  (testing "pull all fields (incl. derived.)"
+    (is (= #{:rdf/type :rdf/about
+             :owl/sameAs
+             ::spouse ::friends ::hair ::eyes ::age ::name}
+           (set (keys (q/pull pull-graph ::luke [::name '*]))))))
+
+  (testing "pull missing"
+    (is (nil? (q/pull pull-graph ::poseidon [::name]))))
+
+  (testing "nested patterns"
+    (is (= {:rdf/about ::luke
+            ::friends
+            #{{:rdf/about ::jim
+               ::name "Jim"}
+              {:rdf/about ::jamie
+               ::name "Jamie"}},
+            ::spouse
+            {:rdf/about ::hannah
+             ::name "Hannah"}}
+           (q/pull pull-graph ::luke [{::spouse [::name]
+                                       ::friends [::name]}]))))
+  (testing "unlimited recursion"
+    (is (= "Thom"
+           (->> (q/pull pull-graph ::luke [::name {::friends '...}])
+                ::friends
+                (filter #(= "Jim" (::name %)))
+                first
+                ::friends
+                first
+                ::friends
+                first
+                ::name))))
+
+    (testing "limited recursion"
+      (is (= ::thom
+             (->> (q/pull pull-graph ::luke [::name {::friends '2}])
+                  ::friends
+                  (filter #(= "Jim" (::name %)))
+                  first
+                  ::friends
+                  first
+                  ::friends
+                  first)))))

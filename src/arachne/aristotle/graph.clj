@@ -29,7 +29,7 @@
 (s/def ::variable variable?)
 
 (s/def ::iri (s/or :keyword keyword?
-               :uri uri-str?))
+                   :uri uri-str?))
 
 (s/def ::literal literal?)
 
@@ -77,7 +77,9 @@
   (node [sym]
     (cond
       (= '_ sym) (NodeFactory/createBlankNode)
-      (.startsWith (name sym) "_") (NodeFactory/createBlankNode (str sym))
+      (.startsWith (name sym) "_") (NodeFactory/createBlankNode
+                                    (str (symbol (namespace sym)
+                                                  (subs (name sym) 1))))
       (.startsWith (name sym) "?") (NodeFactory/createVariable (subs (name sym) 1))
       :else (NodeFactory/createLiteral (str sym) symbol-datatype)))
   String
@@ -148,7 +150,7 @@
   (data [n] (symbol (str "?" (.getName n))))
 
   Node_Blank
-  (data [n] (symbol (.getLabelString (.getBlankNodeId n))))
+  (data [n] (symbol (str "_" (.getLabelString (.getBlankNodeId n)))))
 
   Graph
   (data [g] (graph->clj g)))
