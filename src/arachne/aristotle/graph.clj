@@ -33,9 +33,13 @@
 
 (s/def ::literal literal?)
 
+(s/def ::blank (s/or :anonymous #(= '_ %)
+                     :named #(and (symbol? %) (.startsWith (name %) "_"))))
+
 (s/def ::node (s/or :variable ::variable
-                    :iri     ::iri
-                    :literal ::literal))
+                    :blank    ::blank
+                    :iri      ::iri
+                    :literal  ::literal))
 
 (s/def ::triple (s/tuple ::node ::node ::node))
 
