@@ -48,15 +48,24 @@
   (or (get-in *registry* [:kw->iri kw])
       (when-let [prefix (get-in *registry* [:ns->prefix (namespace kw)])]
         (str prefix (name kw)))
-      (throw (ex-info (format "Could not determine IRI for %s, no matching prefix or keyword is registered."
+      (when (namespace kw)
+        (str "urn:clojure:" (namespace kw) "/" (name kw)))
+      (throw (ex-info (format "Could not determine IRI for %s, no registration found for non-namespaced keyword."
                         kw)
-               {:keyword kw}))))
+                      {:keyword kw}))))
+
+(defn- parse-urn
+  "Parse a clojure URN into a keyword, or return nil if the string is not a Clojure URN."
+  [iri]
+  (when-let [[_ ns name] (re-matches #"^urn:clojure:(.+)/(.+)$" iri)]
+    (keyword ns name)))
 
 (defn kw
   "Return a keyword representing the given IRI. Returns nil if no matching
    keyword or namespace could be found in the registry."
   [iri]
   (or (get-in *registry* [:iri->kw iri])
+      (parse-urn iri)
       (let [idx (Util/splitNamespaceXML iri)
             name (subs iri idx)
             prefix (subs iri 0 idx)

@@ -15,13 +15,14 @@
 
 (deftest fails-on-unknown-kw
   (is (thrown-with-msg? ExceptionInfo #"Could not determine IRI"
-        (reg/iri :no.such/registration)))
-
-  (is (thrown-with-msg? ExceptionInfo #"Could not determine IRI"
         (reg/iri :billy-bob))))
 
 (deftest kw-generation
   (is (= :foaf/name (reg/kw "http://xmlns.com/foaf/0.1/name")))
   (is (= :mike (reg/kw "http://example.com/people/#mike")))
   (is (nil? (reg/kw "http://this-is-not-registered#foobar"))))
+
+(deftest clojure-urns
+  (is (= :foo/bar (reg/kw (reg/iri :foo/bar))))
+  (is (= :datomic.api/pull (reg/kw (reg/iri :datomic.api/pull)))))
 
