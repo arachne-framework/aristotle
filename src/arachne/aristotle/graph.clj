@@ -171,6 +171,15 @@
   ([[s p o]] (triple s p o))
   ([s p o] (Triple/create (node s) (node p) (node o))))
 
+(defn- inv-triple
+  "Create a triple from the given subject, predicate and object,
+  inverting the triple if appropriate for the predicate."
+  [s p o]
+  (if (and (keyword? p) (.startsWith (name p) "_"))
+    (let [p (keyword (namespace p) (subs (name p) 1))]
+      (triple o p s))
+    (triple s p o)))
+
 (extend-protocol AsTriples
 
   arachne.aristotle.registry.Prefix
@@ -202,7 +211,7 @@
                                 (let [child-triples (triples child-map)
                                       child-subject (.getSubject (first child-triples))]
                                   (cons
-                                   (triple subject property child-subject)
+                                   (inv-triple subject property child-subject)
                                    child-triples)))]
         (mapcat (fn [[k v]]
                   (cond
@@ -213,10 +222,9 @@
                     (mapcat (fn [child]
                               (if (instance? Map child)
                                 (child-map-triples k child)
-                                [(triple subject k child)])) v)
-
+                                [(inv-triple subject k child)])) v)
                     :else
-                    [(triple subject k v)]))
+                    [(inv-triple subject k v)]))
                 m))))
 
   Graph

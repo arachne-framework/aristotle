@@ -49,3 +49,27 @@
              '[?ctor]
              '[:bgp [:ex/luke :ex/ctor ?ctor]])))))
 
+(deftest reverse-keyword-test
+  (let [data [{:rdf/about :test/luke
+               :foaf/_knows :test/jon}
+              {:rdf/about :test/hannah
+               :foaf/_knows [{:rdf/about :test/luke}]}]
+        g (ar/add (ar/graph :simple) data)]
+    (is (= #{[:test/jon :test/luke]
+             [:test/luke :test/hannah]}
+           (q/run g '[?a ?b]
+             '[:bgp [?a :foaf/knows ?b]])))))
+
+(comment
+
+(let [data [{:rdf/about :test/luke
+               :foaf/_knows :test/jon}
+              {:rdf/about :test/hannah
+               :foaf/_knows [{:rdf/about :test/luke}]}]
+      g (ar/add (ar/graph :simple) data)]
+  (q/run g '[?a ?b]
+    '[:bgp [?a :foaf/knows ?b]]))
+
+
+  )
+
