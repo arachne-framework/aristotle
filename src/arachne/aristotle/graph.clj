@@ -64,7 +64,7 @@
   "A Node that can be converted back to Clojure data"
   (data [node] "Convert this node to Clojure data"))
 
-(def symbol-datatype (proxy [BaseDatatype] ["urn:clojure.org:symbol"]
+(def symbol-datatype (proxy [BaseDatatype] ["urn:clojure:clojure.core/symbol"]
                        (isValidValue [val] (symbol? val))
                        (getJavaClass [] clojure.lang.Symbol)
                        (parse [lexical-form] (symbol lexical-form))

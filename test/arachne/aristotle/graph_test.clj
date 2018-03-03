@@ -60,6 +60,12 @@
            (q/run g '[?a ?b]
              '[:bgp [?a :foaf/knows ?b]])))))
 
+(deftest empty-map-vals
+  (let [data [{:rdf/about :test/luke
+               :rdf/name "Luke"
+               :foaf/knows []}]]
+    (is (= 1 (count (graph/triples data))))))
+
 (comment
 
 (let [data [{:rdf/about :test/luke
@@ -69,6 +75,8 @@
       g (ar/add (ar/graph :simple) data)]
   (q/run g '[?a ?b]
     '[:bgp [?a :foaf/knows ?b]]))
+
+
 
 
   )
