@@ -53,7 +53,7 @@ java.net.URI|IRI|
 |symbols starting with `?`| variable node (for patterns or queries)|
 |the symbol `_`|unique blank node|
 |symbols starting with `_`| named blank node|
-|other symbols| custom literal datatype with URN `<urn:clojure.org:symbol>`|
+|namespaced symbols| IRI of the form `<urn:clojure:namespace/name>`
 
 #### IRI/Keyword Registry
 

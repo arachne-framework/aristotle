@@ -63,7 +63,7 @@
 (deftest empty-map-vals
   (let [data [{:rdf/about :test/luke
                :rdf/name "Luke"
-               :foaf/knows []}]]
+               :foaf/knows [nil]}]]
     (is (= 1 (count (graph/triples data))))))
 
 (comment

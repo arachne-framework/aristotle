@@ -6,7 +6,6 @@
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
-           [org.apache.jena.datatypes BaseDatatype]
            [org.apache.jena.datatypes.xsd XSDDatatype]
            [javax.xml.bind DatatypeConverter]
            [org.apache.jena.riot RDFDataMgr]
@@ -33,8 +32,11 @@
 
 (s/def ::literal literal?)
 
-(s/def ::blank (s/or :anonymous #(= '_ %)
-                     :named #(and (symbol? %) (.startsWith (name %) "_"))))
+(s/def ::named-blank #(and (symbol? %) (.startsWith (name %) "_")))
+(s/def ::anon-blank #(= '_ %))
+
+(s/def ::blank (s/or :anonymous ::anon-blank
+                     :named ::named-blank))
 
 (s/def ::node (s/or :variable ::variable
                     :blank    ::blank
@@ -64,12 +66,6 @@
   "A Node that can be converted back to Clojure data"
   (data [node] "Convert this node to Clojure data"))
 
-(def symbol-datatype (proxy [BaseDatatype] ["urn:clojure:clojure.core/symbol"]
-                       (isValidValue [val] (symbol? val))
-                       (getJavaClass [] clojure.lang.Symbol)
-                       (parse [lexical-form] (symbol lexical-form))
-                       (toString [val] (str val))))
-
 (extend-protocol AsNode
   Keyword
   (node [kw] (NodeFactory/createURI (reg/iri kw)))
@@ -85,7 +81,8 @@
                                     (str (symbol (namespace sym)
                                                   (subs (name sym) 1))))
       (.startsWith (name sym) "?") (NodeFactory/createVariable (subs (name sym) 1))
-      :else (NodeFactory/createLiteral (str sym) symbol-datatype)))
+      (namespace sym) (NodeFactory/createURI (str "urn:clojure:" (namespace sym) "/" (name sym)))
+      :else (throw (ex-info (format "Cannot convert non-namespaced symbol '%s to node." sym) {:symbol sym}))))
   String
   (node [obj]
     (if-let [uri (second (re-find #"^<(.*)>$" obj))]
@@ -132,12 +129,15 @@
                                objects)])))
        (into {:rdf/about (data subject)})))
 
-(defn- graph->clj
-  "Convert a Graph to a Clojure data structure"
-  [g]
-  (->> (iterator-seq (.find g))
-       (group-by #(.getSubject %))
-       (map (fn [[subject triples]] (subject-map subject triples)))))
+(defn graph->clj
+  "Convert a Graph to a Clojure data structure. Optionally takes a
+  filter function to filter maps before returning."
+  ([g] (graph->clj g (constantly true)))
+  ([g ffn]
+   (->> (iterator-seq (.find g))
+        (group-by #(.getSubject %))
+        (map (fn [[subject triples]] (subject-map subject triples)))
+        (filter ffn))))
 
 (extend-protocol AsClojureData
   nil
