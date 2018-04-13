@@ -83,7 +83,7 @@
                                                   (subs (name sym) 1))))
       (.startsWith (name sym) "?") (NodeFactory/createVariable (subs (name sym) 1))
       (namespace sym) (NodeFactory/createURI (str "urn:clojure:" (namespace sym) "/" (name sym)))
-      :else (throw (ex-info (format "Cannot convert non-namespaced symbol '%s to node." sym) {:symbol sym}))))
+      :else (NodeFactory/createURI (str "urn:clojure:" (name sym)))))
   String
   (node [obj]
     (if-let [uri (second (re-find #"^<(.*)>$" obj))]
