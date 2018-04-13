@@ -1,7 +1,8 @@
 (ns arachne.aristotle.graph
   "Tools for converting Clojure data to an Jena Graph representation"
   (:require [arachne.aristotle.registry :as reg]
-            [clojure.spec.alpha :as s])
+            [clojure.spec.alpha :as s]
+            [clojure.string :as str])
   (:import [clojure.lang Keyword Symbol]
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
@@ -144,8 +145,10 @@
   (data [n] nil)
   Node_URI
   (data [n] (let [uri (.getURI n)]
-                 (or (reg/kw uri)
-                     (str "<" uri ">"))))
+              (or (reg/kw uri)
+                  (when (str/starts-with? uri "urn:clojure:")
+                    (symbol (str/replace uri "urn:clojure:" "")))
+                  (str "<" uri ">"))))
   Node_Literal
   (data [n] (if (= XSDDatatype/XSDdateTime (.getLiteralDatatype n))
               (.getTime (.asCalendar (.getLiteralValue n)))
@@ -222,7 +225,7 @@
                     (mapcat (fn [child]
                               (if (instance? Map child)
                                 (child-map-triples k child)
-                                [(inv-triple subject k child)])) v)
+                                [(inv-triple subject k child)])) (filter identity v))
                     :else
                     [(inv-triple subject k v)]))
                 m))))

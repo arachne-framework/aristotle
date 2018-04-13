@@ -79,7 +79,7 @@ The following common namespace prefixes are defined by default:
 |owl|`<http://www.w3.org/2002/07/owl#>`|
 |owl2|`<http://www.w3.org/2006/12/owl2#>`|
 
-The registry is stored in the dynamic Var `arachne.aristotle.registry/*registry*`, which can be also overridden on a thread-local basis using the `arachne.aristotle.registry/with` macro, which takes a map of namespaces (as keywords) and IRI prefixes. For example:
+The registry is stored in the global dynamic Var `arachne.aristotle.registry/*registry*`, which can be also overridden on a thread-local basis using the `arachne.aristotle.registry/with` macro, which takes a map of namespaces (as keywords) and IRI prefixes. For example:
 
 ```clojure
 (reg/with {'foaf "http://xmlns.com/foaf/0.1/"

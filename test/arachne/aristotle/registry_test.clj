@@ -22,7 +22,4 @@
   (is (= :mike (reg/kw "http://example.com/people/#mike")))
   (is (nil? (reg/kw "http://this-is-not-registered#foobar"))))
 
-(deftest clojure-urns
-  (is (= :foo/bar (reg/kw (reg/iri :foo/bar))))
-  (is (= :datomic.api/pull (reg/kw (reg/iri :datomic.api/pull)))))
 

@@ -48,9 +48,7 @@
   (or (get-in *registry* [:kw->iri kw])
       (when-let [prefix (get-in *registry* [:ns->prefix (namespace kw)])]
         (str prefix (name kw)))
-      (when (namespace kw)
-        (str "urn:clojure:" (namespace kw) "/" (name kw)))
-      (throw (ex-info (format "Could not determine IRI for %s, no registration found for non-namespaced keyword."
+      (throw (ex-info (format "Could not determine IRI for %s, no registration found for keyword."
                         kw)
                       {:keyword kw}))))
 
@@ -65,7 +63,6 @@
    keyword or namespace could be found in the registry."
   [iri]
   (or (get-in *registry* [:iri->kw iri])
-      (parse-urn iri)
       (let [idx (Util/splitNamespaceXML iri)
             name (subs iri idx)
             prefix (subs iri 0 idx)
