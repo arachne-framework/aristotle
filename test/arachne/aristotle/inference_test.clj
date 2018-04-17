@@ -9,7 +9,8 @@
 
 (reg/prefix 'daml "http://www.daml.org/2001/03/daml+oil#")
 (reg/prefix 'wo.tf "http://www.workingontologist.org/Examples/Chapter6/TheFirm.owl#")
-(reg/prefix 'arachne "http://arachne-framework.org/#")
+(reg/prefix :arachne "http://arachne-framework.org/#")
+
 (reg/prefix (ns-name *ns*) "http://example.com/#")
 
 (deftest basic-type-inference

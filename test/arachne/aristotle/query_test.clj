@@ -16,7 +16,7 @@
 (reg/prefix 'skos "http://www.w3.org/2004/02/skos/core#")
 (reg/prefix 'dsbase "http://data.lacity.org/resource/")
 (reg/prefix 'ds "https://data.lacity.org/resource/zzzz-zzzz/")
-(reg/prefix)
+(reg/prefix (ns-name *ns*) "http://example.com/arachne.aristotle-query-test#")
 
 
 (def test-graph (aa/read (aa/graph :simple) (io/resource "la_census.rdf")))

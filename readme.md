@@ -88,6 +88,30 @@ The registry is stored in the global dynamic Var `arachne.aristotle.registry/*re
   )
 ```
 
+You can also register a prefix in RDF/EDN data, using the `#rdf/prefix` tagged literal. The prefix will be added to the thread-local binding and is scoped to the same triple expansion. This allows you to define a prefix alongside the data that uses it, without installing it globally or managing it in your code. For example:
+
+```clojure
+[#rdf/prefix [:ex "http://example.com/"]
+ {:rdf/about :ex/luke
+  :foaf/name "Luke"}]
+  ```
+
+#### Wildcard Prefixes
+
+Aristotle now allows you to register a RDF IRI prefix for a namespace *prefix*, rather than a fully specified namespace. To do so, use an asterisk in the symbol you provide to the `prefix` function:
+
+```clojure
+(reg/prefix 'arachne.* "http://arachne-framework.org/vocab/1.0/")
+```
+
+This means that keywords with a namespace that starts with an `arachne` namespace segment will use the supplied prefix. Any additional namespace segments will be appended to the prefix, separated by a forward slash (`/`).
+
+Given the registration above, for example, the keyword `:arachne.http.request/body` would be interpreted as the IRI "<http://arachne-framework.org/vocab/1.0/http/request/body>"
+
+If multiple wildcard prefixes overlap, the system will use whichever is more specific, and will prefer non-wildcard registrations to wildcard registrations in the case of ambiguity.
+
+Using `#` or any other character as a prefix separator for wildcard prefixes, instead of `/`, is currently not supported.
+
 ### Data Structures
 
 You can use the `arachne.aristotle.graph/triples` function to convert any compatible Clojure data structure to a collection of RDF Triples (usually in practice it isn't necessary to call `triples` explicitly, as the higher-level APIs do it for you.)

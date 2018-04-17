@@ -35,10 +35,9 @@
            (q/run
              (ar/add (ar/graph :simple) data)
              '[?p]
-             '[:bgp [?p :foaf/name "Luke"]]
-)))))
+             '[:bgp [?p :foaf/name "Luke"]])))))
 
-(reg/prefix :ex "http://example.com")
+(reg/prefix :ex "http://example2.com")
 
 (deftest symbol-type-test
   (let [data [{:rdf/about :ex/luke
