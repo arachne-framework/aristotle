@@ -58,12 +58,4 @@
   (is (= :flotsam.jetsam/foo (reg/kw "http://flotsam.com/jetsam#foo")))
 
   (is (= "http://flotsam.com/jetsam.yep/yip/foo" (reg/iri :flotsam.jetsam.yep.yip/foo)))
-  (is (= :flotsam.jetsam.yep.yip/foo (reg/kw "http://flotsam.com/jetsam.yep/yip/foo") ))
-
-
-  )
-
-
-
-
-
+  (is (= :flotsam.jetsam.yep.yip/foo (reg/kw "http://flotsam.com/jetsam.yep/yip/foo"))))

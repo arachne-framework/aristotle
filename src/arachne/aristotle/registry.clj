@@ -83,11 +83,16 @@
   [m prevent-overrides? ks v]
   (update-in m ks (fn [e]
                     (when (and prevent-overrides? e (not= e v))
-                      (throw (ex-info (format "Could not map %s to %s, already mapped to %s"
-                                              ks v e)
-                                      {:value v
-                                       :existing e
-                                       :keyseq ks})))
+                      ;; Reconstruct the prefix
+                      (let [prefix (if (= ::= (last ks))
+                                     (str/join "." (butlast ks))
+                                     (str  (str/join "." ks) "*"))]
+                        (throw (ex-info (format "Could not map keyword prefix `%s` to IRI prefix `%s`, already mapped to `%s`"
+                                          prefix v e)
+                                 {:value v
+                                  :existing e
+                                  :keyseq ks
+                                  :prefix prefix}))))
                     v)))
 
 ;; TODO: it shouldn't be possible to conflict with a non-wildcard
@@ -126,6 +131,12 @@
 (defn read-prefix
   "Constructor for a prefix, called by data reader."
   [[prefix iri]]
+  (->Prefix prefix iri))
+
+(defn read-global-prefix
+  "Constructor for a global prefix, called by data reader."
+  [[prefix iri]]
+  (arachne.aristotle.registry/prefix prefix iri)
   (->Prefix prefix iri))
 
 (defn install-prefix

@@ -4,7 +4,8 @@
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [clojure.edn :as edn]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'test "http://example.com/aristotle#")
@@ -27,15 +28,38 @@
                ["<http://example.com/luke>" :foaf/knows ?person]
                [?person :foaf/name ?name]])))))
 
+(defn- entity-with-name
+  [data name]
+  (ffirst
+    (q/run
+      (ar/add (ar/graph :simple) data)
+      '[?p]
+      '[:bgp [?p :foaf/name ?name]]
+      {'?name name})))
+
 (deftest inline-prefix-test
   (let [data [#rdf/prefix [:foo "http://foo.com/#"]
               {:rdf/about :foo/luke
                :foaf/name "Luke"}]]
-    (is (= #{["<http://foo.com/#luke>"]}
-           (q/run
-             (ar/add (ar/graph :simple) data)
-             '[?p]
-             '[:bgp [?p :foaf/name "Luke"]])))))
+    (is (= "<http://foo.com/#luke>" (entity-with-name data "Luke")))))
+
+(deftest global-prefix-test
+  (testing "initial usage"
+    (let [data [#rdf/global-prefix [:baz "http://baz.com/#"]
+                {:rdf/about :baz/luke
+                 :foaf/name "Luke"}]]
+      (is (= :baz/luke (entity-with-name data "Luke")))))
+  (testing "subsequent usage"
+    (let [data {:rdf/about :baz/jim
+                :foaf/name "Jim"}]
+      (is (= :baz/jim (entity-with-name data "Jim"))))
+    (is (reg/prefix :baz "http://baz.com/#")))
+  (testing "conflict"
+    (is (thrown-with-msg? Exception #"already mapped"
+          (reg/prefix :baz "http://bazbazbaz.com/#")))
+    (is (thrown-with-msg? Exception #"already mapped"
+          (edn/read-string {:readers *data-readers*}
+            "#rdf/global-prefix [:baz \"http://bazbazbaz.com/#\"]")))))
 
 (reg/prefix :ex "http://example2.com")
 
