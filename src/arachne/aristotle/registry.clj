@@ -2,7 +2,8 @@
   "Tools for mapping between IRIs and keywords"
   (:require [clojure.string :as str])
   (:refer-clojure :exclude [find alias])
-  (:import [org.apache.jena.rdf.model.impl Util]))
+  (:import [org.apache.jena.rdf.model.impl Util]
+           [clojure.lang ExceptionInfo]))
 
 ;; Note: it would potentially be more performant to use a trie or
 ;; prefix tree instead of a normal map for the inverse prefix
@@ -83,38 +84,67 @@
   [m prevent-overrides? ks v]
   (update-in m ks (fn [e]
                     (when (and prevent-overrides? e (not= e v))
-                      ;; Reconstruct the prefix
-                      (let [prefix (if (= ::= (last ks))
-                                     (str/join "." (butlast ks))
-                                     (str  (str/join "." ks) "*"))]
-                        (throw (ex-info (format "Could not map keyword prefix `%s` to IRI prefix `%s`, already mapped to `%s`"
-                                          prefix v e)
-                                 {:value v
-                                  :existing e
-                                  :keyseq ks
-                                  :prefix prefix}))))
+                      (throw (ex-info "Mapping conflict" {::existing e})))
                     v)))
+
 
 ;; TODO: it shouldn't be possible to conflict with a non-wildcard
 ;; registration. The two can coexist.
 
 ;; TODO: we need to store non-wildcard registrations as a distinct map form. Not the same as a wildcard, but indicated somehow other than a non-associable form.
 
+(defn- throw-conflicting-prefix
+  [registry namespace prefix existing]
+  (throw (ex-info (format "Could not register namespace `%s` to IRI prefix `%s`: namespace is already registered to a different prefix, `%s`."
+                    namespace prefix existing)
+           {:registry registry
+            :namespace namespace
+            :prefix prefix
+            :existing existing})))
+
+(defn- throw-conflicting-namespace
+  [registry namespace prefix existing]
+  (throw (ex-info (format "Could not register namespace `%s` to IRI prefix `%s`: IRI prefix is already registered with a different namespace (`%s`)."
+                    namespace prefix existing)
+           {:registry registry
+            :namespace namespace
+            :prefix prefix
+            :existing existing})))
+
 (defn add-prefix
   "Return an updated registry map with the given prefix mapping."
   [registry prevent-overrides? namespace prefix]
-  (let [segments (vec (str/split (name namespace) #"\."))]
-    (-> registry
-        (update :prefixes assoc-in-uniquely prevent-overrides? (if (= "*" (last segments))
-                                                                 segments
-                                                                 (conj segments ::=)) prefix)
-        (update :prefixes' assoc-in-uniquely prevent-overrides? [prefix] segments))))
+  (let [segments (vec (str/split (name namespace) #"\."))
+        registry (try
+                   (update registry :prefixes assoc-in-uniquely prevent-overrides?
+                     (if (= "*" (last segments)) segments (conj segments ::=)) prefix)
+                   (catch ExceptionInfo e
+                     (if-let [existing (::existing (ex-data e))]
+                       (throw-conflicting-prefix registry (name namespace) prefix existing)
+                       (throw e))))
+        registry (try
+                   (update registry :prefixes' assoc-in-uniquely prevent-overrides? [prefix] segments)
+                   (catch ExceptionInfo e
+                     (if-let [existing (::existing (ex-data e))]
+                       (throw-conflicting-namespace registry (name namespace) prefix
+                         (str/join "." existing))
+                       (throw e))))]
+    registry))
 
 (defn add-alias
   [registry prevent-overrides? kw iri]
-  (-> registry
+  (try
+    (-> registry
       (update :aliases assoc-in-uniquely prevent-overrides? [kw] iri)
-      (update :aliases' assoc-in-uniquely prevent-overrides? [iri] kw)))
+      (update :aliases' assoc-in-uniquely prevent-overrides? [iri] kw))
+    (catch ExceptionInfo e
+      (if-let [existing (::existing (ex-data e))]
+        (throw (ex-info (format "Cannot alias `%s` to `%s`, already mapped to `%s`"
+                          kw iri existing)
+                 {:kw kw
+                  :iri :iri
+                  :existing existing}))
+        (throw e)))))
 
 (defn prefix
   "Register a namespace as an RDF IRI prefix."

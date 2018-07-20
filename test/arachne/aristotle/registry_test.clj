@@ -11,9 +11,21 @@
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (deftest direct-prefix-registration
-  (is (= "http://xmlns.com/foaf/0.1/name" (reg/iri :foaf/name)))
-  (is (thrown? clojure.lang.ExceptionInfo
-               (reg/prefix 'foaf "http://example.com/foaf"))))
+  (is (= "http://xmlns.com/foaf/0.1/name" (reg/iri :foaf/name))))
+
+(deftest conflicts
+  (testing "Prefix registration conflicts"
+    (reg/prefix :aa.bb "http://aa.bb.com/")
+    (is (thrown-with-msg? ExceptionInfo #"namespace is already registered to a different prefix"
+          (reg/prefix :aa.bb "http://something-else.com/")))
+    (is (thrown-with-msg? ExceptionInfo #"prefix is already registered with a different namespace"
+          (reg/prefix :something.else "http://aa.bb.com/"))))
+  (testing "Alias registration conflicts"
+    (reg/alias :abc "http://abc.com/")
+    (is (thrown-with-msg? ExceptionInfo #"Cannot alias"
+          (reg/alias :abc "http://something-else.com/")))
+    (is (thrown-with-msg? ExceptionInfo #"Cannot alias"
+          (reg/alias :something-else "http://abc.com/")))))
 
 (deftest fails-on-unknown-kw
   (is (thrown-with-msg? ExceptionInfo #"Could not determine IRI"

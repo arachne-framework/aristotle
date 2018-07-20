@@ -55,9 +55,9 @@
       (is (= :baz/jim (entity-with-name data "Jim"))))
     (is (reg/prefix :baz "http://baz.com/#")))
   (testing "conflict"
-    (is (thrown-with-msg? Exception #"already mapped"
+    (is (thrown-with-msg? Exception #"namespace is already registered"
           (reg/prefix :baz "http://bazbazbaz.com/#")))
-    (is (thrown-with-msg? Exception #"already mapped"
+    (is (thrown-with-msg? Exception #"namespace is already registered"
           (edn/read-string {:readers *data-readers*}
             "#rdf/global-prefix [:baz \"http://bazbazbaz.com/#\"]")))))
 
