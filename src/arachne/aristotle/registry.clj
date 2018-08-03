@@ -41,7 +41,7 @@
   (reduce (fn [curr prefix]
             (if (str/starts-with? s prefix)
               (if curr
-                (if (< (.length curr) (.length prefix))
+                (if (< (count curr) (count prefix))
                   prefix
                   curr)
                 prefix)
@@ -52,7 +52,7 @@
   "Construct a keyword from an IRI using the prefix tree, returns nil if not possible."
   [registry iri]
   (when-let [prefix (longest-prefix (keys registry) iri)]
-    (let [fragment (subs iri (.length prefix))
+    (let [fragment (subs iri (count prefix))
           fragment-seq (str/split fragment #"/")
           registration (get registry prefix)
           wild? (= "*" (last registration))]

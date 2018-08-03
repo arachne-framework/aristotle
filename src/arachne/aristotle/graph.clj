@@ -7,7 +7,7 @@
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
-           [org.apache.jena.datatypes.xsd XSDDatatype]
+           [org.apache.jena.datatypes.xsd XSDDatatype XSDDateTime]
            [javax.xml.bind DatatypeConverter]
            [org.apache.jena.riot RDFDataMgr]
            [org.apache.jena.reasoner TriplePattern])
@@ -61,7 +61,7 @@
 
 (defprotocol AsNode
   "An object that can be interpreted as a node in an RDF graph."
-  (node [obj] "Convert this object to a Jena RDFNode."))
+  (node ^Node [obj] "Convert this object to a Jena RDFNode."))
 
 (defprotocol AsClojureData
   "A Node that can be converted back to Clojure data"
@@ -122,9 +122,9 @@
   "Given a set of triples with the same subject, emit a Clojure map"
   [subject triples]
   (->> triples
-       (group-by #(.getPredicate %))
+       (group-by #(.getPredicate ^Triple %))
        (map (fn [[pred triples]]
-              (let [objects (map #(data (.getObject %)) triples)]
+              (let [objects (map #(data (.getObject ^Triple %)) triples)]
                 [(data pred) (if (= 1 (count objects))
                                (first objects)
                                objects)])))
@@ -134,9 +134,9 @@
   "Convert a Graph to a Clojure data structure. Optionally takes a
   filter function to filter maps before returning."
   ([g] (graph->clj g (constantly true)))
-  ([g ffn]
+  ([^Graph g ffn]
    (->> (iterator-seq (.find g))
-        (group-by #(.getSubject %))
+        (group-by #(.getSubject ^Triple %))
         (map (fn [[subject triples]] (subject-map subject triples)))
         (filter ffn))))
 
@@ -150,9 +150,10 @@
                     (symbol (str/replace uri "urn:clojure:" "")))
                   (str "<" uri ">"))))
   Node_Literal
-  (data [n] (if (= XSDDatatype/XSDdateTime (.getLiteralDatatype n))
-              (.getTime (.asCalendar (.getLiteralValue n)))
-              (.getLiteralValue n)))
+  (data [^Node_Literal n]
+    (if (= XSDDatatype/XSDdateTime (.getLiteralDatatype n))
+      (.getTime (.asCalendar ^XSDDateTime (.getLiteralValue n)))
+      (.getLiteralValue n)))
   Node_Variable
   (data [n] (symbol (str "?" (.getName n))))
 
@@ -243,7 +244,7 @@
                 m)
             child-map-triples (fn [property child-map]
                                 (let [child-triples (triples child-map)
-                                      child-subject (.getSubject (first child-triples))]
+                                      child-subject (.getSubject ^Triple (first child-triples))]
                                   (cons
                                    (inv-triple subject property child-subject)
                                    child-triples)))]
@@ -262,7 +263,7 @@
                 m))))
 
   Graph
-  (triples [g]
+  (triples [^Graph g]
     (.toSet (.find g (Triple. (node '?s) (node '?p) (node '?o))))))
 
 (defn reify
@@ -270,7 +271,7 @@
   the graph an add a [statement property subject] triple on the
   reified statement."
   [graph property subject]
-  (let [new-triples (mapcat (fn [t]
+  (let [new-triples (mapcat (fn [^Triple t]
                               (triples {:rdf/type :rdf/Statement
                                         :rdf/subject (.getSubject t)
                                         :rdf/predicate (.getPredicate t)

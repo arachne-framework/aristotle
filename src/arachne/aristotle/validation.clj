@@ -4,13 +4,13 @@
             [arachne.aristotle.graph :as g]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.query :as q])
-  (:import [org.apache.jena.reasoner ValidityReport ValidityReport$Report]))
+  (:import [org.apache.jena.reasoner InfGraph ValidityReport ValidityReport$Report]))
 
 
 (defn built-in
   "Validator which discovers any validation errors returned by the
   Reasoner itself"
-  [graph]
+  [^InfGraph graph]
   (let [r (.validate graph)]
     (if (.isValid r)
       []

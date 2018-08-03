@@ -4,17 +4,18 @@
             [clojure.spec.alpha :as s]
             [clojure.walk :as w]
             [arachne.aristotle.graph :as g])
-  (:import [org.apache.jena.graph NodeFactory Triple Node_Variable Node_Blank]
+  (:import [org.apache.jena.graph Node NodeFactory Triple Node_Variable Node_Blank]
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList E_GreaterThan E_Equals E_LessThan E_GreaterThanOrEqual E_LogicalNot E_LogicalAnd E_LogicalOr E_NotEquals E_LessThanOrEqual E_BNode E_Bound E_Conditional E_Datatype E_DateTimeDay E_DateTimeHours E_DateTimeMinutes E_DateTimeMonth E_DateTimeSeconds E_DateTimeTimezone E_DateTimeYear E_Divide E_Exists E_IRI E_IsIRI E_IsBlank E_IsLiteral E_IsNumeric E_IsURI E_Add E_Lang E_LangMatches E_MD5 E_Multiply E_Subtract E_Now E_NumAbs E_NumCeiling E_NumFloor E_NumRound E_Random E_Regex E_SameTerm E_Str E_SHA1 E_SHA224 E_SHA256 E_SHA384 E_SHA512 E_StrAfter E_StrBefore E_StrConcat E_StrContains E_StrDatatype E_StrLength E_StrEndsWith E_StrStartsWith E_StrLang E_StrSubstring E_StrUpperCase E_StrUUID E_StrLowerCase E_UnaryPlus E_UnaryMinus E_URI E_Version E_UUID E_StrEncodeForURI E_StrReplace E_Coalesce E_OneOf E_NotOneOf E_Function E_NotExists ExprAggregator]
            [org.apache.jena.sparql.core BasicPattern Var VarExprList QuadPattern Quad]
            [org.apache.commons.lang3.reflect ConstructorUtils]
-           [org.apache.jena.sparql.algebra OpAsQuery Algebra Table]
+           [org.apache.jena.sparql.algebra OpAsQuery Algebra Table Op]
            [org.apache.jena.sparql.algebra.table Table1 TableN]
            [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion OpTable ]
            [org.apache.jena.sparql.expr.aggregate AggCount$AccCount AggSum AggAvg AggMin AggMax AggGroupConcat$AccGroupConcat AggSample$AccSample AggGroupConcat AggCount AggCountVar AggCountDistinct AggCountVarDistinct AggSample]
            [org.apache.jena.query SortCondition]
            [org.apache.jena.sparql.engine.binding BindingHashMap]
-           [org.apache.jena.sparql.core Var]))
+           [org.apache.jena.sparql.core Var]
+           [java.util List]))
 
 (defn- replace-vars
   "Given a collection of Triples, mutate the triples to replace Node_variable
@@ -24,12 +25,12 @@
         update-bnodes (fn [bnodes id]
                         (if (bnodes id)
                           bnodes
-                          (assoc bnodes id (Var/alloc (str "?" (count bnodes))))))
+                          (assoc bnodes id (Var/alloc ^String (str "?" (count bnodes))))))
         replace (fn [node]
                   (cond
-                    (instance? Node_Variable node) (Var/alloc node)
+                    (instance? Node_Variable node) (Var/alloc ^Node_Variable node)
                     (instance? Node_Blank node)
-                    (let [id (str (.getBlankNodeId node))
+                    (let [id (str (.getBlankNodeId ^Node_Blank node))
                           bnodes (swap! bnodes update-bnodes id)]
                       (bnodes id))
                     :else node))]
@@ -75,11 +76,11 @@
    sort conditions."
   [conditions]
   (for [[e dir] (partition 2 conditions)]
-    (SortCondition. (expr e) (if (= :asc dir) 1 -1))))
+    (SortCondition. ^Expr (expr e) (if (= :asc dir) 1 -1))))
 
 (defn- quad-pattern
   "Parse the given Clojure data structure into a Jena QuadPattern object"
-  [quads]
+  ^QuadPattern [quads]
   (let [qp (QuadPattern.)]
     (doseq [[g s p o] quads]
       (let [quad (Quad. (g/node g) (g/triple s p o))]
@@ -107,7 +108,7 @@
 
 (defn- table-bindings
   "Add a bindings map entry to the given table"
-  [t [k v]]
+  [^TableN t [k v]]
   (if (coll? v)
     (doseq [node v]
       (let [binding (BindingHashMap.)]
@@ -132,12 +133,13 @@
 
 (defn op
   "Convert a Clojure data structure to an Arq Op"
+  ^Op
   [[op-name & [a1 a2 & amore :as args]]]
   (case op-name
     :table (build-table a1)
     :distinct (OpDistinct/create (op a1))
     :project (OpProject. (op a2) (var-seq a1))
-    :filter (OpFilter/filterBy (ExprList. (map expr (butlast args))) (op (last args)))
+    :filter (OpFilter/filterBy (ExprList. ^List (map expr (butlast args))) (op (last args)))
     :bgp (OpBGP. (BasicPattern/wrap (mapcat triples args)))
     :conditional (OpConditional. (op a1) (op a2))
     :dataset-names (OpDatasetNames. (graph/node a1))
@@ -146,11 +148,11 @@
     :extend (OpExtend/create (op a2) (var-expr-list a1))
     :graph (OpGraph. (graph/node a1) (op a2))
     :group (OpGroup/create (op (first amore))
-                           (VarExprList. (var-seq a1))
+                           (VarExprList. ^List (var-seq a1))
                            (var-aggr-list a2))
     :join (OpJoin/create (op a1) (op a2))
     :label (OpLabel/create a1 (op a2))
-    :left-join (OpLeftJoin/create (op a1) (op a2) (ExprList. (map expr amore)))
+    :left-join (OpLeftJoin/create (op a1) (op a2) (ExprList. ^List (map expr amore)))
     :list (OpList. (op a1))
     :minus (OpMinus/create (op a1) (op a2))
     :null (OpNull/create)
@@ -258,11 +260,11 @@
         (= f '-) (if (= 1 (count args))
                    (E_UnaryMinus. (first args))
                    (E_Subtract. (first args) (second args)))
-        (= f 'coalesce) (E_Coalesce. (ExprList. args))
-        (= f 'in) (E_OneOf. (first args) (ExprList. (rest args)))
-        (= f 'not-in) (E_NotOneOf. (first args) (ExprList. (rest args)))
+        (= f 'coalesce) (E_Coalesce. (ExprList. ^List args))
+        (= f 'in) (E_OneOf. (first args) (ExprList. ^List (rest args)))
+        (= f 'not-in) (E_NotOneOf. (first args) (ExprList. ^List (rest args)))
 
-        (s/valid? ::graph/iri f) (E_Function. (.getURI (graph/node f)) (ExprList. args))
+        (s/valid? ::graph/iri f) (E_Function. (.getURI (graph/node f)) (ExprList. ^List args))
 
         :else (throw (ex-info (str "Unknown expression type " f) {:expr f
                                                                   :args args}))))))
@@ -275,7 +277,7 @@
     (composite-expr expr)
     (let [node (graph/node expr)]
       (if (instance? Node_Variable node)
-        (ExprVar. (Var/alloc node))
+        (ExprVar. (Var/alloc ^Node_Variable node))
         (NodeValue/makeNode node)))))
 
 (comment

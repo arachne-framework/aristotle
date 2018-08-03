@@ -82,7 +82,7 @@
 
 (defn parse
   "Parse a SPARQL query string into a Jena Operation"
-  [query-str]
+  [^String query-str]
   (let [q (QueryFactory/create query-str)]
     (-> (AlgebraGenerator.)
         (.compile q)

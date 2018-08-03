@@ -8,7 +8,9 @@
             [clojure.java.io :as io])
   (:import [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
            [org.apache.jena.graph Factory Graph GraphUtil]
-           [org.apache.jena.riot RDFDataMgr])
+           [org.apache.jena.riot RDFDataMgr]
+           [java.net URL]
+           [java.io File])
   (:refer-clojure :exclude [read]))
 
 (defmulti graph
@@ -61,13 +63,13 @@
   - java.net.URI,
   - java.net.URL
   - java.io.File"
-  [graph file]
+  [^Graph graph file]
   (cond
     (string? file) (RDFDataMgr/read ^Graph graph ^String file)
     (uri? file) (RDFDataMgr/read ^Graph graph ^String (str file))
-    (instance? java.net.URL file) (RDFDataMgr/read graph (str (.toURI file)))
+    (instance? java.net.URL file) (RDFDataMgr/read graph (str (.toURI ^URL file)))
     (instance? java.io.File file) (RDFDataMgr/read graph
-                                                   (-> file
+                                                   (-> ^File file
                                                        (.getAbsoluteFile)
                                                        (.toURI)
                                                        (str))))

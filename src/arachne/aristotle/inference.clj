@@ -9,8 +9,9 @@
            [org.apache.jena.reasoner.rulesys Rule]
            [org.apache.jena.reasoner TriplePattern]
            [org.apache.jena.reasoner.rulesys
-            FBRuleReasoner OWLFBRuleReasoner Node_RuleVariable]
-           [org.apache.jena.reasoner ReasonerRegistry]))
+            RuleReasoner FBRuleReasoner OWLFBRuleReasoner Node_RuleVariable]
+           [org.apache.jena.reasoner InfGraph ReasonerRegistry]
+           [java.util List]))
 
 (def ^:private ^:dynamic *assignments*)
 
@@ -53,20 +54,20 @@
   (cond
     (instance? Node_RuleVariable val) (if (= Node_RuleVariable/WILD val)
                                         {}
-                                        {(.getName val) val})
-    (instance? TriplePattern val) (merge (extract (.getSubject val))
-                                         (extract (.getPredicate val))
-                                         (extract (.getObject val)))
-    (instance? Rule val) (apply merge (map extract (concat (.getHead val) (.getBody val))))
+                                        {(.getName ^Node_RuleVariable val) val})
+    (instance? TriplePattern val) (merge (extract (.getSubject ^TriplePattern val))
+                                         (extract (.getPredicate ^TriplePattern val))
+                                         (extract (.getObject ^TriplePattern val)))
+    (instance? Rule val) (apply merge (map extract (concat (.getHead ^Rule val) (.getBody ^Rule val))))
     :else {}))
 
 (defn add
   "Given a graph, return a new graph with a reasoner including the given
   rules. This may be expensive, given that it rebuilds the reasoner
   for the entire graph."
-  [g rules]
-  (let [reasoner (.getReasoner g)]
-    (.addRules reasoner rules)
+  [^InfGraph g rules]
+  (let [reasoner ^FBRuleReasoner (.getReasoner g)]
+    (.addRules reasoner ^List rules)
     (.bind reasoner (.getRawGraph g))))
 
 (defn rule
@@ -80,24 +81,24 @@
           pattern or an instance of Rule.
   :dir - :forward if the rule is a forward-chaining rule, or :back for
          a backward-chaining rule. Defaults to :back."
-  [& {:keys [name body head dir]}]
+  [& {:keys [^String name body head dir]}]
   (binding [*assignments* (let [vars (extract head)]
                             (atom [(count vars) vars]))]
-
-    (doto (Rule. name (if (instance? Rule head)
-                        [head]
-                        (pattern head))
-                 (pattern body))
-      (.setBackward (not (= :forward dir)))
-      (.setNumVars (count (second @*assignments*))))))
+    (let [^List head (if (instance? Rule head)
+                 [head]
+                 (pattern head))
+          ^List body (pattern body)]
+      (doto (Rule. name head body)
+        (.setBackward (not (= :forward dir)))
+        (.setNumVars (count (second @*assignments*)))))))
 
 (def owl-rules
   "The maximal set of OWL rules supported by Jena"
-  (.getRules (ReasonerRegistry/getOWLReasoner)))
+  (.getRules ^RuleReasoner (ReasonerRegistry/getOWLReasoner)))
 
 (def mini-rules
   "The OWL rules supported by Jena's mini Reasoner"
-  (.getRules (ReasonerRegistry/getOWLMiniReasoner)))
+  (.getRules ^RuleReasoner (ReasonerRegistry/getOWLMiniReasoner)))
 
 (def table-all
   "Rule that calls the built in TableAll directive. This usually
