@@ -183,6 +183,37 @@
       (triple o p s))
     (triple s p o)))
 
+(defn rdf-list
+  "Create an RDF linked list from the given sequence of values"
+  [[item & more]]
+  {:rdf/type :rdf/List
+   :rdf/first item
+   :rdf/rest (if (seq more)
+               (rdf-list more)
+               :rdf/nil)})
+
+(defn- numbered
+  "Return an subject with the given items, numbered in order"
+  [items]
+  (zipmap
+    (map #(str "<" (reg/iri (keyword "rdf" (str "_" %))) ">") (range (count items)))
+    items))
+
+(defn rdf-bag
+  "Create an RDF Bag from the from the given collection of values"
+  [items]
+  (assoc (numbered items) :rdf/type :rdf/Bag))
+
+(defn rdf-alt
+  "Create an RDF Alt from the from the given collection of values"
+  [items]
+  (assoc (numbered items) :rdf/type :rdf/Alt))
+
+(defn rdf-seq
+  "Create an RDF Seq from the from the given collection of values"
+  [items]
+  (assoc (numbered items) :rdf/type :rdf/Seq))
+
 (extend-protocol AsTriples
 
   arachne.aristotle.registry.Prefix

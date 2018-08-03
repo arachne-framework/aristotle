@@ -71,7 +71,7 @@
 
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
-(reg/prefix 'test "http://example.com/aristotle#")
+(reg/prefix 'test "http://example.com/test/")
 
 (def ca-graph (-> (aa/graph :simple) (aa/add [{:rdf/about :test/olivia
                                                :foaf/name "Olivia Person"

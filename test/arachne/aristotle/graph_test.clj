@@ -8,7 +8,7 @@
             [clojure.edn :as edn]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
-(reg/prefix 'test "http://example.com/aristotle#")
+(reg/prefix 'test "http://example.com/test/")
 
 (deftest nested-card-many
   (let [data [{:rdf/about :test/jane
@@ -89,18 +89,34 @@
                :foaf/knows [nil]}]]
     (is (= 1 (count (graph/triples data))))))
 
-(comment
+(deftest rdf-linked-lists
+  "Convert Clojure lists to RDF linked lists"
+  (let [data [{:rdf/about :test/race
+               :test/starters (graph/rdf-list [:test/luke :test/stuart :test/joe])}]
+        g (ar/add (ar/graph :simple) data)]
+    (testing "RDF list triples"
+      (is (not (empty?
+                 (q/run g '[?l0 ?l1 ?l2]
+                   '[:bgp
+                     [:test/race :test/starters ?l0]
+                     [?l0 :rdf/first :test/luke]
+                     [?l0 :rdf/rest ?l1]
+                     [?l1 :rdf/first :test/stuart]
+                     [?l1 :rdf/rest ?l2]
+                     [?l2 :rdf/first :test/joe]
+                     [?l2 :rdf/rest :rdf/nil]])))))))
 
-(let [data [{:rdf/about :test/luke
-               :foaf/_knows :test/jon}
-              {:rdf/about :test/hannah
-               :foaf/_knows [{:rdf/about :test/luke}]}]
-      g (ar/add (ar/graph :simple) data)]
-  (q/run g '[?a ?b]
-    '[:bgp [?a :foaf/knows ?b]]))
-
-
-
-
-  )
+(deftest rdf-containers
+  "Conver Clojure data to RDF containers"
+  (let [data [{:rdf/about :test/groceries
+               :test/contents (graph/rdf-bag [:test/apple :test/banana :test/orange])}]
+        g (ar/add (ar/graph :simple) data)]
+    (testing "RDF bag triples"
+      (is (not (empty?
+                 (q/run g '[?l0 ?l1 ?l2]
+                   '[:bgp
+                     [:test/groceries :test/contents ?bag]
+                     [?bag :rdf/_0 :test/apple]
+                     [?bag :rdf/_1 :test/banana]
+                     [?bag :rdf/_2 :test/orange]])))))))
 

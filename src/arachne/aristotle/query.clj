@@ -175,4 +175,3 @@
   support OWL inferencing to make this determination."
   [graph subject pattern]
   (pull* graph subject (compile-pattern pattern) 0))
-
