@@ -1,8 +1,8 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.10.0-alpha2"},
         org.apache.jena/apache-jena-libs {:mvn/version "3.4.0", :extension "pom"}}
- :aliases {:test {:extra-paths ["test"]
+ :aliases {:run-tests {:main-opts ["-m" "cognitect.test-runner"]}
+           :test {:extra-paths ["test"]
                   :extra-deps {com.cognitect/test-runner {:git/url "git@github.com:cognitect-labs/test-runner"
                                                           :sha "5fb4fc46ad0bf2e0ce45eba5b9117a2e89166479"}
-                               ch.qos.logback/logback-classic {:mvn/version "1.2.3"}}
-                  :main-opts ["-m" "cognitect.test-runner"]}}}
+                               ch.qos.logback/logback-classic {:mvn/version "1.2.3"}}}}}
