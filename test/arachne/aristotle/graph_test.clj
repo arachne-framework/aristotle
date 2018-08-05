@@ -38,16 +38,18 @@
       {'?name name})))
 
 (deftest inline-prefix-test
-  (let [data [#rdf/prefix [:foo "http://foo.com/#"]
+  (let [str "[#rdf/prefix [:foo \"http://foo.com/#\"]
               {:rdf/about :foo/luke
-               :foaf/name "Luke"}]]
+               :foaf/name \"Luke\"}]"
+        data (edn/read-string {:readers *data-readers*} str)]
     (is (= "<http://foo.com/#luke>" (entity-with-name data "Luke")))))
 
 (deftest global-prefix-test
   (testing "initial usage"
-    (let [data [#rdf/global-prefix [:baz "http://baz.com/#"]
+    (let [str "[#rdf/global-prefix [:baz \"http://baz.com/#\"]
                 {:rdf/about :baz/luke
-                 :foaf/name "Luke"}]]
+                 :foaf/name \"Luke\"}]"
+          data (edn/read-string {:readers *data-readers*} str)]
       (is (= :baz/luke (entity-with-name data "Luke")))))
   (testing "subsequent usage"
     (let [data {:rdf/about :baz/jim

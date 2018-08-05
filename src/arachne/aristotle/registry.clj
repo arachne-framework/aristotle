@@ -161,13 +161,15 @@
 (defn read-prefix
   "Constructor for a prefix, called by data reader."
   [[prefix iri]]
-  (->Prefix prefix iri))
+  (->Prefix (str/trim (name prefix)) (str/trim (name iri))))
 
 (defn read-global-prefix
   "Constructor for a global prefix, called by data reader."
   [[prefix iri]]
-  (arachne.aristotle.registry/prefix prefix iri)
-  (->Prefix prefix iri))
+  (let [prefix (str/trim (name prefix))
+        iri (str/trim (name iri))]
+    (arachne.aristotle.registry/prefix prefix iri)
+    (->Prefix prefix iri)))
 
 (defn install-prefix
   "Install a prefix in the thread-local data reader"
