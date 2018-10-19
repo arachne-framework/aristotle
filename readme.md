@@ -1,5 +1,7 @@
 # Aristotle
 
+[![CircleCI](https://circleci.com/gh/arachne-framework/aristotle.svg?style=svg)](https://circleci.com/gh/arachne-framework/aristotle)
+
 An RDF/OWL library for Clojure, providing a data-oriented wrapper for
 Apache Jena.
 
