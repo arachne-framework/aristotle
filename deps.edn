@@ -1,5 +1,5 @@
 {:paths ["src"]
- :deps {org.clojure/clojure {:mvn/version "1.10.0-alpha2"},
+ :deps {org.clojure/clojure {:mvn/version "1.10.0-RC1"},
         org.apache.jena/apache-jena-libs {:mvn/version "3.4.0", :extension "pom"}}
  :aliases {:run-tests {:main-opts ["-m" "cognitect.test-runner"]}
            :test {:extra-paths ["test"]
