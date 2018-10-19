@@ -25,7 +25,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-            - ~/repo/.cpcache
+            - ~/.gitlibs
           key: v1-dependencies-{{ checksum "deps.edn" }}
 
       # run tests!
