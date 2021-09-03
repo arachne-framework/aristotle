@@ -1,8 +1,13 @@
-{:paths ["src"]
- :deps {org.clojure/clojure {:mvn/version "1.10.0-RC1"},
-        org.apache.jena/apache-jena-libs {:mvn/version "3.4.0", :extension "pom"}}
- :aliases {:run-tests {:main-opts ["-m" "cognitect.test-runner"]}
-           :test {:extra-paths ["test"]
-                  :extra-deps {com.cognitect/test-runner {:git/url "git@github.com:cognitect-labs/test-runner"
-                                                          :sha "5fb4fc46ad0bf2e0ce45eba5b9117a2e89166479"}
-                               ch.qos.logback/logback-classic {:mvn/version "1.2.3"}}}}}
+{:paths   ["src"]
+ :deps    {org.clojure/clojure              {:mvn/version "1.10.3"}
+           org.apache.jena/apache-jena-libs {:mvn/version "3.14.0"
+                                             :extension   "pom"}
+
+           ;; Adds missing javax.xml.bind.DatatypeConverter in Java 9+
+           javax.xml.bind/jaxb-api          {:mvn/version "2.4.0-b180830.0359"}}
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps  {io.github.cognitect-labs/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
+                                                                      :sha     "62ef1de18e076903374306060ac0e8a752e57c86"}
+                                ch.qos.logback/logback-classic       {:mvn/version "1.2.3"}}
+                  :main-opts   ["-m" "cognitect.test-runner"]
+                  :exec-fn     cognitect.test-runner.api/test}}}
