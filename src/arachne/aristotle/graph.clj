@@ -1,9 +1,11 @@
 (ns arachne.aristotle.graph
   "Tools for converting Clojure data to an Jena Graph representation"
   (:require [arachne.aristotle.registry :as reg]
+            [ont-app.vocabulary.lstr :refer [lang ->LangStr]]
             [clojure.spec.alpha :as s]
             [clojure.string :as str])
   (:import [clojure.lang Keyword Symbol]
+           [ont_app.vocabulary.lstr LangStr]
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
@@ -89,6 +91,9 @@
     (if-let [uri (second (re-find #"^<(.*)>$" obj))]
       (NodeFactory/createURI uri)
       (NodeFactory/createLiteralByValue obj XSDDatatype/XSDstring)))
+  LangStr
+  (node [obj]
+    (NodeFactory/createLiteralByValue (str obj) (lang obj) XSDDatatype/XSDstring))
   Long
   (node [obj]
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDlong))
@@ -153,7 +158,9 @@
   (data [^Node_Literal n]
     (if (= XSDDatatype/XSDdateTime (.getLiteralDatatype n))
       (.getTime (.asCalendar ^XSDDateTime (.getLiteralValue n)))
-      (.getLiteralValue n)))
+      (if-let [lang (not-empty (.getLiteralLanguage n))]
+        (->LangStr (.getLiteralValue n) lang)
+        (.getLiteralValue n))))
   Node_Variable
   (data [n] (symbol (str "?" (.getName n))))
 
