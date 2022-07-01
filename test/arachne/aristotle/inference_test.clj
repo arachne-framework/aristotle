@@ -4,7 +4,6 @@
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.inference :as inf]
             [arachne.aristotle.query :as q]
-            [arachne.aristotle :as ar]
             [clojure.java.io :as io]))
 
 (reg/prefix 'daml "http://www.daml.org/2001/03/daml+oil#")

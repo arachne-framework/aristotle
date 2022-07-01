@@ -2,7 +2,6 @@
   (:require [clojure.test :refer :all]
             [arachne.aristotle :as aa]
             [arachne.aristotle.registry :as reg]
-            [arachne.aristotle.query :as q]
             [arachne.aristotle.validation :as v]
             [clojure.java.io :as io]))
 
@@ -113,8 +112,8 @@
                                             :owl/differentFrom [:arachne/sara :arachne/jeff]}
                                            {:rdf/about :arachne/sara
                                             :arachne/name "Sarah"
-                                            :owl/differentFrom [:arachne/jim :arachne/jeff]
-                                            }}}])]
+                                            :owl/differentFrom [:arachne/jim :arachne/jeff]}}}])]
+
         (let [errors (v/validate g)]
           ;; The reasoner doesn't support this currently and there isn't a
           ;; great way to write a query, so we'll do without
