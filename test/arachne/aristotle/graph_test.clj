@@ -9,6 +9,7 @@
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'test "http://example.com/test/")
+(reg/prefix 'arachne "http://arachne-framework.org/#")
 
 (deftest nested-card-many
   (let [data [{:rdf/about :test/jane

@@ -1,11 +1,9 @@
 (ns arachne.aristotle.query-test
   (:require [clojure.test :refer :all]
             [arachne.aristotle.registry :as reg]
-            [arachne.aristotle.graph :as graph]
             [arachne.aristotle.query :as q]
             [arachne.aristotle :as aa]
-            [clojure.java.io :as io]
-            [clojure.walk :as w]))
+            [clojure.java.io :as io]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 (reg/prefix 'socrata "http://www.socrata.com/rdf/terms#")
@@ -230,13 +228,13 @@
                 first
                 ::name))))
 
-    (testing "limited recursion"
-      (is (= ::thom
-             (->> (q/pull pull-graph ::luke [::name {::friends '2}])
-                  ::friends
-                  (filter #(= "Jim" (::name %)))
-                  first
-                  ::friends
-                  first
-                  ::friends
-                  first)))))
+  (testing "limited recursion"
+    (is (= ::thom
+           (->> (q/pull pull-graph ::luke [::name {::friends '2}])
+                ::friends
+                (filter #(= "Jim" (::name %)))
+                first
+                ::friends
+                first
+                ::friends
+                first)))))

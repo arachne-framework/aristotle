@@ -2,10 +2,7 @@
   (:require [clojure.test :refer :all]
             [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
-            [arachne.aristotle.query :as q]
-            [arachne.aristotle :as aa]
-            [clojure.java.io :as io]
-            [clojure.walk :as w]))
+            [arachne.aristotle :as aa]))
 
 (reg/prefix 'foaf "http://xmlns.com/foaf/0.1/")
 
@@ -25,12 +22,12 @@
   (import '[java.util UUID])
 
   (def entities (vec (repeatedly 5000 (fn []
-                                         (str "<http://example.com/" (UUID/randomUUID) ">")
-                                         ))))
+                                         (str "<http://example.com/" (UUID/randomUUID) ">")))))
+
 
   (def properties (vec (repeatedly 500 (fn []
-                                           (str "<http://example.com/p/" (UUID/randomUUID) ">")
-                                         ))))
+                                           (str "<http://example.com/p/" (UUID/randomUUID) ">")))))
+
 
   (defn rand-triple
     []
@@ -44,12 +41,12 @@
   (time
    (let [g (aa/add (aa/graph :jena-mini) (repeatedly n rand-triple))
          g (graph/reify g "<http://example.com/graph>" (str (UUID/randomUUID)))]
-     (def the-g g)
-     ))
+     (def the-g g)))
+
 
   (def the-g nil)
 
-  (time (count (graph/triples the-g)))
+  (time (count (graph/triples the-g))))
 
   ;; Results: 100k triples (before reification) in a :jena-mini graph
   ;; cost about 1.1G of heap.
@@ -57,5 +54,5 @@
   ;; :simple is much cheaper, can fit about 1M
   ;; triples (before reification) in a 2GB data structure.
 
-  )
+
 

@@ -2,7 +2,6 @@
   (:require [arachne.aristotle.registry :as reg]
             [arachne.aristotle.graph :as graph]
             [clojure.spec.alpha :as s]
-            [clojure.walk :as w]
             [arachne.aristotle.graph :as g])
   (:import [org.apache.jena.graph Node NodeFactory Triple Node_Variable Node_Blank]
            [org.apache.jena.sparql.expr Expr NodeValue ExprVar ExprList E_GreaterThan E_Equals E_LessThan E_GreaterThanOrEqual E_LogicalNot E_LogicalAnd E_LogicalOr E_NotEquals E_LessThanOrEqual E_BNode E_Bound E_Conditional E_Datatype E_DateTimeDay E_DateTimeHours E_DateTimeMinutes E_DateTimeMonth E_DateTimeSeconds E_DateTimeTimezone E_DateTimeYear E_Divide E_Exists E_IRI E_IsIRI E_IsBlank E_IsLiteral E_IsNumeric E_IsURI E_Add E_Lang E_LangMatches E_MD5 E_Multiply E_Subtract E_Now E_NumAbs E_NumCeiling E_NumFloor E_NumRound E_Random E_Regex E_SameTerm E_Str E_SHA1 E_SHA224 E_SHA256 E_SHA384 E_SHA512 E_StrAfter E_StrBefore E_StrConcat E_StrContains E_StrDatatype E_StrLength E_StrEndsWith E_StrStartsWith E_StrLang E_StrSubstring E_StrUpperCase E_StrUUID E_StrLowerCase E_UnaryPlus E_UnaryMinus E_URI E_Version E_UUID E_StrEncodeForURI E_StrReplace E_Coalesce E_OneOf E_NotOneOf E_Function E_NotExists ExprAggregator]
@@ -10,10 +9,10 @@
            [org.apache.commons.lang3.reflect ConstructorUtils]
            [org.apache.jena.sparql.algebra OpAsQuery Algebra Table Op]
            [org.apache.jena.sparql.algebra.table Table1 TableN]
-           [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion OpTable ]
+           [org.apache.jena.sparql.algebra.op OpDistinct OpProject OpFilter OpBGP OpConditional OpDatasetNames OpDiff OpDisjunction OpDistinctReduced OpExtend OpGraph OpGroup OpJoin OpLabel OpLeftJoin OpList OpMinus OpNull OpOrder OpQuad OpQuadBlock OpQuadPattern OpReduced OpSequence OpSlice OpTopN OpUnion OpTable]
            [org.apache.jena.sparql.expr.aggregate AggCount$AccCount AggSum AggAvg AggMin AggMax AggGroupConcat$AccGroupConcat AggSample$AccSample AggGroupConcat AggCount AggCountVar AggCountDistinct AggCountVarDistinct AggSample]
            [org.apache.jena.query SortCondition]
-           [org.apache.jena.sparql.engine.binding BindingHashMap]
+           [org.apache.jena.sparql.engine.binding BindingBuilder]
            [org.apache.jena.sparql.core Var]
            [java.util List]))
 
@@ -60,8 +59,7 @@
   [bindings]
   (let [vel (VarExprList.)]
     (doseq [[v e] (partition 2 bindings)]
-      (.add vel (Var/alloc (graph/node v))
-        (expr e)))
+      (.add vel (Var/alloc (graph/node v)) (expr e)))
     vel))
 
 (defn- var-aggr-list
@@ -93,11 +91,15 @@
   [[op & [a1 a2 & _ :as args]]]
   (case op
     count (cond
-            (symbol? a1) (AggCountVar. (expr a1))
+            (symbol? a1)
+            (AggCountVar. (expr a1))
+
             (and (seq? a1) (= 'distinct (first a1)) (and (= 1 (count a1))))
-              (AggCountDistinct.)
+            (AggCountDistinct.)
+
             (and (seq? a1) (= 'distinct (first a1)) (and (= 2 (count a1))))
-              (AggCountVarDistinct. (expr (second a1)))
+            (AggCountVarDistinct. (expr (second a1)))
+
             :else (AggCount.))
     sum (AggSum. (expr a1))
     avg (AggAvg. (expr a1))
@@ -111,14 +113,14 @@
   [^TableN t [k v]]
   (if (coll? v)
     (doseq [node v]
-      (let [binding (BindingHashMap.)]
+      (let [bb (BindingBuilder/create)]
         (if (coll? k)
-          (mapv #(when %2 (.add binding (Var/alloc (graph/node %1)) (graph/node %2))) k node)
-          (.add binding (Var/alloc (graph/node k)) (graph/node node)))
-        (.addBinding t binding)))
-    (let [binding (BindingHashMap.)]
+          (mapv #(when %2 (.add bb (Var/alloc (graph/node %1)) (graph/node %2))) k node)
+          (.add bb (Var/alloc (graph/node k)) (graph/node node)))
+        (.addBinding t (.build bb))))
+    (let [binding (BindingBuilder/create)]
       (.add binding (Var/alloc (graph/node k)) (graph/node v))
-      (.addBinding t binding))))
+      (.addBinding t (.build binding)))))
 
 (defn build-table
   "Given a bindings map, return an OpSequence including a nested table
@@ -126,8 +128,8 @@
   [bm]
   (->> bm
        (map #(let [t (TableN.)]
-              (table-bindings t %)
-              (OpTable/create t)))
+               (table-bindings t %)
+               (OpTable/create t)))
        (reduce (fn [op t]
                  (OpSequence/create op t)))))
 
@@ -177,70 +179,70 @@
 (def expr-class
   "Simple expressions that resolve to a class which takes Exprs in its
    constructor"
-  {'* E_Multiply
-   '/ E_Divide
-   '< E_LessThan
-   '<= E_LessThanOrEqual
-   '= E_Equals
-   '> E_GreaterThan
-   '>= E_GreaterThanOrEqual
-   'abs E_NumAbs
-   'and E_LogicalAnd
-   'bnode E_BNode
-   'bound E_Bound
-   'ceil E_NumCeiling
-   'concat E_StrConcat
-   'contains E_StrContains
-   'datatype E_Datatype
-   'day E_DateTimeDay
-   'encode E_StrEncodeForURI
-   'floor E_NumFloor
-   'hours E_DateTimeHours
-   'if E_Conditional
-   'iri E_IRI
-   'uri E_URI
-   'isBlank E_IsBlank
-   'isIRI E_IsIRI
-   'isURI E_IsURI
-   'isLiteral E_IsLiteral
-   'isNumeric E_IsNumeric
-   'lang E_Lang
+  {'*           E_Multiply
+   '/           E_Divide
+   '<           E_LessThan
+   '<=          E_LessThanOrEqual
+   '=           E_Equals
+   '>           E_GreaterThan
+   '>=          E_GreaterThanOrEqual
+   'abs         E_NumAbs
+   'and         E_LogicalAnd
+   'bnode       E_BNode
+   'bound       E_Bound
+   'ceil        E_NumCeiling
+   'concat      E_StrConcat
+   'contains    E_StrContains
+   'datatype    E_Datatype
+   'day         E_DateTimeDay
+   'encode      E_StrEncodeForURI
+   'floor       E_NumFloor
+   'hours       E_DateTimeHours
+   'if          E_Conditional
+   'iri         E_IRI
+   'uri         E_URI
+   'isBlank     E_IsBlank
+   'isIRI       E_IsIRI
+   'isURI       E_IsURI
+   'isLiteral   E_IsLiteral
+   'isNumeric   E_IsNumeric
+   'lang        E_Lang
    'langMatches E_LangMatches
-   'lcase E_StrLowerCase
-   'md5 E_MD5
-   'minutes E_DateTimeMinutes
-   'month E_DateTimeMonth
-   'not E_LogicalNot
-   'not= E_NotEquals
-   'now E_Now
-   'or E_LogicalOr
-   'rand E_Random
-   'regex E_Regex
-   'replace E_StrReplace
-   'round E_NumRound
-   'sameTerm E_SameTerm
-   'seconds E_DateTimeSeconds
-   'sha1 E_SHA1
-   'sha224 E_SHA224
-   'sha256 E_SHA256
-   'sha384 E_SHA384
-   'sha512 E_SHA512
-   'str E_Str
-   'strafter E_StrAfter
-   'strbefore E_StrBefore
-   'strdt E_StrDatatype
-   'strends E_StrEndsWith
-   'strlang E_StrLang
-   'strlen E_StrLength
-   'strstarts E_StrStartsWith
-   'struuid E_StrUUID
-   'substr E_StrSubstring
-   'timezone E_DateTimeTimezone
-   'tz E_DateTimeTimezone
-   'ucase E_StrUpperCase
-   'uuid E_UUID
-   'version E_Version
-   'year E_DateTimeYear})
+   'lcase       E_StrLowerCase
+   'md5         E_MD5
+   'minutes     E_DateTimeMinutes
+   'month       E_DateTimeMonth
+   'not         E_LogicalNot
+   'not=        E_NotEquals
+   'now         E_Now
+   'or          E_LogicalOr
+   'rand        E_Random
+   'regex       E_Regex
+   'replace     E_StrReplace
+   'round       E_NumRound
+   'sameTerm    E_SameTerm
+   'seconds     E_DateTimeSeconds
+   'sha1        E_SHA1
+   'sha224      E_SHA224
+   'sha256      E_SHA256
+   'sha384      E_SHA384
+   'sha512      E_SHA512
+   'str         E_Str
+   'strafter    E_StrAfter
+   'strbefore   E_StrBefore
+   'strdt       E_StrDatatype
+   'strends     E_StrEndsWith
+   'strlang     E_StrLang
+   'strlen      E_StrLength
+   'strstarts   E_StrStartsWith
+   'struuid     E_StrUUID
+   'substr      E_StrSubstring
+   'timezone    E_DateTimeTimezone
+   'tz          E_DateTimeTimezone
+   'ucase       E_StrUpperCase
+   'uuid        E_UUID
+   'version     E_Version
+   'year        E_DateTimeYear})
 
 
 (defn composite-expr
@@ -281,6 +283,7 @@
         (NodeValue/makeNode node)))))
 
 (comment
-  (s/conform :org.arachne.aristotle.query.spec/expr '(< 105000 (:xsd/integer ?pop)))
-  
-  )
+  (require 'arachne.aristotle.query.spec)
+  (s/conform :arachne.aristotle.query.spec/expr '(< 105000 (:xsd/integer ?pop)))
+  #_.)
+
