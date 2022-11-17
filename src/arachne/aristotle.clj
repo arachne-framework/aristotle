@@ -9,6 +9,7 @@
   (:import [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
            [org.apache.jena.graph Factory Graph GraphUtil]
            [org.apache.jena.riot RDFDataMgr]
+           [org.apache.jena.riot Lang]
            [java.net URL]
            [java.io File])
   (:refer-clojure :exclude [read]))
@@ -76,3 +77,28 @@
   graph)
 
 
+
+(def formats {:csv Lang/CSV
+              :jsonld Lang/JSONLD
+              :jsonld10 Lang/JSONLD10
+              :jsonld11 Lang/JSONLD11
+              :n3 Lang/N3
+              :nquads Lang/NQUADS
+              :ntriples Lang/NTRIPLES
+              :rdfjson Lang/RDFJSON
+              :null Lang/RDFNULL
+              :rdfthrift Lang/RDFTHRIFT
+              :rdfxml Lang/RDFXML
+              :shaclc Lang/SHACLC
+              :trig Lang/TRIG
+              :trix Lang/TRIX
+              :tsv Lang/TSV
+              :ttl Lang/TTL
+              :turtle Lang/TTL})
+
+(defn write
+  "Write the contents of a graph to a file using the specified serialization format."
+  [^Graph graph file format]
+  (if-let [lang (formats format)]
+    (with-open [out (io/output-stream file)]
+      (RDFDataMgr/write out graph lang))))
