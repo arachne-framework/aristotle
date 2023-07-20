@@ -99,13 +99,13 @@
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDlong))
   Integer
   (node [obj]
-    (NodeFactory/createLiteralByValue obj XSDDatatype/XSDlong))
+    (NodeFactory/createLiteralByValue obj XSDDatatype/XSDinteger))
   Double
   (node [obj]
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDdouble))
   Float
   (node [obj]
-    (NodeFactory/createLiteralByValue obj XSDDatatype/XSDdouble))
+    (NodeFactory/createLiteralByValue obj XSDDatatype/XSDfloat))
   Boolean
   (node [obj]
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDboolean))
