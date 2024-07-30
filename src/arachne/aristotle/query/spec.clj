@@ -70,7 +70,7 @@
 
 (defd ::sort-conditions
   "A list of alternating expresion/direction pairs."
-  (s/cat :pairs (s/+ (s/cat :expr ::expr :direction #{:asc :desc}))))
+  (s/spec (s/cat :pairs (s/+ (s/cat :expr ::expr :direction #{:asc :desc})))))
 
 (defd ::quad
   "Quad represented as a 4-tuple"
