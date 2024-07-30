@@ -34,7 +34,19 @@
                   '[:bgp
                     [?e :ds/zip_code "90001"]
                     [?e :ds/total_population ?pop]])]
-    (is (= "57110" (get (first results) '?pop)))))
+    (is (= "57110" (get (first results) '?pop))))
+  (let [results (q/run test-graph
+                  '[:top-n 10 [(:xsd/integer ?population) :desc]
+                    [:bgp
+                     [?district :ds/total_population ?population]]])]
+    (is (= (count results) 10))
+    (is (= "<http://data.lacity.org/resource/zzzz-zzzz/132>" (get (first results) '?district))))
+  (let [results (q/run test-graph
+                  '[:order [(:xsd/integer ?population) :asc]
+                    [:bgp
+                     [?district :ds/total_population ?population]]])]
+    (is (= "0" (get (first results) '?population)))
+    (is (= "105549" (get (last results) '?population)))))
 
 (deftest functions+filters
   (is (= #{["90650"]}
