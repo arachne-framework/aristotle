@@ -7,7 +7,7 @@
             [arachne.aristotle.rdf-edn]
             [clojure.java.io :as io])
   (:import [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
-           [org.apache.jena.graph Factory Graph GraphUtil]
+           [org.apache.jena.graph GraphMemFactory Graph GraphUtil]
            [org.apache.jena.riot RDFDataMgr]
            [org.apache.jena.riot Lang]
            [java.net URL]
@@ -30,7 +30,7 @@
 
 (defmethod graph :simple
   [_]
-  (Factory/createGraphMem))
+  (GraphMemFactory/createGraphMem))
 
 (defmethod graph :jena-mini
   [_]
@@ -44,7 +44,7 @@
   (let [reasoner (GenericRuleReasoner. initial-rules)]
      (.setOWLTranslation reasoner true)
      (.setTransitiveClosureCaching reasoner true)
-     (.bind reasoner (Factory/createGraphMem))))
+     (.bind reasoner (GraphMemFactory/createGraphMem))))
 
 (defn add
   "Add the given data to a graph, returning the graph. Data must satisfy
@@ -80,7 +80,6 @@
 
 (def formats {:csv Lang/CSV
               :jsonld Lang/JSONLD
-              :jsonld10 Lang/JSONLD10
               :jsonld11 Lang/JSONLD11
               :n3 Lang/N3
               :nquads Lang/NQUADS

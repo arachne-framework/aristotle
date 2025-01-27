@@ -29,12 +29,12 @@
                   (cond
                     (instance? Node_Variable node) (Var/alloc ^Node_Variable node)
                     (instance? Node_Blank node)
-                    (let [id (str (.getBlankNodeId ^Node_Blank node))
+                    (let [id     (.getBlankNodeLabel ^Node_Blank node)
                           bnodes (swap! bnodes update-bnodes id)]
                       (bnodes id))
                     :else node))]
     (for [^Triple triple triples]
-      (Triple.
+      (Triple/create
         (replace (.getSubject triple))
         (replace (.getPredicate triple))
         (replace (.getObject triple))))))
@@ -150,7 +150,10 @@
     :extend (OpExtend/create (op a2) (var-expr-list a1))
     :graph (OpGraph. (graph/node a1) (op a2))
     :group (OpGroup/create (op (first amore))
-                           (VarExprList. ^List (var-seq a1))
+                           (reduce (fn [^VarExprList o v]
+                                     (doto o
+                                       (.add v)))
+                                   (VarExprList.) (var-seq a1))
                            (var-aggr-list a2))
     :join (OpJoin/create (op a1) (op a2))
     :label (OpLabel/create a1 (op a2))
@@ -286,4 +289,3 @@
   (require 'arachne.aristotle.query.spec)
   (s/conform :arachne.aristotle.query.spec/expr '(< 105000 (:xsd/integer ?pop)))
   #_.)
-

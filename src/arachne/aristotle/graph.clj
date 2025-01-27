@@ -8,7 +8,7 @@
            [ont_app.vocabulary.lstr LangStr]
            [java.net URL URI]
            [java.util GregorianCalendar Calendar Date Map Collection List]
-           [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
+           [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Graph]
            [org.apache.jena.datatypes.xsd XSDDatatype XSDDateTime]
            [javax.xml.bind DatatypeConverter]
            [org.apache.jena.riot RDFDataMgr]
@@ -93,7 +93,7 @@
       (NodeFactory/createLiteralByValue obj XSDDatatype/XSDstring)))
   LangStr
   (node [obj]
-    (NodeFactory/createLiteralByValue (str obj) (lang obj) XSDDatatype/XSDstring))
+    (NodeFactory/createLiteral (str obj) (lang obj) XSDDatatype/XSDstring))
   Long
   (node [obj]
     (NodeFactory/createLiteralByValue obj XSDDatatype/XSDlong))
@@ -165,7 +165,7 @@
   (data [n] (symbol (str "?" (.getName n))))
 
   Node_Blank
-  (data [n] (symbol (str "_" (.getLabelString (.getBlankNodeId n)))))
+  (data [n] (symbol (str "_" (.getBlankNodeLabel n))))
 
   Graph
   (data [g] (graph->clj g)))
@@ -271,7 +271,7 @@
 
   Graph
   (triples [^Graph g]
-    (.toSet (.find g (Triple. (node '?s) (node '?p) (node '?o))))))
+    (.toSet (.find g (Triple/create (node '?s) (node '?p) (node '?o))))))
 
 (defn reify
   "Given a graph, a property and an object, add reification triples to
